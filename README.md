@@ -1,1 +1,1 @@
-# nss-teaching-web-app
+# Nss Teaching Web App
