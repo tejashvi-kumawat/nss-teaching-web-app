@@ -1,13 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- <link rel="icon" type="image/png" href="https://www.himalayanvidyadaan.org/logo.png" /> -->
+    <link rel="shortcut icon" href="" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta
+      name="description"
+      content="NSS Teaching is an initiative by the Himalayan Vidya Daan Trust to provide quality education to underprivileged students. Join us in our mission to spread knowledge and empower young minds."
+    />
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta content="himalayanvidyadaan" name="current-instance-name" />
+    <meta content="NSS Teaching" name="twitter:title" />
+    <meta content="NSS Teaching" property="og:title" />
+    <meta
+      content="NSS Teaching is an initiative by the Himalayan Vidya Daan Trust to provide quality education to underprivileged students. Join us in our mission to spread knowledge and empower young minds."
+      property="og:description"
+    />
+    <meta
+      content="Empowering students through education and knowledge sharing."
+      name="twitter:description"
+    />
+    <meta
+      name="keywords"
+      content="NSS Teaching, Himalayan Vidya Daan Trust, education, learning, teaching, volunteer, students, underprivileged education, knowledge, empowerment, social service, literacy, free education, community teaching, India, NGO, trust, mentorship"
+    />
+    <meta name="al:android:url" content="https://www.himalayanvidyadaan.org" />
+    <meta name="al:ios:url" content="https://www.himalayanvidyadaan.org" />
+
+    <title>NSS Teaching - Himalayan Vidya Daan Trust</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      (function () {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+    
+        // Detect if opened inside Instagram or Facebook's in-app browser
+        if (ua.includes("Instagram") || ua.includes("FBAN") || ua.includes("FBAV")) {
+          setTimeout(() => {
+            const url = window.location.href;
+            window.location.href = "googlechrome://" + url.replace(/^https?:\/\//, "");
+          }, 500);
+        }
+      })();
+    </script>
   </body>
 </html>
