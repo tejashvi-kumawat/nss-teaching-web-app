@@ -1,0 +1,212 @@
+.about-us-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fcfcfc00;
+}
+
+.about-us-container h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #333;
+  font-size: 32px;
+  font-weight: 600;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.top_image {
+  width: 100%;
+  position: relative;
+  padding: 20px;
+}
+
+.AboutUs_background_cover {
+  width: 97%;
+  background-color: green;
+  position: absolute;
+  border-radius: 2rem;
+  z-index: 2;
+  opacity: 0.4;
+}
+
+.AboutUs_background_image {
+  width: 100%;
+  z-index: 1;
+}
+/* General container styling */
+.about-us-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.about-us-intro {
+  margin: 60px 0;
+}
+
+.about-us-intro p {
+  font-size: 20px;
+  width: 60%;
+  line-height: 1.5;
+  color: #526652;
+}
+
+
+.about-us-vision-section h1 {
+  font-size: 38px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.vision-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.about-us-our-vision-section{
+  margin-top: 100px;
+}
+.about-us-our-vision {
+  list-style: none;
+  padding: 10px 0 20px 0px;
+  margin: 0;
+  flex: 1;
+}
+.about-us-our-vision h2{
+  font-size: 49px;
+  margin: 0 0 25px 0;
+  text-align: left;
+}
+
+.about-us-our-vision li {
+  color: #526652;
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.about-us-our-vision li::before {
+  content: "";
+  position: absolute;
+  margin-left: 30px;
+  left: 0;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background-color: #2E7D32; /* Green bullet */
+  border-radius: 50%;
+}
+
+/* Creates the connecting line between bullets */
+.about-us-our-vision li:not(:last-child)::after {
+  content: "";
+  margin-left: 30px;
+  position: absolute;
+  left: 6px; /* Center the line with the bullet */
+  top: 16px; /* Start below the bullet */
+  width: 2px;
+  opacity: 50%;
+  height: calc(100% + 18px); /* Extend to the next bullet */
+  background-color: #2E7D32; /* Green connector */
+}
+
+/* Image styling */
+.our-vision-image {
+  max-width: 500px;
+  border-radius: 8px;
+  flex: 1;
+}
+
+
+/* Make it responsive */
+@media (max-width: 768px) {
+  .vision-content {
+    flex-direction: column;
+  }
+  
+  .our-vision-image {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+
+.about-us-mission-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+.about-us-mission-section h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.mission-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.mission-points {
+  flex: 1;
+}
+
+.mission-point {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+.mission-point p {
+  margin: 0;
+  line-height: 1.5;
+  color: #555;
+}
+
+.highlight {
+  font-weight: bold;
+}
+
+.our-mission-image {
+  flex: 1;
+  max-width: 45%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .mission-content {
+    flex-direction: column;
+  }
+  
+  .our-mission-image {
+    max-width: 100%;
+    margin-top: 30px;
+  }
+}

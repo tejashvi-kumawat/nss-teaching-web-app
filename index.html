@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .image {
+            float: left; /* Align image to the left */
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+            shape-outside: circle(); /* Creates a circular wrap */
+            clip-path: circle(); /* Clips the image to a circle */
+        }
+        .text {
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://th.bing.com/th?id=ORMS.54008023a2aaff83028e12f0e7983518&pid=Wdp&w=268&h=140&qlt=90&c=1&rs=1&dpr=0.8999999761581421&p=0" alt="Profile Image" class="image">
+        <div class="text">
+            <h2>Your Name</h2>
+            <p>
+                Welcome to my portfolio website! I am a web developer passionate about creating stunning and functional designs.
+                This layout demonstrates how you can make an image wrap around the text in a smooth manner using `shape-outside`.
+                You can experiment with different shapes like `circle()`, `ellipse()`, or even a polygon for unique designs.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

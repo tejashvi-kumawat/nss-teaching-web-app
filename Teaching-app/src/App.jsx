@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 import "./App.css";
 import ComingSoon from "./pages/ComingSoon/ComingSoon.jsx";
-// import AboutUs from "./pages/AboutUs/AboutUs.jsx";
+import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 // import Home from "./pages/Home/Home.jsx";
@@ -18,14 +18,14 @@ import { DataContext } from "./store/Data";
 // import Profile from "./pages/Profile/Profile.jsx";
 // import Loader from "./components/Loader/Loader.jsx"
 function App() {
-  const { isAuth, workshops } = useContext(DataContext);
+  // const { isAuth, workshops } = useContext(DataContext);
   return (
     <div className="App">
       <Navbar />
       <Routes>
         <Route path="/*" element={<ComingSoon />} />
-        {/* <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/contact-us" element={<ContactUs />} />
+         <Route path="/about-us" element={<AboutUs />} />
+        {/*<Route path="/contact-us" element={<ContactUs />} />
         <Route path="/" element={<Home />} />
         <Route path="/trustees" element={<Trustees />} />
         <Route path="/login" element={<Login />} />
