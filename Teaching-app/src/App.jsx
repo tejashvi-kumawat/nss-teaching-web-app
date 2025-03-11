@@ -3,8 +3,8 @@ import { useContext } from "react";
 import "./App.css";
 import ComingSoon from "./pages/ComingSoon/ComingSoon.jsx";
 // import AboutUs from "./pages/AboutUs/AboutUs.jsx";
-// import Navbar from "./components/Navbar/Navbar.jsx";
-// import Footer from "./components/Footer/Footer.jsx";
+import Navbar from "./components/Navbar/Navbar.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 // import Home from "./pages/Home/Home.jsx";
 // import Teaching from "./pages/Teaching/Teaching.jsx";
 // import Login from "./pages/Login/Login.jsx";
@@ -21,7 +21,7 @@ function App() {
   const { isAuth, workshops } = useContext(DataContext);
   return (
     <div className="App">
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path="/*" element={<ComingSoon />} />
         {/* <Route path="/about-us" element={<AboutUs />} />
@@ -46,7 +46,7 @@ function App() {
         } */}
 
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

@@ -1,42 +1,96 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@font-face {
+  font-family: 'RogerexBlack';
+  src: url('./assets/fonts/rogerex-font/RogerexBlack-w18y8.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+@font-face {
+  font-family: 'RogerexBold';
+  src: url('./assets/fonts/rogerex/RogerexBold-7B7oR.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: 'RogerexExtraBold';
+  src: url('./assets/fonts/rogerex/RogerexExtraBold-mLgKa.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'RogerexMax';
+  src: url('./assets/fonts/rogerex/RogerexMax-d92lE.ttf') format('truetype');
+  font-weight: 1000;
+  font-style: normal;
 }
 
-.card {
-  padding: 2em;
+@font-face {
+  font-family: 'RogerexMedium';
+  src: url('./assets/fonts/rogerex/RogerexMedium-PKm9x.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
 }
 
-.read-the-docs {
-  color: #888;
+@font-face {
+  font-family: 'RogerexRegular';
+  src: url('./assets/fonts/rogerex/RogerexRegular-L32KD.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RogerexSemiBold';
+  src: url('./assets/fonts/rogerex/RogerexSemiBold-X30Jj.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+:root{
+  --primary-color:#82D9E8;
+}
+
+*{
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  color: white;
+}
+
+
+
+
+.title-container{
+  display: flex;
+  width:fit-content;
+  position: relative;
+}
+
+.title-container::before{
+  position: absolute;
+  content: '';
+  width: 80%;
+  height: 3px;
+  left: 10%;
+  background-color: #9AE9E6;
+  border-radius: 100%;
+  bottom:2.8rem;
+}
+
+.title-container h1{
+  font-size: 2.5rem;
+  letter-spacing: 0.4rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+html {
+  background: #F5FAF5;
+}
+body {
+  font-family: 'RogerexRegular', sans-serif;
+  background:#F5FAF5;
+  margin: 0;
+  padding: 0;
 }
