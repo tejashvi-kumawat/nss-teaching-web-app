@@ -1,0 +1,45 @@
+/* Downloads.css */
+
+.downloads {
+    max-width: 900px; /* Limit content width */
+    margin: 40px auto; /* Center the content */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #2d2d2d;
+  }
+  
+  .downloads h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #172613;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+  
+  .downloads p {
+    font-size: 18px;
+    color: #172613;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+  
+  .downloads h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #172613;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+  
+  .reports-container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align to the left */
+  }
+  
+  .brochure-container {
+    margin-bottom: 24px;
+  }
+  
