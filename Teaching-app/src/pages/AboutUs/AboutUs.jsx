@@ -5,7 +5,7 @@ import founderImage from "../../assets/founder.png";
 import nidhi_pandey from "../../assets/nidhi_pandey.svg";
 import AboutUs_background from "../../assets/AboutUs_background.png";
 import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png";
-import AboutUs_Ourvision from "../../assets/AboutUs_Ourvision.png";
+import AboutUs_Ourvision from "../../assets/AboutUs_OurVision.png";
 import AboutUs_Mission from "../../assets/AboutUs_OurMission.png"
 import checkbox from "../../assets/checkbox.svg"
 const AboutUs = () => {
