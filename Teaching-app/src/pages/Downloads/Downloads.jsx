@@ -1,5 +1,5 @@
+import React from 'react';
 import './Downloads.css';
-
 const Downloads = () => {
   const brochure = {
     title: 'Brochure_2024',
