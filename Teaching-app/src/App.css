@@ -1,56 +1,8 @@
-@font-face {
-  font-family: 'RogerexBlack';
-  src: url('./assets/fonts/rogerex-font/RogerexBlack-w18y8.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
+:root {
+  --primary-color: #82D9E8;
 }
 
-@font-face {
-  font-family: 'RogerexBold';
-  src: url('./assets/fonts/rogerex/RogerexBold-7B7oR.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RogerexExtraBold';
-  src: url('./assets/fonts/rogerex/RogerexExtraBold-mLgKa.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RogerexMax';
-  src: url('./assets/fonts/rogerex/RogerexMax-d92lE.ttf') format('truetype');
-  font-weight: 1000;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RogerexMedium';
-  src: url('./assets/fonts/rogerex/RogerexMedium-PKm9x.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RogerexRegular';
-  src: url('./assets/fonts/rogerex/RogerexRegular-L32KD.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RogerexSemiBold';
-  src: url('./assets/fonts/rogerex/RogerexSemiBold-X30Jj.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-:root{
-  --primary-color:#82D9E8;
-}
-
-*{
+* {
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
@@ -60,13 +12,13 @@
 
 
 
-.title-container{
+.title-container {
   display: flex;
-  width:fit-content;
+  width: fit-content;
   position: relative;
 }
 
-.title-container::before{
+.title-container::before {
   position: absolute;
   content: '';
   width: 80%;
@@ -74,10 +26,10 @@
   left: 10%;
   background-color: #9AE9E6;
   border-radius: 100%;
-  bottom:2.8rem;
+  bottom: 2.8rem;
 }
 
-.title-container h1{
+.title-container h1 {
   font-size: 2.5rem;
   letter-spacing: 0.4rem;
   font-weight: 800;
@@ -88,9 +40,10 @@
 html {
   background: #F5FAF5;
 }
+
 body {
   font-family: 'RogerexRegular', sans-serif;
-  background:#F5FAF5;
+  background: #F5FAF5;
   margin: 0;
   padding: 0;
 }

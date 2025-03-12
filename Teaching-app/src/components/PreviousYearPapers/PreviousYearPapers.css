@@ -1,0 +1,142 @@
+* {
+    color: black;
+}
+
+.papers-container {
+    width: 100%;
+    background-color: #E9F2E9;
+    padding: 0;
+    margin: 0;
+    border-radius: 16px;
+}
+
+.paper-section {
+    background-color: #E9F2E9;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    border: none;
+    margin: 1.5rem 0px 0px 0px;
+}
+
+.section-header:hover {
+    background-color: rgba(220, 240, 220, 0.5);
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #2a5a1a;
+}
+
+.section-divider {
+    height: 1px;
+    background-color: #c0d0c0;
+    margin: 0;
+    width: 100%;
+    opacity: 0.6;
+}
+
+.toggle-icon {
+    color: #4a8522;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.section-content {
+    padding: 0;
+    background-color: #fff;
+    border: none;
+    width: 100%;
+    border-radius: 0 0 8px 8px;
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+.section-content.open {
+    transition: all 0.5s ease;
+}
+
+.papers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.papers-table th,
+.papers-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 0.9rem;
+    color: #444;
+    font-weight: 400;
+}
+
+.papers-table th {
+    background-color: #fff;
+    color: #666;
+    position: relative;
+    font-size: 0.85rem;
+    font-weight: normal;
+}
+
+.sortable-header {
+    position: relative;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.sortable-header::after {
+    content: '↓';
+    position: absolute;
+    right: 8px;
+    color: #4a8522;
+    opacity: 0.6;
+    font-size: 0.8rem;
+}
+
+.file-name {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.pdf-icon {
+    color: #e22;
+    margin-right: 8px;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.download-cell {
+    text-align: center;
+}
+
+.download-icon {
+    color: #4a8522;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+/* Match the expanded/collapsed sections */
+.paper-section:first-child .section-content {
+    display: block;
+}
+
+/* Empty table cell styling */
+.papers-table td.empty-cell {
+    background-color: #f9f9f9;
+    height: 60px;
+}
