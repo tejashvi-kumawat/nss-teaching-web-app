@@ -1,0 +1,135 @@
+.TrusteesBody {
+    background-color: #f5f9f3; 
+    font-family: "Montserrat", "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 40px;
+    color: #2F4F2F;
+}
+
+.BannerSection {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1100px;
+    position: relative;
+}
+
+.BannerImageBox {
+    position: relative;
+    border-radius: 20px; 
+    overflow: hidden;
+}
+
+.BannerImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(65%);
+    border-radius: 15px;
+}
+
+.BannerOverlayText {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    color: white;
+    text-align: left;
+    width: 90%;
+}
+
+.BannerOverlayText h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    opacity: 0.9; 
+}
+
+.BannerOverlayText h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.BannerDescription {
+    margin-top: 25px;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.TrusteesContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.TextBox {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.NumberHeading{
+    opacity: 0.15;
+    color: rgb(25, 85, 80);
+    font-size: 4rem;
+    font-weight: bolder;
+    position: absolute;
+    top: -30px;
+    left: -30px;
+}
+
+.TextHeading {
+    font-family: "Montserrat", "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    color: #174f4b; 
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    z-index: 2;
+    padding-left: 20px;
+}
+
+.TextPara {
+    color: #2F4F2F !important;
+    font-size: 18px;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+}
+
+.TextPara li::marker {
+    content: "●"; 
+    color: #2F4F2F; 
+    font-size: 20px;
+    position: center;
+    left: 0;
+    top: 2px;
+}
+
+.TrustImageBox {
+    width: 30%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.TrustImage {
+    border-radius: 10px; 
+    width: 300px; 
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.TrustImage:hover {
+    border: 4px solid #A5C7A1; 
+    box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.2); 
+    border-radius: 12px; 
+}
