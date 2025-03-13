@@ -27,13 +27,13 @@
   
   .person-photo {
     float: left;
-    height: 500px;
+    /* height: 500px; */
     flex: 0 0 300px;
     margin: 0px 200px 20px 20px;
   }
   
   .person-photo img {
-    height: 500px;
+    width: 100%;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -46,6 +46,7 @@
   }
   
   .message-text p {
+    color: #526652;
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: 400;
@@ -59,16 +60,120 @@
     padding-top: 10px;
     border-top: 1px solid #e0e0e0;
   }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .message-content {
-      flex-direction: column;
-    }
-    
-    .person-photo {
-      flex: 0 0 auto;
-      max-width: 250px;
-      margin: 0 auto 20px;
-    }
+  #signature {
+    color: #000000;
   }
+  
+  /* Medium devices (tablets, 992px and down) */
+@media (max-width: 992px) {
+  .person-photo {
+    max-width: 250px;
+  }
+  
+  .message-text p {
+    font-size: 1.1rem;
+  }
+  
+  .message-header h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Small tablets and large phones (768px and down) */
+@media (max-width: 768px) {
+  .message-content {
+    flex-direction: column;
+  }
+  
+  .person-photo {
+    max-width: 250px;
+    margin: 0 auto 30px;
+  }
+}
+
+/* Small phones (576px and down) */
+@media (max-width: 576px) {
+  .message-container {
+    padding: 0 15px;
+  }
+  
+  .message-header h2 {
+    font-size: 1.75rem;
+  }
+  
+  .person-photo {
+    max-width: 200px;
+  }
+  
+  .message-text p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  .signature {
+    margin-top: 20px;
+  }
+}
+
+/* Large devices (desktops, 1200px and down) */
+@media (max-width: 1200px) {
+  .person-photo {
+      max-width: 250px;
+  }
+}
+
+/* Medium devices (tablets, 992px and down) */
+@media (max-width: 992px) {
+  .message-text p {
+      font-size: 1.25rem;
+  }
+
+  .message-header h2 {
+      font-size: 2rem;
+  }
+}
+
+/* Small tablets and large phones (768px and down) */
+@media (max-width: 768px) {
+  .person-photo {
+      max-width: 220px;
+      margin: 0 20px 20px 0;
+  }
+  
+  .message-text p {
+      font-size: 1.1rem;
+  }
+}
+
+/* Small phones (576px and down) */
+@media (max-width: 576px) {
+  .person-photo {
+      float: none;
+      margin: 0 auto 20px;
+      display: block;
+  }
+  
+  .message-header h2 {
+      font-size: 1.75rem;
+  }
+  
+  .message-text p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 375px) {
+  .message-header h2 {
+      font-size: 1.5rem;
+  }
+  
+  .person-photo {
+      max-width: 100%;
+  }
+  
+  .message-text p {
+      font-size: 0.95rem;
+  }
+}
