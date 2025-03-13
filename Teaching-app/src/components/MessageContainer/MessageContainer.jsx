@@ -37,7 +37,7 @@ const MessageContainer = (props) => {
           {/* Signature */}
 
           
-          <p className="signature">
+          <p className="signature" id='signature'>
             - {name}
             {position && `, ${position}`}
           </p>
