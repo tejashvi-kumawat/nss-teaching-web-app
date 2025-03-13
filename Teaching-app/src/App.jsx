@@ -15,7 +15,7 @@ import Trustees from "./pages/Trustees/Trustees.jsx";
 // import GetInvolved from "./pages/GetInvolved/GetInvolved.jsx";
 import Downloads from "./pages/Downloads/Downloads.jsx";
 import { DataContext } from "./store/Data";
-// import ContactUs from "./pages/ContactUs/ContactUs.jsx"
+import ContactUs from "./pages/ContactUs/ContactUs.jsx"
 // import Profile from "./pages/Profile/Profile.jsx";
 // import Loader from "./components/Loader/Loader.jsx"
 function App() {
@@ -30,8 +30,8 @@ function App() {
         <Route path="/announcement/:id" element={<AnnouncementDetail />} />
         <Route path="/downloads" element={<Downloads/>}/>
         <Route path="/trustees" element={<Trustees />} />
-        {/*<Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        {/*<Route path="/" element={<Home />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
