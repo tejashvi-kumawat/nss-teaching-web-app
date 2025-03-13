@@ -5,7 +5,9 @@ import RajendraMohan from "../../assets/Rajendra Mohan.png"
 import RajKumarKohli from "../../assets/Raj Kumar Kohli.png"
 import NareshChand from "../../assets/Naresh Chand.png"
 import Banner from "../../assets/TrusteesBanner.png"
+import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png";
 import "./Trustees.css"
+import { Link } from 'react-router-dom';
 
 const TrusteesList=[
     {
@@ -13,13 +15,13 @@ const TrusteesList=[
         name: "J.P. Dabral",
         image: JPDabral,
         points: (
-            <ul>
-                <li className="TextPara">An MBA graduate from Delhi University and 
+            <ul className='Trustees-Object-Points'>
+                <li className="Trustees-Points-TextPara">An MBA graduate from Delhi University and 
                     former Regional Marketing Manager at ITC</li>
-                <li className="TextPara">A recipient of prestigious accolades, including the Ashoka Fellowship, 
+                <li className="Trustees-Points-TextPara">A recipient of prestigious accolades, including the Ashoka Fellowship, 
                     CNN-IBN Real Heroes Award, 
                     International Green Apple Award, and Hindustan Times India Awaken Award</li>
-                <li className="TextPara">Over 30 years of grassroots work dedicated to improving education, tackling 
+                <li className="Trustees-Points-TextPara">Over 30 years of grassroots work dedicated to improving education, tackling 
                     bureaucratic challenges, and empowering communities in Uttarakhand</li>
             </ul>
         )
@@ -29,11 +31,11 @@ const TrusteesList=[
         name: "Rajeev Jain",
         image: RajeevJain,
         points: (
-            <ul>
-                <li className="TextPara">Rajeev Jain, law graduate, works in consultancy and customised manufacturer of fancy lights,
+            <ul className='Trustees-Object-Points'>
+                <li className="Trustees-Points-TextPara">Rajeev Jain, law graduate, works in consultancy and customised manufacturer of fancy lights,
                 Jain scholar associated in several Jain organizations and philanthropic activities</li>
-                <li className="TextPara">Engaged in various charitable and social initiatives.</li>
-                <li className="TextPara">Actively associated with several Jain organizations</li>
+                <li className="Trustees-Points-TextPara">Engaged in various charitable and social initiatives.</li>
+                <li className="Trustees-Points-TextPara">Actively associated with several Jain organizations</li>
             </ul>
         )
     },
@@ -42,11 +44,11 @@ const TrusteesList=[
         name: "Rajendra Mohan",
         image: RajendraMohan,
         points: (
-            <ul>
-                <li className="TextPara">Studied at Cambridge School, graduated from Shri Ram College,
+            <ul className='Trustees-Object-Points'>
+                <li className="Trustees-Points-TextPara">Studied at Cambridge School, graduated from Shri Ram College,
                 and joined the family business Sri Ram & Son (est. 1882)</li>
-                <li className="TextPara">Founded the men's wear brand Pall Mall in 1988, curating fashion for discerning men</li>
-                <li className="TextPara">Associated with Ramjas Educational Foundation, active in Rotary & Jaycees, 
+                <li className="Trustees-Points-TextPara">Founded the men's wear brand Pall Mall in 1988, curating fashion for discerning men</li>
+                <li className="Trustees-Points-TextPara">Associated with Ramjas Educational Foundation, active in Rotary & Jaycees, 
                     enjoys golf and music</li>
             </ul>
         )
@@ -56,9 +58,9 @@ const TrusteesList=[
         name: "Raj Kumar Kohli",
         image: RajKumarKohli,
         points: (
-            <ul>
-                <li className="TextPara">Alumnus of Shri Ram College of Commerce (SRCC), Delhi</li>
-                <li className="TextPara">Importer and exporter of textiles and textile products</li>
+            <ul className='Trustees-Object-Points'>
+                <li className="Trustees-Points-TextPara">Alumnus of Shri Ram College of Commerce (SRCC), Delhi</li>
+                <li className="Trustees-Points-TextPara">Importer and exporter of textiles and textile products</li>
             </ul>
         )
     },
@@ -67,9 +69,9 @@ const TrusteesList=[
         name: "Naresh Chand",
         image: NareshChand,
         points: (
-            <ul>
-                <li className='TextPara'>Importer and exporter of sandal wood and various other products.</li>
-                <li className="TextPara">Committed to the upliftment of rural students through education</li>
+            <ul className='Trustees-Object-Points'>
+                <li className='Trustees-Points-TextPara'>Importer and exporter of sandal wood and various other products.</li>
+                <li className="Trustees-Points-TextPara">Committed to the upliftment of rural students through education</li>
             </ul>
         )
     }
@@ -79,40 +81,48 @@ const Trustees = () => {
 
     return(
         <div className='TrusteesBody'>
-            <div className="BannerSection">
-                <div className="BannerImageBox">
-                    <img className='BannerImage' src={Banner} />
-                    <div className="BannerOverlayText">
+
+            <div className="TrusteesBannerSection">
+            {/* Breadcrumb Navigation */}
+            <div className="breadcrumb">
+                <Link to="/" className="breadcrumb-link">Home</Link>
+                <span className="breadcrumb-separator">&gt;</span>
+                <span className="breadcrumb-current">Trustees</span>
+            </div>
+                <div className="TrusteesBannerImageBox">
+                    <img className='TrusteesBannerImage' src={Banner} />
+                    <img src={AboutUs_background_cover} alt="" className="Trustees_background_cover" />
+                    <div className="TrusteesBannerOverlayText">
                         <h2>Meet the visionaries behind the</h2>
                         <h1>Himalayan Vidya Daan Trust</h1>
                     </div>
                 </div>
-                <p className='BannerDescription'>
+                <p className='TrusteesBannerDescription'>
                 The trust is guided by five dedicated individuals who bring their unique
                 expertise and unwavering commitment to the cause of education in Uttarakhand.
                 </p>
             </div>
             {TrusteesList.map((TrustObject,index) => index%2===0 ? (
                 <div className="TrusteesContainer" key={index}>
-                    <div className="TextBox">
-                        <span className="NumberHeading">{TrustObject.number}</span>
-                        <h2 className="TextHeading">
-                            {TrustObject.name}
+                    <div className="TrusteesTextBox">
+                        <span className="TrusteesNumberHeading">{TrustObject.number}</span>
+                        <h2 className="TrusteesTextHeading">
+                            <div className='Trusteestrust-object'>{TrustObject.name}</div>
                         </h2>
                         {TrustObject.points}
                     </div>
-                    <div className="TrustImageBox">
-                        <img className="TrustImage" src={TrustObject.image} />
+                    <div className="TrusteesTrustImageBox">
+                        <img className="TrusteesTrustImage" src={TrustObject.image} />
                     </div>
                 </div>
             ) : (
                 <div className="TrusteesContainer" key={index}>
-                    <div className="TrustImageBox">
-                        <img className="TrustImage" src={TrustObject.image} />
+                    <div className="TrusteesTrustImageBox">
+                        <img className="TrusteesTrustImage" src={TrustObject.image} />
                     </div>
-                    <div className="TextBox">
-                        <span className="NumberHeading">{TrustObject.number}</span>
-                        <h2 className="TextHeading">
+                    <div className="TrusteesTextBox">
+                        <span className="TrusteesNumberHeading">{TrustObject.number}</span>
+                        <h2 className="TrusteesTextHeading">
                             {TrustObject.name}
                         </h2>
                         {TrustObject.points}
