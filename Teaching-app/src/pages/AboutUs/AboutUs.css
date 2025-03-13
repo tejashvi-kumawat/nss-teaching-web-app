@@ -1,6 +1,6 @@
 /* About Us Section Styles */
 .about-us-container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -9,7 +9,7 @@
 .breadcrumb {
   display: flex;
   align-items: center;
-  padding: 20px 0;
+  /* padding: 20px 0; */
   font-size: 16px;
   color: #333;
 }

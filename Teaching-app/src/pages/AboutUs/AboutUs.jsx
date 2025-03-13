@@ -4,10 +4,11 @@ import MessageContainer from "../../components/MessageContainer/MessageContainer
 import founderImage from "../../assets/founder.png";
 import nidhi_pandey from "../../assets/nidhi_pandey.svg";
 import AboutUs_background from "../../assets/AboutUs_background.png";
-import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png";
+// import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png";
 import AboutUs_Ourvision from "../../assets/AboutUs_OurVision.png";
 import AboutUs_Mission from "../../assets/AboutUs_OurMission.png";
-import checkbox from "../../assets/checkbox.svg";
+import { Link } from "react-router-dom";
+// import checkbox from "../../assets/checkbox.svg";
 const AboutUs = () => {
   // Data for multiple personalities
   const messageData = [
@@ -39,11 +40,12 @@ const AboutUs = () => {
   ];
   return (
     <div className="about-us-container">
-      <div className="breadcrumb">
-        <span>Home</span>
-        <span className="breadcrumb-arrow">›</span>
-        <span className="breadcrumb-current">About us</span>
-      </div>
+            {/* Breadcrumb Navigation */}
+        <div className="breadcrumb">
+          <Link to="/" className="breadcrumb-link">Home</Link>
+          <span className="breadcrumb-separator">&gt;</span>
+          <span className="breadcrumb-current">Trustees</span>
+        </div>
 
       {/* Hero section with background image and overlay */}
       <div

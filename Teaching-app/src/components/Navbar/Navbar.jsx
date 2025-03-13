@@ -41,7 +41,7 @@ const Navbar = () => {
       {/* Desktop Navbar */}
       <ul className="navbar-menu">
         <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
-        <li><Link to="/about-us" className={location.pathname === '/about-us' ? 'active' : ''}>About</Link></li>
+        <li><Link to="/about-us" className={location.pathname === '/about-us' ? 'active' : ''}>AboutUs</Link></li>
         <li><Link to="/teaching" className={location.pathname === '/teaching' ? 'active' : ''}>Teaching</Link></li>
         <li><Link to="/for-students" className={location.pathname === '/for-students' ? 'active' : ''}>For Students</Link></li>
         <li><Link to="/trustees" className={location.pathname === '/trustees' ? 'active' : ''}>Trustees</Link></li>

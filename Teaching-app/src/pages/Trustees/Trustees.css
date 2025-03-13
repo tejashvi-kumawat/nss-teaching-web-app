@@ -2,7 +2,7 @@
     background-color: #f5f9f3; 
     font-family: "Montserrat", "Helvetica Neue", sans-serif;
     margin: 0;
-    padding: 40px;
+    /* padding: 40px; */
     color: #2F4F2F;
 }
 .breadcrumb {
@@ -40,7 +40,7 @@
 .TrusteesBannerSection {
     text-align: center;
     margin: 0 auto;
-    max-width: 1100px;
+    max-width: 1440px;
     position: relative;
 }
 
