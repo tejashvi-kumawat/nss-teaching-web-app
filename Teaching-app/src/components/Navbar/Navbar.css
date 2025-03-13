@@ -20,8 +20,11 @@
   width: 169px;
   height: auto;
 }
+.navbar-logo a {
+  text-decoration: none;
+}
 
-.logo-title-name {
+.navbar-logo-title-name {
   font-size: 0.7rem;
   color: #2E7D32;
   font-weight: 700;
@@ -257,7 +260,7 @@
     max-width: 70%;
   }
   
-  .logo-title-name {
+  .navbar-logo-title-name {
     font-size: 0.5rem;
   }
 }
@@ -276,7 +279,7 @@
     width: 100px;
   }
   
-  .logo-title-name {
+  .navbar-logo-title-name {
     font-size: 0.5rem;
   }
   

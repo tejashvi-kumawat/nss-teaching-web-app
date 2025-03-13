@@ -28,7 +28,7 @@ const Navbar = () => {
       <div className="navbar-logo">
         <Link to="/">
           <img src={trust_logo} alt="Tryst IIT Delhi Logo" />
-          <div className='logo-title-name'>HIMALAYAN VIDYA DAAN TRUST</div>
+          <div className='navbar-logo-title-name'>HIMALAYAN VIDYA DAAN TRUST</div>
         </Link>
 
       </div>

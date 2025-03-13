@@ -103,7 +103,7 @@ const Trustees = () => {
                 </p>
             </div>
             {TrusteesList.map((TrustObject,index) => index%2===0 ? (
-                <div className="TrusteesContainer" key={index}>
+                <div className="TrusteesContainer TrusteesContainer-even" key={index}>
                     <div className="TrusteesTextBox">
                         <span className="TrusteesNumberHeading">{TrustObject.number}</span>
                         <h2 className="TrusteesTextHeading">
@@ -116,7 +116,7 @@ const Trustees = () => {
                     </div>
                 </div>
             ) : (
-                <div className="TrusteesContainer" key={index}>
+                <div className="TrusteesContainer TrusteesContainer-odd" key={index}>
                     <div className="TrusteesTrustImageBox">
                         <img className="TrusteesTrustImage" src={TrustObject.image} />
                     </div>
