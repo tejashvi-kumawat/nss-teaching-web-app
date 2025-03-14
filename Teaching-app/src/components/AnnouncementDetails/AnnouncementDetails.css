@@ -1,89 +1,138 @@
 .announcement-details-container {
-    width: 100%;
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-}
-
-/* Breadcrumb Styles */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #555;
-}
-
-.breadcrumb-link {
-    color: #4a8522;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.breadcrumb-link:hover {
-    color: #3a6a1a;
-    text-decoration: underline;
-}
-
-.breadcrumb-separator {
-    margin: 0 8px;
-    color: #777;
-}
-
-.breadcrumb-current {
-    color: #555;
+    padding: 40px;
+    background-color: #F5FAF5;
 }
 
 /* Announcement Content Styles */
-.announcement-content {
-    background-color: #fff;
-    padding: 20px;
+.announcement-details-announcement-content {
+    background-color: #F5FAF5;
+    padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.announcement-title {
-    font-size: 24px;
-    font-weight: 700;
+/* Title of Announcement */
+.announcement-details-announcement-title {
+    font-size: 32px;
     color: #222;
-    margin-bottom: 16px;
-}
-
-.announcement-date {
-    font-size: 14px;
-    color: #555;
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
+    font-weight: 700;
 }
 
-.calendar-icon {
-    margin-right: 8px;
-}
-
-.announcement-message {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.important-info {
-    font-size: 16px;
-    color: #333;
-    margin-top: 20px;
-}
-
-.important-info h2 {
+/* Date and Calendar Icon */
+.announcement-details-announcement-date {
+    width: 135px;
     font-size: 18px;
+    color: #526652;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.announcement-details-calendar-icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Main Content Message */
+.announcement-details-announcement-message {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.announcement-details-announcement-message p {
+    color: #526652;
+}
+
+/* Important Information Section */
+.announcement-details-important-info {
+    font-size: 18px;
+    color: #333;
+    margin-top: 30px;
+}
+
+.announcement-details-important-info h2 {
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
     color: #4a8522;
+    /* Dark green for header */
 }
 
-.important-info p {
+.announcement-details-important-info p {
     margin: 8px 0;
-    color: #555;
+    color: #526652;
+    font-size: 16px;
+}
+
+/* Small enhancements for responsiveness */
+@media (max-width: 1200px) {
+    .announcement-details-container {
+        padding: 20px;
+    }
+
+    .announcement-details-announcement-title {
+        font-size: 20px;
+    }
+
+    .announcement-details-announcement-message {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .announcement-details-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .announcement-details-announcement-content {
+        padding: 15px;
+    }
+
+    .announcement-details-announcement-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .announcement-details-announcement-date {
+        width: 120px;
+        font-size: 16px;
+    }
+
+    .announcement-details-calendar-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .announcement-details-announcement-message {
+        font-size: 14px;
+    }
+
+    .announcement-details-important-info h2 {
+        font-size: 18px;
+    }
+
+    .announcement-details-important-info p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .announcement-details-announcement-title {
+        font-size: 16px;
+    }
+
+    .announcement-details-announcement-date {
+        width: 110px;
+        font-size: 14px;
+    }
+
+    .announcement-details-important-info {
+        font-size: 16px;
+    }
 }
