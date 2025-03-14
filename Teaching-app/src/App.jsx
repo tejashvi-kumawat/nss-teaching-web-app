@@ -12,7 +12,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import ForStudents from "./pages/ForStudents/ForStudents.jsx"
 import AnnouncementDetail from './components/AnnouncementDetail/AnnouncementDetail.jsx'
 import Trustees from "./pages/Trustees/Trustees.jsx";
-// import GetInvolved from "./pages/GetInvolved/GetInvolved.jsx";
+import GetInvolved from "./pages/GetInvolved/GetInvolved.jsx";
 import Downloads from "./pages/Downloads/Downloads.jsx";
 import { DataContext } from "./store/Data";
 import ContactUs from "./pages/ContactUs/ContactUs.jsx"
@@ -31,6 +31,7 @@ function App() {
         <Route path="/downloads" element={<Downloads/>}/>
         <Route path="/trustees" element={<Trustees />} />
         <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/get-involved" element={<GetInvolved />} />
         {/*<Route path="/" element={<Home />} />
 
         <Route path="/login" element={<Login />} />

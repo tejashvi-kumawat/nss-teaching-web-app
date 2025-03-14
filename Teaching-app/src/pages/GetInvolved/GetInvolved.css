@@ -1,0 +1,435 @@
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Main container styles */
+.get-involved-main-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  position: relative;
+  padding: 0 20px;
+}
+
+.get-involved-content-container {
+  background-color: #f8f9fa;
+  display: block;
+  position: relative;
+}
+
+/* Title section styles */
+.get-involved-title-container {
+  max-width: 880px;
+  background: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  position: relative;
+  display: block;
+}
+
+.get-involved-page-title {
+  font-size: 48px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  color: #132611;
+  margin-bottom: 0px;
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+.get-involved-description {
+  color: #526652;
+  margin-bottom: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 20px;
+  margin-top: 0;
+  padding: 8px 0px;
+  border-radius: 4px;
+}
+
+/* Breadcrumb Styles */
+.get-involved-breadcrumb {
+  display: flex;
+  align-items: center;
+  margin: 15px 0 25px 0;
+  font-size: 14px;
+  width: 244.5px;
+  height: 27px;
+  top: 152px;
+  left: 144px;
+}
+
+.get-involved-breadcrumb-link {
+  color: #4a8522;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.get-involved-breadcrumb-link:hover {
+  color: #3a6a1a;
+  text-decoration: underline;
+}
+
+.get-involved-breadcrumb-separator {
+  margin: 0 8px;
+  color: #777;
+}
+
+.get-involved-breadcrumb-current {
+  color: #555;
+}
+
+/* Tabs container and styles */
+.get-involved-tabs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 100%;
+  overflow: hidden;
+  margin-bottom: 192px;
+}
+
+.get-involved-tabs-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 111px;
+  background-color: #E9F2E9;
+  padding: 0;
+  margin: 0;
+}
+
+.get-involved-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 0 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 8px;
+  height: 95px;
+}
+
+.get-involved-tab:hover {
+  background-color: rgba(74, 133, 34, 0.1);
+}
+
+.get-involved-tab-active {
+  background-color: #4a8522;
+  color: white;
+}
+
+/* Tab content container */
+.get-involved-tab-content-container {
+  width: 100%;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+/* Main container */
+.get-involved-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9fafb;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+/* Volunteer Form Section */
+.get-involved-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+
+}
+
+.get-involved-intro h1 {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.get-involved-intro p {
+  font-size: 24px;
+  max-width: 800px;
+  text-align: center;
+  color: #526652;
+  margin: 10px;
+}
+
+/* GetInvolved.css - Form Styles */
+
+.get-involved-container {
+  display: flex;
+  justify-content: center;
+  padding: 48px;
+}
+
+.get-involved-card {
+  background: #F5FAF5;
+  width: 613px;
+  border-radius: 10px;
+  padding: 44px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.get-involved-form-group {
+  margin-bottom: 40px;
+}
+
+.get-involved-form-label {
+  display: block;
+  font-size: 18px;
+  color: #526652;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.get-involved-form-input,
+.get-involved-dropdown-toggle {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 16px;
+  background-color: #ffffff00;
+  color: #526652;
+}
+
+.get-involved-form-input:focus,
+.get-involved-dropdown-toggle:focus {
+  outline: none;
+  border-color: #3a8038;
+  box-shadow: 0 0 0 2px rgba(58, 128, 56, 0.2);
+}
+
+.get-involved-dropdown-container {
+  position: relative;
+}
+
+.get-involved-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+}
+
+.get-involved-dropdown-text {
+  color: #666;
+}
+
+.get-involved-dropdown-arrow {
+  width: 16px;
+  height: 16px;
+  color: #666;
+  transition: transform 0.2s ease;
+}
+
+.get-involved-dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.get-involved-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.get-involved-dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.get-involved-dropdown-item {
+  height: 50px;
+  padding: 10px 12px;
+  cursor: pointer;
+  background-color: #ffffff00;
+}
+
+.get-involved-dropdown-item:hover {
+  background: #f5f5f5;
+}
+
+.get-involved-submit-button {
+  width: 100%;
+  height: 64px;
+  background-color: #2e7d32;
+  /* Green button color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: background-color 0.2s ease;
+}
+
+.get-involved-submit-button:hover {
+  background-color: #2c6a2a;
+}
+
+.get-involved-submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(58, 128, 56, 0.4);
+}
+
+/* Donate and Partner sections */
+.get-involved-donate-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #F5FAF5;
+  width: 613px;
+  border-radius: 10px;
+  padding: 44px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.get-involved-donate-form h3{
+  color: #526652;
+  font-weight: 400;
+  text-align: center;
+  margin: 10px 0 50px 0;
+}
+.input-money-container {
+  display: flex;
+  align-items: center;
+  background-color: #f2f7f2;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+.vertical-bar {
+  color: #000000;
+  margin-right: 2px;
+  font-size: 30px;
+  opacity: 0.6;
+}
+
+.rupee-symbol {
+  color: #348838;
+  opacity: 0.6;
+  font-weight: 500;
+  font-size: 34px;
+}
+
+.money-input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #45b94a;
+  opacity: 0.4;
+  font-size: 34px;
+  width: 80px;
+}
+.get-involved-money::placeholder {
+  color: #00a000;
+  opacity: 0.6;
+}
+
+.get-involved-donate-buttons {
+  display: flex;
+  gap: 96px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.get-involved-donate-buttons button {
+  background-color: white;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 110px;
+  text-align: center;
+}
+
+.get-involved-donate-buttons button:hover {
+  background-color: #f0fdf4;
+}
+
+.get-involved-donate-buttons button:active {
+  transform: scale(0.98);
+}
+
+.get-involved-donate-submit-btn {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 14px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.get-involved-donate-submit-btn:hover {
+  background-color: #16612b;
+}
+
+.get-involved-donate-submit-btn:active {
+  transform: scale(0.99);
+}
+
+@media (max-width: 480px) {
+  .get-involved-donate-form {
+    padding: 16px;
+  }
+  
+  .buttons {
+    flex-direction: column;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .get-involved-tabs-row {
+    flex-direction: column;
+  }
+
+  .get-involved-tab {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .get-involved-volunteer-form {
+    padding: 20px;
+  }
+}
