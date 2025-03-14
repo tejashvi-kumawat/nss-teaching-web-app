@@ -6,6 +6,11 @@ const ContactUs = () => {
   return (
     <div className="contact-us">
       <div className="contact-info">
+      <div className="breadcrumb">
+        <a href="/">Home</a>
+        <span className="separator">›</span>
+        <span>Contact us</span>
+        </div>
         <h1>Contact us</h1>
         <p>Any question or remarks? Write us a message!</p>
 
@@ -14,7 +19,7 @@ const ContactUs = () => {
       </div>
 
       <div className="contact-form">
-        <div className="form-group">
+        <div className="name-group">
           <div>
             <label>First name</label>
             <input type="text" placeholder="" />
