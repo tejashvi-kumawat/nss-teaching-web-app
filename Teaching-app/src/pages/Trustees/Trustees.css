@@ -1,17 +1,18 @@
 .TrusteesBody {
-    background-color: #f5f9f3; 
+    background-color: #f5f9f3;
     font-family: "Montserrat", "Helvetica Neue", sans-serif;
     margin: 0;
     /* padding: 40px; */
     color: #2F4F2F;
 }
+
 .breadcrumb {
-    
+
     display: flex;
     align-items: center;
     margin: 15px 0 25px 0;
     font-size: 14px;
-    width: 244.5px;
+    width: auto;
     height: 27px;
     top: 152px;
     left: 144px;
@@ -47,7 +48,7 @@
 
 .TrusteesBannerImageBox {
     position: relative;
-    border-radius: 20px; 
+    border-radius: 20px;
     overflow: hidden;
 }
 
@@ -58,6 +59,7 @@
     border-radius: 20px;
     z-index: 1;
 }
+
 .Trustees_background_cover {
     width: 100%;
     background-color: green;
@@ -67,7 +69,7 @@
     opacity: 0.4;
     bottom: 0%;
     border-radius: 24px;
-  }
+}
 
 .TrusteesBannerOverlayText {
     position: absolute;
@@ -82,7 +84,7 @@
 .TrusteesBannerOverlayText h2 {
     font-size: 2.2rem;
     font-weight: 600;
-    opacity: 0.9; 
+    opacity: 0.9;
     color: #ADCCAF;
 }
 
@@ -92,13 +94,13 @@
     color: #F5FAF5;
 }
 
-.TrusteesBannerDescription{
+.TrusteesBannerDescription {
     margin-top: 25px;
     font-size: 1rem;
     color: #555;
     line-height: 1.6;
     max-width: 550px;
-    text-align:left;
+    text-align: left;
     margin: 2rem 0rem 2rem 0rem;
 
 }
@@ -120,7 +122,7 @@
     position: relative;
 }
 
-.TrusteesNumberHeading{
+.TrusteesNumberHeading {
     opacity: 0.15;
     color: rgb(25, 85, 80);
     font-size: 4rem;
@@ -134,7 +136,7 @@
 .TrusteesTextHeading {
     font-family: "Montserrat", "Helvetica Neue", sans-serif;
     font-weight: 600;
-    color: #174f4b; 
+    color: #174f4b;
     font-size: 1.8rem;
     margin-bottom: 10px;
     z-index: 2;
@@ -147,9 +149,11 @@
     line-height: 1.6;
     font-family: Arial, sans-serif;
 }
-.Trustees-Object-Points{
+
+.Trustees-Object-Points {
     list-style: none;
 }
+
 .Trustees-Object-Points li {
 
     color: #526652;
@@ -158,7 +162,8 @@
     margin-bottom: 25px;
     font-weight: 300;
     line-height: 1.4;
-  }
+}
+
 .Trustees-Object-Points li::before {
     content: "";
     position: absolute;
@@ -167,22 +172,27 @@
     top: 6px;
     width: 12px;
     height: 12px;
-    background-color: #2E7D32; /* Green bullet */
+    background-color: #2E7D32;
+    /* Green bullet */
     border-radius: 50%;
-  }
-  
-  /* Creates the connecting line between bullets */
-  .Trustees-Object-Points li:not(:last-child)::after {
+}
+
+/* Creates the connecting line between bullets */
+.Trustees-Object-Points li:not(:last-child)::after {
     content: "";
     margin-left: 30px;
     position: absolute;
-    left: 6px; /* Center the line with the bullet */
-    top: 16px; /* Start below the bullet */
+    left: 6px;
+    /* Center the line with the bullet */
+    top: 16px;
+    /* Start below the bullet */
     width: 0.6px;
     opacity: 50%;
-    height: calc(100% + 18px); /* Extend to the next bullet */
-    background-color: #2E7D32; /* Green connector */
-  }
+    height: calc(100% + 18px);
+    /* Extend to the next bullet */
+    background-color: #2E7D32;
+    /* Green connector */
+}
 
 .TrusteesTrustImageBox {
     width: 30%;
@@ -193,17 +203,17 @@
 }
 
 .TrusteesTrustImage {
-    border-radius: 10px; 
-    width: 300px; 
+    border-radius: 10px;
+    width: 300px;
     height: 300px;
     object-fit: cover;
     object-position: top;
     transition: all 0.3s ease-in-out;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .TrusteesTrustImage:hover {
-    border: 4px solid #A5C7A1; 
-    box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.2); 
-    border-radius: 12px; 
+    border: 4px solid #A5C7A1;
+    box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.2);
+    border-radius: 12px;
 }

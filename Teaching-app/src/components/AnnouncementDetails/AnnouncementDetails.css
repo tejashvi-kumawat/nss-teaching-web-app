@@ -13,6 +13,10 @@
     border-radius: 8px;
 }
 
+.breadcrumb {
+    width: auto;
+}
+
 /* Title of Announcement */
 .announcement-details-announcement-title {
     font-size: 32px;
