@@ -1,142 +1,211 @@
-* {
-    color: black;
-}
-
-.papers-container {
+.previousYearPapers-and-results-papers-container {
     width: 100%;
-    background-color: #E9F2E9;
+    background-color: #F5FAF5;
     padding: 0;
     margin: 0;
-    border-radius: 16px;
 }
 
-.paper-section {
-    background-color: #E9F2E9;
-    overflow: hidden;
+.previousYearPapers-and-results-paper-section {
+    background-color: #F5F8F5;
     transition: all 0.3s ease;
     width: 100%;
-    margin-bottom: 8px;
+    /* Small gap between sections */
 }
 
-.section-header {
+/* First section styling */
+.previousYearPapers-and-results-paper-section.first-section {
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+/* Last section styling */
+.previousYearPapers-and-results-paper-section.last-section {
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.previousYearPapers-and-results-section-header {
+    min-height: 13vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem;
+    padding: 0 2%;
     cursor: pointer;
-    border: none;
-    margin: 1.5rem 0px 0px 0px;
-}
-
-.section-header:hover {
-    background-color: rgba(220, 240, 220, 0.5);
-}
-
-.section-header h3 {
     margin: 0;
-    font-size: 1rem;
+    background-color: #E9F2E9;
+}
+
+.previousYearPapers-and-results-section-header span {
+    color: #132611;
+    font-size: 22px;
     font-weight: 400;
-    color: #2a5a1a;
+    line-height: 1;
+    letter-spacing: 0;
 }
 
-.section-divider {
-    height: 1px;
-    background-color: #c0d0c0;
-    margin: 0;
-    width: 100%;
-    opacity: 0.6;
+.previousYearPapers-and-results-section-header:hover {
+    background-color: #e0f5dd;
 }
 
-.toggle-icon {
-    color: #4a8522;
-    font-size: 1.2rem;
+.previousYearPapers-and-results-toggle-icon {
+    width: 24px;
+    height: 24px;
     transition: transform 0.3s ease;
 }
 
-.section-content {
-    padding: 0;
-    background-color: #fff;
-    border: none;
-    width: 100%;
-    border-radius: 0 0 8px 8px;
-    transition: all 0.5s ease;
+.previousYearPapers-and-results-toggle-icon.expanded {
+    transform: rotate(180deg);
+}
+
+.previousYearPapers-and-results-section-content {
+    max-height: 0;
     overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease-in-out;
+    background-color: #F5F8F5;
 }
 
-.section-content.open {
-    transition: all 0.5s ease;
+.previousYearPapers-and-results-section-content.show {
+    max-height: 1000px;
+    opacity: 1;
 }
 
-.papers-table {
+.previousYearPapers-and-results-papers-table {
     width: 100%;
     border-collapse: collapse;
+    background-color: #F5F8F5;
 }
 
-.papers-table th,
-.papers-table td {
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid #e8e8e8;
-    font-size: 0.9rem;
-    color: #444;
+.previousYearPapers-and-results-papers-table th,
+.previousYearPapers-and-results-papers-table td {
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
     font-weight: 400;
+    border-bottom: 1px solid #E9F2E9;
+
 }
 
-.papers-table th {
-    background-color: #fff;
-    color: #666;
+.previousYearPapers-and-results-papers-table th {
+    background-color: #F5F8F5;
+    color: #333;
     position: relative;
-    font-size: 0.85rem;
-    font-weight: normal;
+    font-weight: 500;
+    border-bottom: 1px solid #E9F2E9;
+    padding-bottom: 8px;
 }
 
-.sortable-header {
+.previousYearPapers-and-results-sortable-header {
     position: relative;
-    padding-right: 20px;
     cursor: pointer;
+    padding-right: 16px;
 }
 
-.sortable-header::after {
-    content: '↓';
+.previousYearPapers-and-results-sortable-header::after {
     position: absolute;
-    right: 8px;
-    color: #4a8522;
-    opacity: 0.6;
-    font-size: 0.8rem;
+    right: 0;
+    color: #999;
+    font-size: 12px;
 }
 
-.file-name {
+.previousYearPapers-and-results-file-name {
     display: flex;
     align-items: center;
-    font-size: 0.9rem;
-    color: #333;
+    justify-content: center;
 }
 
-.pdf-icon {
-    color: #e22;
+.previousYearPapers-and-results-pdf-icon {
     margin-right: 8px;
-    font-size: 1rem;
-    opacity: 0.9;
+    width: 28px;
+    height: 30px;
 }
 
-.download-cell {
+.previousYearPapers-and-results-download-header {
     text-align: center;
 }
 
-.download-icon {
-    color: #4a8522;
-    font-size: 1.2rem;
+.previousYearPapers-and-results-download-icon {
+    width: 121px;
+    height: 51px;
     cursor: pointer;
-    opacity: 0.8;
 }
 
-/* Match the expanded/collapsed sections */
-.paper-section:first-child .section-content {
+.previousYearPapers-and-results-divider {
+    height: 1px;
+    background-color: #EBEBEB;
+    width: 100%;
     display: block;
+    /* Ensure it's visible */
 }
 
-/* Empty table cell styling */
-.papers-table td.empty-cell {
-    background-color: #f9f9f9;
-    height: 60px;
+/* Add wrapper styles */
+.previousYearPapers-and-results-wrapper {
+    width: 100%;
+}
+
+.previousYearPapers-and-results-sort-icon-image {
+    width: 20px;
+    height: 20px;
+}
+
+.previousYearPapers-and-results-papers-table span {
+    color: #132611;
+}
+
+
+/* Responsive styles for PreviousYearPapers component */
+
+@media (max-width: 1200px) {
+    .previousYearPapers-and-results-section-header {
+        /* flex-direction: column; */
+        /* align-items: flex-start; */
+        padding: 10px;
+    }
+
+    .previousYearPapers-and-results-section-header span {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .previousYearPapers-and-results-papers-table th,
+    .previousYearPapers-and-results-papers-table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .previousYearPapers-and-results-pdf-icon {
+        width: 20px;
+        height: 22px;
+    }
+
+    .previousYearPapers-and-results-download-icon {
+        width: 80px;
+        height: 40px;
+    }
+
+    .previousYearPapers-and-results-section-header {
+        min-height: 8vh;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .previousYearPapers-and-results-section-header span {
+        font-size: 16px;
+        padding-left: 10px;
+    }
+
+    .previousYearPapers-and-results-papers-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .previousYearPapers-and-results-papers-table th,
+    .previousYearPapers-and-results-papers-table td {
+        white-space: nowrap;
+    }
 }

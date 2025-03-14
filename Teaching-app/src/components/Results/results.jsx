@@ -1,135 +1,175 @@
 import React, { useState } from 'react';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { BiDownload } from 'react-icons/bi';
-import { FaFileExcel } from 'react-icons/fa';
-import '../PreviousYearPapers/PreviousYearPapers.css'
+import "../PreviousYearPapers/PreviousYearPapers.css";
+import pluslogo from "../../assets/bx-plus.svg";
+import minuslogo from "../../assets/bx-minus.svg";
+import downloadIcon from "../../assets/Download Icon.svg";
+import hoveredDownloadIcon from "../../assets/HoveredDownload.svg";
+import excelIcon from "../../assets/excel-icon.svg";
+import sorticon from "../../assets/bxs-sort-alt.svg";
 
-const Results = () => {
-    // Initialize with screening section expanded to match screenshot
-    const [expandedSections, setExpandedSections] = useState({
-        screening: true,
-        surprise: false,
-        weekly: false
+const Results = ({ showDivider, sectionName, results, isFirst = false, isLast = false }) => {
+    // Initialize with section collapsed by default
+    const [expanded, setExpanded] = useState(false);
+
+    // State to track which row's download icon is being hovered
+    const [hoveredDownloadRow, setHoveredDownloadRow] = useState(null);
+
+    // Track sort state for each column independently
+    const [sortStates, setSortStates] = useState({
+        camp: null,     // null, 'ascending', or 'descending'
+        standard: null, // null, 'ascending', or 'descending'
     });
 
-    const toggleSection = (section) => {
-        setExpandedSections({
-            ...expandedSections,
-            [section]: !expandedSections[section]
+    const toggleSection = () => {
+        setExpanded(!expanded);
+    };
+
+    // Handle sorting when a sortable header is clicked
+    const handleSort = (key) => {
+        // Create a copy of current sort states
+        const newSortStates = { ...sortStates };
+
+        // Reset all other columns' sort states
+        Object.keys(newSortStates).forEach(k => {
+            if (k !== key) newSortStates[k] = null;
+        });
+
+        // Cycle through sort states for the clicked column
+        if (newSortStates[key] === null) {
+            // First click: alphabetical/numerical ascending
+            newSortStates[key] = 'ascending';
+        } else if (newSortStates[key] === 'ascending') {
+            // Second click: descending
+            newSortStates[key] = 'descending';
+        } else {
+            // Third click: back to unsorted
+            newSortStates[key] = null;
+        }
+
+        setSortStates(newSortStates);
+    };
+
+    // Get sorted data based on current sort states
+    const getSortedData = (data) => {
+        const sortKey = Object.keys(sortStates).find(key => sortStates[key] !== null);
+
+        if (!sortKey) {
+            return [...data]; // Return a copy of unsorted data
+        }
+
+        const direction = sortStates[sortKey];
+
+        return [...data].sort((a, b) => {
+            // Handle numeric sorting for 'standard' if it contains numbers
+            if (!isNaN(parseInt(a[sortKey])) && !isNaN(parseInt(b[sortKey]))) {
+                const numA = parseInt(a[sortKey]);
+                const numB = parseInt(b[sortKey]);
+                return direction === 'ascending'
+                    ? numA - numB
+                    : numB - numA;
+            }
+
+            // Handle string sorting for other fields
+            if (a[sortKey] < b[sortKey]) {
+                return direction === 'ascending' ? -1 : 1;
+            }
+            if (a[sortKey] > b[sortKey]) {
+                return direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
         });
     };
 
-    const screeningResults = [
-        { no: 1, camp: 'Saikot', standard: '12', fileName: 'Test_result_12th_2025' },
-        { no: 2, camp: 'Saikot', standard: '11', fileName: 'Test_result_11th_2025' },
-        { no: 3, camp: 'Saikot', standard: '10', fileName: 'Test_result_10th_2025' }
-    ];
+    const renderTable = (results) => {
+        const sortedResults = getSortedData(results);
+        const handleDownload = (downloadLink, fileName) => {
+            const link = document.createElement('a');
+            link.href = downloadLink;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
 
-    const surpriseResults = [
-        { no: 1, camp: 'Shimla', standard: '12', fileName: 'Surprise_test_result_1_2025' },
-        { no: 2, camp: 'Dehradun', standard: '11', fileName: 'Surprise_test_result_2_2025' }
-    ];
 
-    const weeklyResults = [
-        { no: 1, camp: 'Nainital', standard: '12', fileName: 'Weekly_test_result_week1_2025' },
-        { no: 2, camp: 'Dharamshala', standard: '11', fileName: 'Weekly_test_result_week2_2025' },
-        { no: 3, camp: 'Manali', standard: '10', fileName: 'Weekly_test_result_week3_2025' }
-    ];
-
-    const renderTable = (results) => (
-        <table className="papers-table">
-            <thead>
-                <tr>
-                    <th className="sortable-header">No</th>
-                    <th className="sortable-header">Camp</th>
-                    <th className="sortable-header">Standard</th>
-                    <th>File name</th>
-                    <th className="download-header">Download</th>
-                </tr>
-            </thead>
-            <tbody>
-                {results.map((result) => (
-                    <tr key={`${result.fileName}-${result.no}`}>
-                        <td>{result.no}</td>
-                        <td>{result.camp}</td>
-                        <td>{result.standard}</td>
-                        <td>
-                            <div className="file-name">
-                                <FaFileExcel className="pdf-icon" style={{ color: '#1D6F42' }} />
-                                <span>{result.fileName}</span>
-                            </div>
-                        </td>
-                        <td className="download-cell">
-                            <BiDownload className="download-icon" />
-                        </td>
+        return (
+            <table className="previousYearPapers-and-results-papers-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th
+                            className="previousYearPapers-and-results-sortable-header"
+                            onClick={() => handleSort('camp')}
+                        >
+                            <span>Camp</span>
+                            <span><img className="previousYearPapers-and-results-sort-icon-image" src={sorticon} alt="" /></span>
+                        </th>
+                        <th
+                            className="previousYearPapers-and-results-sortable-header"
+                            onClick={() => handleSort('standard')}
+                        >
+                            <span>Standard</span>
+                            <span><img className="previousYearPapers-and-results-sort-icon-image" src={sorticon} alt="" /></span>
+                        </th>
+                        <th>File name</th>
+                        <th className="previousYearPapers-and-results-download-header">Download</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
-    );
+                </thead>
+                <tbody>
+                    {sortedResults.map((result, index) => (
+                        <tr key={`${result.fileName}-${result.no}`}>
+                            <td>{index + 1}</td>
+                            <td>{result.camp}</td>
+                            <td>{result.standard}</td>
+                            <td>
+                                <div className="previousYearPapers-and-results-file-name">
+                                    <span><img className="previousYearPapers-and-results-pdf-icon" src={excelIcon} alt="excel-Icon" /></span>
+                                    <span>{result.fileName}</span>
+                                </div>
+                            </td>
+                            <td className="previousYearPapers-and-results-download-cell">
+                                <img
+                                    src={hoveredDownloadRow === index ? hoveredDownloadIcon : downloadIcon}
+                                    alt="Download"
+                                    className="previousYearPapers-and-results-download-icon"
+                                    onMouseEnter={() => setHoveredDownloadRow(index)}
+                                    onMouseLeave={() => setHoveredDownloadRow(null)}
+                                    onClick={() => handleDownload(result.downloadLink, result.fileName)}
+                                    style={{ cursor: 'pointer' }}
+                                />
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        );
+    };
 
     return (
-        <div className="papers-container">
-            {/* Screening Test Results */}
-            <div className="paper-section">
-                <div
-                    className="section-header"
-                    onClick={() => toggleSection('screening')}
-                >
-                    <h3>Screening test results</h3>
-                    {expandedSections.screening ?
-                        <IoIosArrowUp className="toggle-icon minus" /> :
-                        <IoIosArrowDown className="toggle-icon plus" />
-                    }
-                </div>
-                <div className="section-divider"></div>
-                {expandedSections.screening && (
-                    <div className="section-content">
-                        {renderTable(screeningResults)}
-                    </div>
-                )}
-            </div>
+        <>
+            {/* Render divider before the container if needed */}
+            {showDivider && <div className="previousYearPapers-and-results-divider"></div>}
 
-            {/* Surprise Test Results */}
-            <div className="paper-section">
-                <div
-                    className="section-header"
-                    onClick={() => toggleSection('surprise')}
-                >
-                    <h3>Surprise test results</h3>
-                    {expandedSections.surprise ?
-                        <IoIosArrowUp className="toggle-icon minus" /> :
-                        <IoIosArrowDown className="toggle-icon plus" />
-                    }
-                </div>
-                <div className="section-divider"></div>
-                {expandedSections.surprise && (
-                    <div className="section-content">
-                        {renderTable(surpriseResults)}
+            <div className="previousYearPapers-and-results-papers-container">
+                {/* Results Section */}
+                <div className={`previousYearPapers-and-results-paper-section ${isFirst ? 'first-section' : ''} ${isLast ? 'last-section' : ''}`}>
+                    <div
+                        className="previousYearPapers-and-results-section-header"
+                        onClick={toggleSection}
+                    >
+                        <span>{sectionName}</span>
+                        <img
+                            src={expanded ? minuslogo : pluslogo}
+                            alt={expanded ? "Collapse" : "Expand"}
+                            className={`previousYearPapers-and-results-toggle-icon ${expanded ? "expanded" : ""}`}
+                        />
                     </div>
-                )}
-            </div>
-
-            {/* Weekly Test Results */}
-            <div className="paper-section">
-                <div
-                    className="section-header"
-                    onClick={() => toggleSection('weekly')}
-                >
-                    <h3>Weekly test results</h3>
-                    {expandedSections.weekly ?
-                        <IoIosArrowUp className="toggle-icon minus" /> :
-                        <IoIosArrowDown className="toggle-icon plus" />
-                    }
-                </div>
-                <div className="section-divider"></div>
-                {expandedSections.weekly && (
-                    <div className="section-content">
-                        {renderTable(weeklyResults)}
+                    <div className={`previousYearPapers-and-results-section-content ${expanded ? "show" : ""}`}>
+                        {renderTable(results)}
                     </div>
-                )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

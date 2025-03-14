@@ -2,6 +2,8 @@
   --primary-color: #82D9E8;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 * {
   padding: 0%;
   margin: 0%;
@@ -42,7 +44,7 @@ html {
 }
 
 body {
-  font-family: 'RogerexRegular', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background: #F5FAF5;
   margin: 0;
   padding: 0;

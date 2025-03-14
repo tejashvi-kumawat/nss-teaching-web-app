@@ -1,135 +1,194 @@
 import React, { useState } from 'react';
 import './PreviousYearPapers.css';
-import { BiDownload } from 'react-icons/bi';
-import { FaFilePdf } from 'react-icons/fa';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import pluslogo from "../../assets/bx-plus.svg";
+import minuslogo from "../../assets/bx-minus.svg";
+import downloadIcon from "../../assets/Download Icon.svg";
+import hoveredDownloadIcon from "../../assets/HoveredDownload.svg";
+import sorticon from "../../assets/bxs-sort-alt.svg";
+import pdficon from "../../assets/Pdf Icon.svg";
 
-const PreviousYearPapers = () => {
-    // Initialize with screening section expanded to match screenshot
-    const [expandedSections, setExpandedSections] = useState({
-        screening: true,
-        surprise: false,
-        weekly: false
+const PreviousYearPapers = ({ showDivider, sectionName, papers, isFirst = false, isLast = false }) => {
+    // Initialize with section collapsed by default
+    const [expanded, setExpanded] = useState(false);
+
+    // State to track which row's download icon is being hovered
+    const [hoveredDownloadRow, setHoveredDownloadRow] = useState(null);
+
+    // Track sort state for each column independently
+    const [sortStates, setSortStates] = useState({
+        camp: null,       // null, 'ascending', or 'descending'
+        examDate: null,   // null, 'ascending', or 'descending'
     });
 
-    const toggleSection = (section) => {
-        setExpandedSections({
-            ...expandedSections,
-            [section]: !expandedSections[section]
+    const toggleSection = () => {
+        setExpanded(!expanded);
+    };
+
+    // Parse date string (DD-MM-YYYY) to Date object for comparison
+    const parseDate = (dateStr) => {
+        const [day, month, year] = dateStr.split('-');
+        return new Date(year, month - 1, day);
+    };
+
+    // Handle sorting when a sortable header is clicked
+    const handleSort = (key) => {
+        // Create a copy of current sort states
+        const newSortStates = { ...sortStates };
+
+        // Reset all other columns' sort states
+        Object.keys(newSortStates).forEach(k => {
+            if (k !== key) newSortStates[k] = null;
+        });
+
+        // Cycle through sort states for the clicked column
+        if (newSortStates[key] === null) {
+            // First click
+            if (key === 'examDate') {
+                // For dates: newest first (descending)
+                newSortStates[key] = 'descending';
+            } else {
+                // For text: alphabetical ascending 
+                newSortStates[key] = 'ascending';
+            }
+        } else if (newSortStates[key] === 'ascending') {
+            // Second click: always descending
+            newSortStates[key] = 'descending';
+        } else if (newSortStates[key] === 'descending') {
+            // Third click: for dates, switch to oldest first (ascending)
+            if (key === 'examDate' && newSortStates[key] === 'descending') {
+                newSortStates[key] = 'ascending';
+            } else {
+                // Third click for others: back to unsorted
+                newSortStates[key] = null;
+            }
+        } else if (key === 'examDate' && newSortStates[key] === 'ascending') {
+            // Fourth click for dates: back to unsorted
+            newSortStates[key] = null;
+        }
+
+        setSortStates(newSortStates);
+    };
+
+    // Get sorted data based on current sort states
+    const getSortedData = (data) => {
+        const sortKey = Object.keys(sortStates).find(key => sortStates[key] !== null);
+
+        if (!sortKey) {
+            return [...data]; // Return a copy of unsorted data
+        }
+
+        const direction = sortStates[sortKey];
+
+        return [...data].sort((a, b) => {
+            // Handle date sorting
+            if (sortKey === 'examDate') {
+                const dateA = parseDate(a.examDate);
+                const dateB = parseDate(b.examDate);
+                return direction === 'ascending'
+                    ? dateA - dateB    // Oldest first
+                    : dateB - dateA;   // Newest first
+            }
+
+            // Handle string sorting for other fields
+            if (a[sortKey] < b[sortKey]) {
+                return direction === 'ascending' ? -1 : 1;
+            }
+            if (a[sortKey] > b[sortKey]) {
+                return direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
         });
     };
 
-    const screeningPapers = [
-        { no: 1, camp: 'Malethi', examDate: '29-01-2025', fileName: 'Screening_test_paper_year - 2025' },
-        { no: 2, camp: 'Saikot', examDate: '29-01-2024', fileName: 'Screening_test_paper_year - 2024' },
-        { no: 3, camp: 'Narayan Bhagar', examDate: '29-01-2023', fileName: 'Screening_test_paper_year - 2023' }
-    ];
+    const renderTable = (papers) => {
+        const sortedPapers = getSortedData(papers);
+        const handleDownload = (downloadLink, fileName) => {
+            const link = document.createElement('a');
+            link.href = downloadLink;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
 
-    const surprisePapers = [
-        { no: 1, camp: 'Shimla', examDate: '15-02-2025', fileName: 'Surprise_test_paper_1 - 2025' },
-        { no: 2, camp: 'Dehradun', examDate: '18-09-2024', fileName: 'Surprise_test_paper_3 - 2024' }
-    ];
-
-    const weeklyPapers = [
-        { no: 1, camp: 'Nainital', examDate: '08-03-2025', fileName: 'Weekly_test_paper_week1 - 2025' },
-        { no: 2, camp: 'Dharamshala', examDate: '15-03-2025', fileName: 'Weekly_test_paper_week2 - 2025' },
-        { no: 3, camp: 'Manali', examDate: '22-03-2025', fileName: 'Weekly_test_paper_week3 - 2025' }
-    ];
-
-    const renderTable = (papers) => (
-        <table className="papers-table">
-            <thead>
-                <tr>
-                    <th className="sortable-header">No</th>
-                    <th className="sortable-header">Camp</th>
-                    <th className="sortable-header">Exam date</th>
-                    <th>File name</th>
-                    <th className="download-header">Download</th>
-                </tr>
-            </thead>
-            <tbody>
-                {papers.map((paper) => (
-                    <tr key={`${paper.fileName}-${paper.no}`}>
-                        <td>{paper.no}</td>
-                        <td>{paper.camp}</td>
-                        <td>{paper.examDate}</td>
-                        <td>
-                            <div className="file-name">
-                                <FaFilePdf className="pdf-icon" />
-                                <span>{paper.fileName}</span>
-                            </div>
-                        </td>
-                        <td className="download-cell">
-                            <BiDownload className="download-icon" />
-                        </td>
+        return (
+            <table className="previousYearPapers-and-results-papers-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th
+                            className="previousYearPapers-and-results-sortable-header"
+                            onClick={() => handleSort('camp')}
+                        >
+                            <span>Camp</span>
+                            <span><img className="previousYearPapers-and-results-sort-icon-image" src={sorticon} alt="" /></span>
+                        </th>
+                        <th
+                            className="previousYearPapers-and-results-sortable-header"
+                            onClick={() => handleSort('examDate')}
+                        >
+                            <span>Exam date</span>
+                            <span><img className="previousYearPapers-and-results-sort-icon-image" src={sorticon} alt="" /></span>
+                        </th>
+                        <th>File name</th>
+                        <th className="previousYearPapers-and-results-download-header">Download</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
-    );
+                </thead>
+                <tbody>
+                    {sortedPapers.map((paper, index) => (
+                        <tr key={`${paper.fileName}-${paper.no}`}>
+                            <td>{index + 1}</td>
+                            <td>{paper.camp}</td>
+                            <td>{paper.examDate}</td>
+                            <td>
+                                <div className="previousYearPapers-and-results-file-name">
+                                    <span><img className="previousYearPapers-and-results-pdf-icon" src={pdficon} alt="pdf-Icon" /></span>
+                                    <span>{paper.fileName}</span>
+                                </div>
+                            </td>
+                            <td className="previousYearPapers-and-results-download-cell">
+                                <img
+                                    src={hoveredDownloadRow === index ? hoveredDownloadIcon : downloadIcon}
+                                    alt="Download"
+                                    className="previousYearPapers-and-results-download-icon"
+                                    onMouseEnter={() => setHoveredDownloadRow(index)}
+                                    onMouseLeave={() => setHoveredDownloadRow(null)}
+                                    onClick={() => handleDownload(paper.downloadLink)}
+                                    style={{ cursor: 'pointer' }}
+                                />
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        );
+    };
 
     return (
-        <div className="papers-container">
-            {/* Screening Test Papers */}
-            <div className="paper-section">
-                <div
-                    className="section-header"
-                    onClick={() => toggleSection('screening')}
-                >
-                    <h3>Screening test papers</h3>
-                    {expandedSections.screening ?
-                        <IoIosArrowUp className="toggle-icon minus" /> :
-                        <IoIosArrowDown className="toggle-icon plus" />
-                    }
-                </div>
-                <div className="section-divider"></div>
-                {expandedSections.screening && (
-                    <div className="section-content">
-                        {renderTable(screeningPapers)}
-                    </div>
-                )}
-            </div>
+        <>
+            {/* Render divider before the container if needed */}
+            {showDivider && <div className="previousYearPapers-and-results-divider"></div>}
 
-            {/* Surprise Test Papers */}
-            <div className="paper-section">
-                <div
-                    className="section-header"
-                    onClick={() => toggleSection('surprise')}
-                >
-                    <h3>Surprise test papers</h3>
-                    {expandedSections.surprise ?
-                        <IoIosArrowUp className="toggle-icon minus" /> :
-                        <IoIosArrowDown className="toggle-icon plus" />
-                    }
-                </div>
-                <div className="section-divider"></div>
-                {expandedSections.surprise && (
-                    <div className="section-content">
-                        {renderTable(surprisePapers)}
+            <div className="previousYearPapers-and-results-papers-container">
+                {/* Paper Section */}
+                <div className={`previousYearPapers-and-results-paper-section ${isFirst ? 'first-section' : ''} ${isLast ? 'last-section' : ''}`}>
+                    <div
+                        className="previousYearPapers-and-results-section-header"
+                        onClick={toggleSection}
+                    >
+                        <span>{sectionName}</span>
+                        <img
+                            src={expanded ? minuslogo : pluslogo}
+                            alt={expanded ? "Collapse" : "Expand"}
+                            className={`previousYearPapers-and-results-toggle-icon ${expanded ? "expanded" : ""}`}
+                        />
                     </div>
-                )}
-            </div>
-
-            {/* Weekly Test Papers */}
-            <div className="paper-section">
-                <div
-                    className="section-header"
-                    onClick={() => toggleSection('weekly')}
-                >
-                    <h3>Weekly test papers</h3>
-                    {expandedSections.weekly ?
-                        <IoIosArrowUp className="toggle-icon minus" /> :
-                        <IoIosArrowDown className="toggle-icon plus" />
-                    }
-                </div>
-                <div className="section-divider"></div>
-                {expandedSections.weekly && (
-                    <div className="section-content">
-                        {renderTable(weeklyPapers)}
+                    <div className={`previousYearPapers-and-results-section-content ${expanded ? "show" : ""}`}>
+                        {renderTable(papers)}
                     </div>
-                )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
