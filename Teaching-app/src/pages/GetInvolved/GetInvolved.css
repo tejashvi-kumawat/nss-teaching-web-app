@@ -37,7 +37,7 @@
 }
 
 .get-involved-page-title {
-  font-size: 48px;
+  font-size: 38px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   color: #132611;
@@ -75,37 +75,6 @@
   }
 }
 
-/* Breadcrumb Styles */
-.get-involved-breadcrumb {
-  display: flex;
-  align-items: center;
-  margin: 15px 0 25px 0;
-  font-size: 14px;
-  width: 244.5px;
-  height: 27px;
-  top: 152px;
-  left: 144px;
-}
-
-.get-involved-breadcrumb-link {
-  color: #4a8522;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.get-involved-breadcrumb-link:hover {
-  color: #3a6a1a;
-  text-decoration: underline;
-}
-
-.get-involved-breadcrumb-separator {
-  margin: 0 8px;
-  color: #777;
-}
-
-.get-involved-breadcrumb-current {
-  color: #555;
-}
 
 /* Tabs container and styles */
 .get-involved-tabs-container {
