@@ -17,6 +17,12 @@
     transform: translateY(-100%);
   }
   
+  /* Add this to Loader.css */
+.white-logo {
+    filter: brightness(0) invert(1);  /* This makes the logo white */
+    width: 250px;
+    height: auto;
+  }
   .loader-content {
     display: flex;
     flex-direction: column;
