@@ -133,7 +133,7 @@ function GetInvolved() {
           <button>₹500 &gt;</button>
           <button>₹1000 &gt;</button>
         </div>
-        <button className="get-involved-donate-submit-btn">Enter your details</button>
+        <button className="get-involved-submit-button">Enter your details</button>
       </div>
     </div>
   );
