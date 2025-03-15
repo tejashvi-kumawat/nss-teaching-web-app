@@ -7,9 +7,7 @@ const ComingSoon = () => {
 
         {/* </div> */}
         <div className='coming-soon-heading'>
-            <h1>COMING</h1>
-            <h1 id='soon'>SOON
-            </h1>
+            <h1>COMING SOON </h1>
         </div>
     </div>
   );

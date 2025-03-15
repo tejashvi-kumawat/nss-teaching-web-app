@@ -124,7 +124,7 @@ const ForStudents = () => {
                 <Link to="/" className="breadcrumb-link">Home</Link>
                 <span className="breadcrumb-separator">&gt;</span>
                 <span className="breadcrumb-current">For students</span>
-            </div>
+            </div> 
 
             {/* Main Content */}
             <div className="for-students-student-resources">

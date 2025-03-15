@@ -28,7 +28,7 @@
 }
 
 .for-students-title-container .for-students-page-title {
-    font-size: 58px;
+    font-size: 38px;
     font-weight: 700;
     color: #222;
     line-height: 1;
@@ -39,11 +39,14 @@
 
 .for-students-title-container .for-students-description {
     color: #526652;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 400;
-    line-height: 1;
+    /* line-height: 1; */
     letter-spacing: 0;
     margin-top: 0
+}
+.for-students-description{
+    line-height: 1.2;
 }
 
 .for-students-title-container::before {
@@ -54,7 +57,7 @@
 
 /* Container for tabs and content */
 .for-students-tabs-container {
-    border-radius: 16px;
+    border-radius: 24px;
     display: flex;
     flex-direction: column;
     gap: 48px;
@@ -90,7 +93,7 @@
     transition: all 0.3s ease;
     text-align: center;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1;
     letter-spacing: 0;
     height: 9vh;
@@ -178,33 +181,3 @@
 }
 
 
-/* Breadcrumb Styles */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    margin: 15px 0 25px 0;
-    font-size: 14px;
-    height: 27px;
-    top: 152px;
-    left: 144px;
-}
-
-.breadcrumb-link {
-    color: #4a8522;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.breadcrumb-link:hover {
-    color: #3a6a1a;
-    text-decoration: underline;
-}
-
-.breadcrumb-separator {
-    margin: 0 8px;
-    color: #777;
-}
-
-.breadcrumb-current {
-    color: #555;
-}

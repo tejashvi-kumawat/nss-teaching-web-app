@@ -5,37 +5,6 @@
     /* padding: 40px; */
     color: #2F4F2F;
 }
-.breadcrumb {
-    
-    display: flex;
-    align-items: center;
-    margin: 15px 0 25px 0;
-    font-size: 14px;
-    width: 244.5px;
-    height: 27px;
-    top: 152px;
-    left: 144px;
-}
-
-.breadcrumb-link {
-    color: #4a8522;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.breadcrumb-link:hover {
-    color: #3a6a1a;
-    text-decoration: underline;
-}
-
-.breadcrumb-separator {
-    margin: 0 8px;
-    color: #777;
-}
-
-.breadcrumb-current {
-    color: #555;
-}
 
 .TrusteesBannerSection {
     text-align: center;

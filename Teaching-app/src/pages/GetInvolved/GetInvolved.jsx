@@ -155,12 +155,12 @@ function GetInvolved() {
   return (
     <div className="get-involved-main-container">
       {/* Breadcrumb Navigation */}
-      <div className="get-involved-breadcrumb">
-        <Link to="/" className="get-involved-breadcrumb-link">
+      <div className="breadcrumb">
+        <Link to="/" className="breadcrumb-link">
           Home
         </Link>
-        <span className="get-involved-breadcrumb-separator">&gt;</span>
-        <span className="get-involved-breadcrumb-current">Get Involved</span>
+        <span className="breadcrumb-separator">&gt;</span>
+        <span className="breadcrumb-current">Get Involved</span>
       </div>
 
       {/* Main Content */}

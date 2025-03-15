@@ -1,15 +1,16 @@
 .announcement-details-container {
     width: 95%;
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 40px;
+    /* padding: 40px; */
     background-color: #F5FAF5;
+    height: 60vh;
 }
 
 /* Announcement Content Styles */
 .announcement-details-announcement-content {
     background-color: #F5FAF5;
-    padding: 30px;
+    /* padding: 30px; */
     border-radius: 8px;
 }
 

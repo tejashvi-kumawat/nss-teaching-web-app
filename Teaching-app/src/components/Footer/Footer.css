@@ -38,7 +38,7 @@
   
   .social-icons {
     display: flex;
-    gap: 1rem;
+    gap: 1.8rem;
     margin-top: 1rem;
   }
   
@@ -49,14 +49,14 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: #4d5c4d;
-    color: #4d5c4d;
+    background-color: transparent;
+    color: #4e8d2a;
     transition: background-color 0.2s;
   }
   
   .social-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
   }
   
   .social-icon:hover {
