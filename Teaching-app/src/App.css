@@ -4,16 +4,12 @@
   --primary-color: #82D9E8;
 }
 
-
 * {
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
   /* color: rgb(0, 0, 0); */
 }
-
-
-
 
 .title-container {
   display: flex;
