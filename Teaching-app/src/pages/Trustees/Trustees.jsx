@@ -8,6 +8,7 @@ import Banner from "../../assets/TrusteesBanner.png"
 import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png";
 import "./Trustees.css"
 import { Link } from 'react-router-dom';
+import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx'
 
 const TrusteesList=[
     {
@@ -80,6 +81,7 @@ const TrusteesList=[
 const Trustees = () => {  
 
     return(
+        <>
         <div className='TrusteesBody'>
 
             <div className="TrusteesBannerSection">
@@ -130,6 +132,8 @@ const Trustees = () => {
                 </div>
             ))}
         </div>
+        <ContributionBanner/>
+        </>
   )
 }
 

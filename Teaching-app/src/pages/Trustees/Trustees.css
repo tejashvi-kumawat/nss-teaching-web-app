@@ -2,6 +2,7 @@
     background-color: #f5f9f3; 
     font-family: "Montserrat", "Helvetica Neue", sans-serif;
     margin: 0 auto;
+    max-width: 1440px;
     /* padding: 40px; */
     color: #2F4F2F;
 }
@@ -246,9 +247,9 @@
         top: -32px;
     }
 }
-@media (max-width: 1500px) {
+@media (max-width: 1650px) {
     .TrusteesBody{
-        width: 90%;
+        width: 85%;
     }
 }
 
@@ -258,6 +259,9 @@
     }
     .TrusteesTextBox{
         width: 100%;
+    }
+    .TrusteesBody{
+        width: 90%;
     }
 
 }

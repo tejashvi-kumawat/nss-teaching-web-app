@@ -16,7 +16,7 @@ import Downloads from "./pages/Downloads/Downloads.jsx";
 import { DataContext } from "./store/Data";
 import ContactUs from "./pages/ContactUs/ContactUs.jsx";
 import Teaching from "./pages/Teaching/Teaching.jsx"
-import ContributionBanner from "./components/ContributionBanner/ContributionBanner.jsx";
+import Home from "./pages/Home/Home.jsx";
 
 function App() {
   // const { isAuth, workshops } = useContext(DataContext);
@@ -35,9 +35,12 @@ function App() {
         <Loader onLoadComplete={handleLoadComplete} />
       ) : (
         <>
-          <Navbar />
+          <div className="app-jsx-navbar">
+            <Navbar />
+          </div>
           <Routes className="App-routes-container">
             <Route path="/*" element={<ComingSoon />} />
+            <Route path="/" element={<Home/>} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/for-students" element={<ForStudents />} />
             <Route path="/announcement/:id" element={<AnnouncementDetails />} />
@@ -48,7 +51,6 @@ function App() {
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/get-involved" element={<GetInvolved />} />
           </Routes>
-          <ContributionBanner/>
           <Footer className="app-footer" />
         </>
       )}

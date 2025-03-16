@@ -9,6 +9,7 @@ import AboutUs_Mission from "../../assets/AboutUs_OurMission.png";
 import { Link } from "react-router-dom";
 // import checkbox from "../../assets/checkbox.svg";
 import { BannerSection_About} from '../Teaching/TeachingData'
+import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx'
 const AboutUs = () => {
   // Data for multiple personalities
   const messageData = [
@@ -39,6 +40,7 @@ const AboutUs = () => {
     },
   ];
   return (
+    <>
     <div className="about-us-container">
             {/* Breadcrumb Navigation */}
         <div className="breadcrumb">
@@ -144,6 +146,8 @@ const AboutUs = () => {
         />
       ))}
     </div>
+    <ContributionBanner/>
+    </>
   );
 };
 

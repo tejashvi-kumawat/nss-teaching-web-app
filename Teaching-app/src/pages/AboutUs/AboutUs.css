@@ -122,9 +122,6 @@
 }
 
 /* Typography improvements */
-.about-us-intro {
-  /* margin: var(--spacing-lg) 0; */
-}
 
 .about-us-intro p {
   font-size: 18px;
@@ -313,9 +310,9 @@
 }
 
 /* Improved responsive styles with better breakpoints */
-@media (max-width: 1500px) {
+@media (max-width: 1650px) and (min-width:800px){
   .about-us-container {
-    max-width: 92%;
+    max-width: 85%;
   }
   
   .about-us-our-vision h2 {
@@ -327,6 +324,11 @@
   }
   .our-mission-image {
     max-width: 300px;
+  }
+}
+@media (max-width: 1650px) and (min-width:576px){
+  .about-us-container {
+    max-width: 85%;
   }
 }
 

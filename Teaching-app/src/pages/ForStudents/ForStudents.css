@@ -117,9 +117,9 @@
     box-shadow: none;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1650px) {
     .for-students-container {
-        max-width: 90vw;
+        max-width: 85vw;
     }
 
     .for-students-title-container .for-students-page-title {

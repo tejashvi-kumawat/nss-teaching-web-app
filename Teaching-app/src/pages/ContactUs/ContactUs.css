@@ -4,9 +4,9 @@
     margin-bottom: 5%;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1650px) {
     .contact-us{
-        width: 90%;
+        width: 85%;
     }
 }
 
@@ -14,8 +14,8 @@
     .contact-us {
         margin-bottom: 8%;
     }
+    .contact-us{
+        width: 90%;
+    }
 
-}
-
-@media (max-width: 480px) {
 }

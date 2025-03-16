@@ -172,11 +172,13 @@
 }
 
 /* Responsive breakpoints */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1650px) {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
+  .downloads{
+    width: 85%;
+  }
   .downloads-header {
     max-width: 100%;
   }

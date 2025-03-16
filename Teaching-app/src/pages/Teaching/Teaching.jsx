@@ -2,8 +2,32 @@ import React from 'react'
 import "./Teaching.css"
 import { BannerSection,TeachingPrograms,TeachingApproach,TeachingVolunteerList } from './TeachingData'
 import { Link } from 'react-router-dom'
+import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx'
+import TeachingPageReportCard from '../../components/TeachingPageReportCard/TeachingPageReportCard.jsx'
+
+const reports = [
+  {
+    title: 'Report_title1',
+    placeName: 'Salkot',
+    year: "2024",
+    lastUpdated: "2025-03-14T14:30:00", // ISO date string
+  },
+  {
+    title: 'Report_title2',
+    placeName: 'Narayan Bhagar',
+    year: "2023",
+    lastUpdated: "2024-03-15T14:30:00", // ISO date string
+  },
+  {
+    title: 'Report_title3',
+    placeName: 'Place name',
+    year: "20XX",
+    lastUpdated: "2024-02-15T14:30:00", // ISO date string
+  },
+];
 const Teaching = () => {
   return (
+    <>
     <div className="TeachingBody">
         <div className="breadcrumb">
           <Link to="/" className="breadcrumb-link">Home</Link>
@@ -56,6 +80,19 @@ const Teaching = () => {
           </div>
         ))}
       </div>
+      <div className='teaching-content-container'>
+          <h2>Reports</h2>
+          <div className="teaching-reports-cards-container">
+            {reports.map((report, index) => (
+              <TeachingPageReportCard
+                key={index}
+                title={report.title}
+                placeName={report.placeName}
+                year={report.year}
+              />
+            ))}
+          </div>
+        </div>
 {/* 
       Testimonials 
       <div className="TeachingTestimonials">
@@ -91,7 +128,9 @@ const Teaching = () => {
       </div> */}
 
     </div>
-  )
+    <ContributionBanner/>
+    </>
+  );
 }
 
 export default Teaching

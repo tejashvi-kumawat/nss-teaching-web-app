@@ -4,9 +4,8 @@
     background-color: #f7f7f7;
     font-family: "Open Sans",sans-serif;
     font-weight: 400;
-    padding:0 2em;
-    margin-left: 6%;
-    margin-right: 6%;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 .TeachingHeadings{
@@ -312,12 +311,13 @@ ul.TeachingProgramsInnerText li{
     text-shadow: 0.1vw 0.1vw 0.1vw #2E7D3233;
 }
 
-
-@media screen and (max-width: 750px) and (min-width: 450px) {
+@media screen and (max-width:1650px){
     .TeachingBody{
-        margin-left: 2%;
-        margin-right: 2%;
+        width: 85%;
     }
+    
+}
+@media screen and (max-width: 750px) and (min-width: 450px) {
     .TeachingHeadings{
         margin-top: 10%;
     }
@@ -359,8 +359,7 @@ ul.TeachingProgramsInnerText li{
 
 @media screen and (max-width: 450px) {
     .TeachingBody{
-        margin-left: 0;
-        margin-right: 0;
+        width: 90%;
     }
     .TeachingHeadings{
         font-size: medium;
@@ -396,3 +395,20 @@ ul.TeachingProgramsInnerText li{
         padding-top: 50px;
     }
 }
+
+.teaching-content-container{
+    margin-top: 1.5rem;
+}
+.teaching-content-container h2{
+    font-size: 28px;
+    margin-bottom: 1.5rem;
+}
+.teaching-reports-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  
+  .teaching-reports-cards-container {
+    margin-bottom: 40px;
+  }
