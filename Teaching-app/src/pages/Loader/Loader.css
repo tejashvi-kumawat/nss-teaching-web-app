@@ -14,7 +14,7 @@
   }
   
   .loader-container.shutter-up {
-    transform: translateY(-200%);
+    transform: translateY(-100%);
   }
   
   /* Add this to Loader.css */
