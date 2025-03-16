@@ -25,7 +25,7 @@ const AboutUs = () => {
       position: "Founder",
     },
     {
-      name: "J.P. Dabral",
+      name: "Nidhi Pandey",
       message: [
         "Welcome to the Uttarakhand Teaching Project, a mission driven by passion, dedication, and the vision to make quality education accessible to students in remote areas.",
         "I am Nidhi Pandey, Coordinator of the Uttarakhand Teaching Project and Secretary at NSS IIT Delhi. This initiative was founded with the belief that education has the power to transform lives. Through this project, we aim to provide structured learning, mentorship, and academic support to students from class 9th to 12th who aspire to excel in their studies and prepare for competitive exams like JEE and NEET.",
@@ -44,7 +44,7 @@ const AboutUs = () => {
         <div className="breadcrumb">
           <Link to="/" className="breadcrumb-link">Home</Link>
           <span className="breadcrumb-separator">&gt;</span>
-          <span className="breadcrumb-current">Trustees</span>
+          <span className="breadcrumb-current">About Us</span>
         </div>
 
       {/* Hero section with background image and overlay */}

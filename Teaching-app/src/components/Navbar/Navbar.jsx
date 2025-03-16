@@ -68,7 +68,7 @@ const Navbar = () => {
       <div className="sidebar">
         <ul>
           <li><Link to="/" className={location.pathname === '/' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>Home</Link></li>
-          <li><Link to="/about-us" className={location.pathname === '/about-us' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>About</Link></li>
+          <li><Link to="/about-us" className={location.pathname === '/about-us' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>About Us</Link></li>
           <li><Link to="/teaching" className={location.pathname === '/teaching' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>Teaching</Link></li>
           <li><Link to="/for-students" className={location.pathname === '/for-students' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>For Students</Link></li>
           <li><Link to="/trustees" className={location.pathname === '/trustees' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>Trustees</Link></li>  
