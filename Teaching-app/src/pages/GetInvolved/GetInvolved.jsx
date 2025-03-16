@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./GetInvolved.css";
 
-function GetInvolved() {
-  const [activeTab, setActiveTab] = useState("Volunteer");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
+// Define components outside of the main component
+const VolunteerForm = ({ 
+  selectedRole, 
+  setSelectedRole, 
+  isDropdownOpen, 
+  setIsDropdownOpen, 
+  fullName, 
+  setFullName, 
+  email, 
+  setEmail 
+}) => {
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setIsDropdownOpen]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -18,7 +37,7 @@ function GetInvolved() {
     setIsDropdownOpen(false);
   };
 
-  const VolunteerForm = () => (
+  return (
     <div className="get-involved-container">
       <div className="get-involved-intro">
         <h1>Become a volunteer</h1>
@@ -28,129 +47,107 @@ function GetInvolved() {
           contribution can make a lasting impact.
         </p>
       </div>
-      <div className="get-involved-card">
+
+      <div className="get-involved-form-container">
         <div className="get-involved-form-group">
-          <label className="get-involved-form-label">Role</label>
-          <div className="get-involved-dropdown-container">
-            <button
-              type="button"
-              className="get-involved-dropdown-toggle"
+          <label htmlFor="role">Role</label>
+          <div className="custom-dropdown" ref={dropdownRef}>
+            <div
+              className="dropdown-header"
               onClick={toggleDropdown}
             >
-              <span className="get-involved-dropdown-text">
-                {selectedRole || "Choose role"}
-              </span>
-              <svg
-                className={`get-involved-dropdown-arrow ${
-                  isDropdownOpen ? "open" : ""
-                }`}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
+              {selectedRole || "Choose role"}
+              <span className="dropdown-arrow">&#9662;</span>
+            </div>
             {isDropdownOpen && (
-              <div className="get-involved-dropdown-menu">
-                <ul className="get-involved-dropdown-list">
-                  <li
-                    className="get-involved-dropdown-item"
-                    onClick={() => selectRole("Mentoring")}
-                  >
-                    Mentoring
-                  </li>
-                  <li
-                    className="get-involved-dropdown-item"
-                    onClick={() => selectRole("Teaching")}
-                  >
-                    Teaching
-                  </li>
-                  <li
-                    className="get-involved-dropdown-item"
-                    onClick={() => selectRole("Administrative support")}
-                  >
-                    Administrative support
-                  </li>
-                </ul>
+              <div className="dropdown-content">
+                <div
+                  className="dropdown-item"
+                  onClick={() => selectRole("Mentoring")}
+                >
+                  Mentoring
+                </div>
+                <div
+                  className="dropdown-item"
+                  onClick={() => selectRole("Teaching")}
+                >
+                  Teaching
+                </div>
+                <div
+                  className="dropdown-item"
+                  onClick={() => selectRole("Administrative support")}
+                >
+                  Administrative support
+                </div>
               </div>
             )}
           </div>
         </div>
 
         <div className="get-involved-form-group">
-          <label className="get-involved-form-label">Full Name</label>
+          <label htmlFor="fullName">Full Name</label>
           <input
             type="text"
-            className="get-involved-form-input"
+            id="fullName"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+            placeholder=""
+            className="get-involved-form-input"
           />
         </div>
 
         <div className="get-involved-form-group">
-          <label className="get-involved-form-label">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
-            className="get-involved-form-input"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder=""
+            className="get-involved-form-input"
           />
         </div>
 
-        <button type="button" className="get-involved-submit-button">
-          Write mail
-        </button>
+        <button className="submit-button">Write mail</button>
       </div>
     </div>
   );
+};
 
-  const Donate = () => (
-    <div className="get-involved-container">
-      <div className="get-involved-intro">
-        <h1>Donate Us</h1>
-        <p>
-          Your support helps us provide free coaching, study materials, and
-          resources to students in remote areas. Together, we can build a
-          brighter future
-        </p>
-      </div>
-      <div className="get-involved-donate-form">
-        <h3>Enter amount</h3>
-        <div className="input-money-container">
-  <span className="vertical-bar">|</span>
-  <span className="rupee-symbol">₹</span>
-  <input type="text" className="money-input" placeholder="0000" />
-</div>
+const Donate = () => (
+  <div className="get-involved-container">
+    <div className="get-involved-intro">
+      <h1>Donate</h1>
+      <p>
+        Your support helps us provide free coaching, study materials, and
+        resources to students in remote areas. Together, we can build a
+        brighter future.
+      </p>
+    </div>
+  </div>
+);
 
-        <p>or</p>
-        <div className="get-involved-donate-buttons">
-          <button>₹100 &gt;</button>
-          <button>₹500 &gt;</button>
-          <button>₹1000 &gt;</button>
-        </div>
-        <button className="get-involved-submit-button">Enter your details</button>
-      </div>
+const PartnerWithUs = () => (
+  <div className="get-involved-container">
+    <div className="get-involved-intro">
+      <h1>Partner with us</h1>
+      <p>
+        Join Hands to Empower Education in Rural Uttarakhand! We invite
+        organizations, NGOs, corporates, and individuals to collaborate with
+        us in bringing quality education to underprivileged students in
+        Uttarakhand. Together, we can bridge the education gap and transform
+        young lives.
+      </p>
     </div>
-  );
-  const PartnerWithUs = () => (
-    <div className="get-involved-container">
-      <div className="get-involved-intro">
-        <h1>Partner with us</h1>
-        <p>
-          Join Hands to Empower Education in Rural uttarakhand! We invite
-          organizations, NGOs, corporates, and individuals to collorate with us
-          in bringing quality education to underprivileged students in
-          Uttarakhand. Together, we can bridge the education gap and transform
-          young lives.
-        </p>
-      </div>
-    </div>
-  );
+  </div>
+);
+
+function GetInvolved() {
+  const [activeTab, setActiveTab] = useState("Volunteer");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <div className="get-involved-main-container">
@@ -205,7 +202,16 @@ function GetInvolved() {
           {/* Tab Content */}
           {activeTab === "Volunteer" && (
             <div className="tab-content">
-              <VolunteerForm />
+              <VolunteerForm 
+                selectedRole={selectedRole}
+                setSelectedRole={setSelectedRole}
+                isDropdownOpen={isDropdownOpen}
+                setIsDropdownOpen={setIsDropdownOpen}
+                fullName={fullName}
+                setFullName={setFullName}
+                email={email}
+                setEmail={setEmail}
+              />
             </div>
           )}
 

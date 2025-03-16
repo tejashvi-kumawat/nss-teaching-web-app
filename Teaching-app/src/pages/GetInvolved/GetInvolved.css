@@ -1,6 +1,5 @@
 * {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  box-sizing: border-box;
 }
 
 /* Main container styles */
@@ -12,12 +11,6 @@
   background-color: #f8f9fa;
   position: relative;
   padding: 0 20px;
-}
-
-@media (max-width: 768px) {
-  .get-involved-main-container {
-    padding: 0 12px;
-  }
 }
 
 .get-involved-content-container {
@@ -37,25 +30,13 @@
 }
 
 .get-involved-page-title {
-  font-size: 38px;
+  font-size: 48px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   color: #132611;
   margin-bottom: 0px;
   line-height: 1.2;
   margin-top: 0;
-}
-
-@media (max-width: 768px) {
-  .get-involved-page-title {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 480px) {
-  .get-involved-page-title {
-    font-size: 28px;
-  }
 }
 
 .get-involved-description {
@@ -69,12 +50,37 @@
   border-radius: 4px;
 }
 
-@media (max-width: 768px) {
-  .get-involved-description {
-    font-size: 16px;
-  }
+/* Breadcrumb Styles */
+.get-involved-breadcrumb {
+  display: flex;
+  align-items: center;
+  margin: 15px 0 25px 0;
+  font-size: 14px;
+  width: 244.5px;
+  height: 27px;
+  top: 152px;
+  left: 144px;
 }
 
+.get-involved-breadcrumb-link {
+  color: #4a8522;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.get-involved-breadcrumb-link:hover {
+  color: #3a6a1a;
+  text-decoration: underline;
+}
+
+.get-involved-breadcrumb-separator {
+  margin: 0 8px;
+  color: #777;
+}
+
+.get-involved-breadcrumb-current {
+  color: #555;
+}
 
 /* Tabs container and styles */
 .get-involved-tabs-container {
@@ -83,31 +89,18 @@
   gap: 48px;
   max-width: 100%;
   overflow: hidden;
-  margin-bottom: 64px;
-}
-
-@media (max-width: 768px) {
-  .get-involved-tabs-container {
-    gap: 24px;
-    margin-bottom: 48px;
-  }
+  margin-bottom: 192px;
 }
 
 .get-involved-tabs-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 111px;
   background-color: #E9F2E9;
-  padding: 8px;
-  border-radius: 8px;
-}
-
-@media (max-width: 768px) {
-  .get-involved-tabs-row {
-    flex-direction: column;
-    height: auto;
-    padding: 6px;
-  }
+  padding: 0;
+  margin: 0;
 }
 
 .get-involved-tab {
@@ -115,9 +108,7 @@
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 16px;
-  height: auto;
-  min-height: 60px;
+  padding: 0 20px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -126,26 +117,24 @@
   text-align: center;
   font-weight: 600;
   border-radius: 8px;
-  margin: 4px;
+  height: 95px;
 }
 
-@media (max-width: 768px) {
-  .get-involved-tab {
-    width: 100%;
-    min-height: 50px;
-    margin: 3px 0;
-  }
+.get-involved-tab:hover {
+  background-color: rgba(74, 133, 34, 0.1);
 }
 
 .get-involved-tab-active {
-  background-color: #2E7D32;
+  background-color: #4a8522;
   color: white;
 }
 
 /* Tab content container */
-.tab-content {
+.get-involved-tab-content-container {
   width: 100%;
+  background-color: #f7f7f7;
   border-radius: 4px;
+  padding: 20px;
 }
 
 /* Main container */
@@ -156,13 +145,7 @@
   align-items: center;
   background-color: #f9fafb;
   width: 100%;
-  padding: 24px 16px;
-}
-
-@media (max-width: 768px) {
-  .get-involved-container {
-    padding: 16px 8px;
-  }
+  padding: 0 1rem;
 }
 
 /* Volunteer Form Section */
@@ -173,377 +156,129 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 900px;
-  margin-bottom: 24px;
+
 }
 
 .get-involved-intro h1 {
   font-size: 36px;
   font-weight: 700;
-  margin-bottom: 16px;
-}
-
-@media (max-width: 768px) {
-  .get-involved-intro h1 {
-    font-size: 28px;
-  }
-}
-
-@media (max-width: 480px) {
-  .get-involved-intro h1 {
-    font-size: 24px;
-  }
 }
 
 .get-involved-intro p {
-  font-size: 18px;
+  font-size: 24px;
   max-width: 800px;
   text-align: center;
   color: #526652;
-  margin: 10px 0;
+  margin: 10px;
 }
 
-@media (max-width: 768px) {
-  .get-involved-intro p {
-    font-size: 16px;
-  }
-}
 
 /* Form Styles */
-.get-involved-card {
-  background: #F5FAF5;
-  width: 100%;
-  max-width: 613px;
-  border-radius: 10px;
-  padding: 44px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-@media (max-width: 768px) {
-  .get-involved-card {
-    padding: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .get-involved-card {
-    padding: 16px;
-    border-radius: 8px;
-  }
+.get-involved-form-container {
+  width: 600px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 50px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .get-involved-form-group {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-  .get-involved-form-group {
-    margin-bottom: 20px;
-  }
-}
-
-.get-involved-form-label {
+.get-involved-form-group label {
   display: block;
-  font-size: 18px;
-  color: #526652;
   margin-bottom: 8px;
-  font-weight: 400;
-}
-
-@media (max-width: 768px) {
-  .get-involved-form-label {
-    font-size: 16px;
-  }
-}
-
-.get-involved-form-input,
-.get-involved-dropdown-toggle {
-  width: 100%;
-  height: 60px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 0 12px;
   font-size: 16px;
-  background-color: #ffffff00;
   color: #526652;
+  font-weight: 500;
 }
 
-@media (max-width: 768px) {
-  .get-involved-form-input,
-  .get-involved-dropdown-toggle {
-    height: 50px;
-  }
+.get-involved-form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #C5E0C5;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
 }
 
-.get-involved-form-input:focus,
-.get-involved-dropdown-toggle:focus {
+.get-involved-form-input:focus {
   outline: none;
   border-color: #2E7D32;
-  box-shadow: 0 0 0 2px rgba(58, 128, 56, 0.2);
 }
 
-.get-involved-dropdown-container {
+/* Custom dropdown styles */
+.custom-dropdown {
   position: relative;
+  width: 100%;
 }
 
-.get-involved-dropdown-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.dropdown-header {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #C5E0C5;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: white;
   cursor: pointer;
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
 }
 
-.get-involved-dropdown-text {
-  color: #666;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+.dropdown-arrow {
+  margin-left: 10px;
+  transition: transform 0.3s;
 }
 
-.get-involved-dropdown-arrow {
-  width: 16px;
-  height: 16px;
-  color: #666;
-  transition: transform 0.2s ease;
-  flex-shrink: 0;
-}
-
-.get-involved-dropdown-arrow.open {
-  transform: rotate(180deg);
-}
-
-.get-involved-dropdown-menu {
+.dropdown-content {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%;
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  right: 0;
+  background-color: white;
+  border: 1px solid #C5E0C5;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
   z-index: 10;
   max-height: 200px;
   overflow-y: auto;
 }
 
-.get-involved-dropdown-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.get-involved-dropdown-item {
-  height: 50px;
-  padding: 10px 12px;
+.dropdown-item {
+  padding: 12px 15px;
   cursor: pointer;
-  background-color: #ffffff00;
+  transition: background-color 0.2s;
 }
 
-.get-involved-dropdown-item:hover {
-  background: #f5f5f5;
+.dropdown-item:hover {
+  background-color: #F5FAF5;
 }
 
-.get-involved-submit-button {
+/* Submit button styles */
+.submit-button {
   width: 100%;
-  height: 64px;
+  padding: 14px;
   background-color: #2E7D32;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 24px;
-  font-weight: 500;
-  cursor: pointer;
-  margin: 20px 0 0 0;
-  transition: background-color 0.2s ease;
-}
-
-@media (max-width: 768px) {
-  .get-involved-submit-button {
-    height: 56px;
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .get-involved-submit-button {
-    height: 48px;
-    font-size: 18px;
-  }
-}
-
-.get-involved-submit-button:hover {
-  background-color: #246826;
-}
-
-.get-involved-submit-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(58, 128, 56, 0.4);
-}
-
-/* Donate Form Section */
-.get-involved-donate-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #F5FAF5;
-  width: 100%;
-  max-width: 613px;
-  border-radius: 10px;
-  padding: 44px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-@media (max-width: 768px) {
-  .get-involved-donate-form {
-    padding: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .get-involved-donate-form {
-    padding: 16px;
-    border-radius: 8px;
-  }
-}
-
-.get-involved-donate-form h3 {
-  color: #526652;
-  font-weight: 400;
-  text-align: center;
-  margin: 10px 0 30px 0;
-}
-
-.input-money-container {
-  display: flex;
-  align-items: center;
-  background-color: #f2f7f2;
-  border-radius: 4px;
-  padding: 8px 12px;
-  width: fit-content;
-  margin-bottom: 15px;
-}
-
-.vertical-bar {
-  color: #000000;
-  margin-right: 2px;
-  font-size: 30px;
-  opacity: 0.6;
-}
-
-.rupee-symbol {
-  color: #2E7D32;
-  opacity: 0.6;
-  font-weight: 500;
-  font-size: 34px;
-}
-
-.money-input {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: #2E7D32;
-  opacity: 0.4;
-  font-size: 34px;
-  width: 80px;
-}
-
-@media (max-width: 480px) {
-  .vertical-bar {
-    font-size: 24px;
-  }
-  
-  .rupee-symbol {
-    font-size: 28px;
-  }
-  
-  .money-input {
-    font-size: 28px;
-    width: 70px;
-  }
-}
-
-.money-input::placeholder {
-  color: #2E7D32;
-  opacity: 0.6;
-}
-
-.get-involved-donate-form p {
-  margin: 12px 0;
-}
-
-.get-involved-donate-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 40px;
-  width: 100%;
-  flex-wrap: wrap;
-}
-
-@media (max-width: 768px) {
-  .get-involved-donate-buttons {
-    gap: 16px;
-    margin-bottom: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .get-involved-donate-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-}
-
-.get-involved-donate-submit-button {
-  background-color: white;
-  color: #2E7D32;
-  border: 1px solid #2E7D32;
-  border-radius: 5px;
-  padding: 8px 16px;
+  border-radius: 6px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  width: 110px;
-  text-align: center;
+  transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
-@media (max-width: 480px) {
-  .get-involved-donate-buttons button {
-    width: 100%;
-    max-width: 200px;
-  }
+.submit-button:hover {
+  background-color: #226129;
 }
 
-.get-involved-donate-submit-btn:active {
-  transform: scale(0.99);
-}
-
-@media (max-width: 480px) {
-  .get-involved-donate-form {
-    padding: 16px;
-  }
-  
-  .buttons {
-    flex-direction: column;
-  }
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .get-involved-tabs-row {
-    flex-direction: column;
-  }
-
-  .get-involved-tab {
-    margin-right: 0;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-
-  .get-involved-volunteer-form {
-    padding: 20px;
-  }
+.submit-button:disabled {
+  background-color: #90C590;
+  cursor: not-allowed;
 }
