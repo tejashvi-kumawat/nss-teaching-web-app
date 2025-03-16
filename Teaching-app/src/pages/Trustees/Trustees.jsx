@@ -9,6 +9,16 @@ import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png"
 import "./Trustees.css"
 import { Link } from 'react-router-dom';
 import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx'
+import { useImagePreloader, LoadingIndicator } from '../../utils/ImagePreloader';
+const allImages = [
+    JPDabral,
+    RajeevJain,
+    RajendraMohan,
+    RajKumarKohli,
+    NareshChand,
+    Banner,
+    AboutUs_background_cover
+  ];
 
 const TrusteesList=[
     {
@@ -79,66 +89,16 @@ const TrusteesList=[
 ]
 
 const Trustees = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [imagesLoaded, setImagesLoaded] = useState(0);
-    
-    // All images that need to be preloaded
-    const allImages = [
-      JPDabral,
-      RajeevJain,
-      RajendraMohan,
-      RajKumarKohli,
-      NareshChand,
-      Banner,
-      AboutUs_background_cover
-    ];
-    
-    useEffect(() => {
-      // Preload all images
-      const imagePromises = allImages.map(src => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = () => {
-            setImagesLoaded(prev => prev + 1);
-            resolve();
-          };
-          img.onerror = () => {
-            console.error(`Failed to load image: ${src}`);
-            // Still count this as "loaded" to avoid getting stuck
-            setImagesLoaded(prev => prev + 1);
-            resolve();
-          };
-        });
-      });
-      
-      // When all images are loaded, set loading to false
-      Promise.all(imagePromises)
-        .then(() => {
-          setIsLoading(false);
-        })
-        .catch(error => {
-          console.error("Failed to load images:", error);
-          // Set loading to false even if some images fail
-          setIsLoading(false);
-        });
-    }, []);
-    
-    // Show loading state or render the component
+    const { isLoading, loadingProgress } = useImagePreloader(allImages);
+  
     if (isLoading) {
-      return (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading... </p>
-        </div>
-      );
+      return <LoadingIndicator progress={loadingProgress} />;
     }
-    
+  
     return (
       <>
         <div className='TrusteesBody'>
           <div className="TrusteesBannerSection">
-            {/* Breadcrumb Navigation */}
             <div className="breadcrumb">
               <Link to="/" className="breadcrumb-link">Home</Link>
               <span className="breadcrumb-separator">&gt;</span>
@@ -189,5 +149,5 @@ const Trustees = () => {
       </>
     );
   };
-  
+
   export default Trustees;

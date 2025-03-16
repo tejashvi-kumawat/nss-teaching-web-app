@@ -1,35 +1,37 @@
-import IntensiveCoachingCamps1 from "../../assets/IntensiveCoachingCamps1.jpeg"
-import IntensiveCoachingCamps2 from "../../assets/IntensiveCoachingCamps2.jpeg"
-import WeeklyAndSurpriseTests from "../../assets/WeeklyAndSurpriseTests.jpeg"
-import MentorshipPrograms from "../../assets/MentorshipProgram.png"
-import TeachingApproach1 from "../../assets/TeachingApproach1.jpeg"
-import TeachingApproach2 from "../../assets/TeachingApproach2.jpeg"
-import TeachingBanner from "../../assets/TeachingBanner.png"
+import { useState, useEffect } from 'react';
+import IntensiveCoachingCamps1 from "../../assets/IntensiveCoachingCamps1.jpeg";
+import IntensiveCoachingCamps2 from "../../assets/IntensiveCoachingCamps2.jpeg";
+import WeeklyAndSurpriseTests from "../../assets/WeeklyAndSurpriseTests.jpeg";
+import MentorshipPrograms from "../../assets/MentorshipProgram.png";
+import TeachingApproach1 from "../../assets/TeachingApproach1.jpeg";
+import TeachingApproach2 from "../../assets/TeachingApproach2.jpeg";
+import TeachingBanner from "../../assets/TeachingBanner.png";
 import AboutUs_background from "../../assets/AboutUs_background.png";
-import Volunteer1 from "../../assets/Volunteer1.jpeg"
-import Volunteer2 from "../../assets/Volunteer2.jpeg"
-import Volunteer3 from "../../assets/Volunteer3.jpeg"
-import Volunteer4 from "../../assets/Volunteer4.jpeg"
-import Volunteer5 from "../../assets/Volunteer5.jpeg"
-import Volunteer6 from "../../assets/Volunteer6.jpeg"
-import Volunteer7 from "../../assets/Volunteer7.jpeg"
-import Volunteer8 from "../../assets/Volunteer8.jpeg"
-import Volunteer9 from "../../assets/Volunteer9.jpeg"
-import Volunteer10 from "../../assets/Volunteer10.jpeg"
+import Volunteer1 from "../../assets/Volunteer1.jpeg";
+import Volunteer2 from "../../assets/Volunteer2.jpeg";
+import Volunteer3 from "../../assets/Volunteer3.jpeg";
+import Volunteer4 from "../../assets/Volunteer4.jpeg";
+import Volunteer5 from "../../assets/Volunteer5.jpeg";
+import Volunteer6 from "../../assets/Volunteer6.jpeg";
+import Volunteer7 from "../../assets/Volunteer7.jpeg";
+import Volunteer8 from "../../assets/Volunteer8.jpeg";
+import Volunteer9 from "../../assets/Volunteer9.jpeg";
+import Volunteer10 from "../../assets/Volunteer10.jpeg";
 
+// Define all your data exports as they were in the original file
 export const BannerSection={
     image: <img className='TeachingBannerImage' src={TeachingBanner} alt="students studying" />,
     description: <p className="TeachingBannerDescription" >Our teaching focuses on transformative educational programs, 
         including coaching camps, tests, and mentorship. With innovative methods, we inspire students. </p>,
     overlaytext: <span className='TeachingBannerOverlayText'>Teaching</span>
 }
+
 export const BannerSection_About={
     image: <img className='TeachingBannerImage' src={AboutUs_background} alt="students studying" />,
     description: <p className="TeachingBannerDescription" >Our teaching focuses on transformative educational programs, 
         including coaching camps, tests, and mentorship. With innovative methods, we inspire students. </p>,
     overlaytext: <span className='TeachingBannerOverlayText'>About</span>
 }
-
 
 export const TeachingPrograms=[
     {
@@ -235,3 +237,79 @@ This unforgettable experience will remain a cherished chapter of my life, inspir
             </p>
     }
 ]
+export const useImagePreloader = () => {
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+    const [loadedCount, setLoadedCount] = useState(0);
+    
+    // List of all image sources to preload
+    const imageSources = [
+      IntensiveCoachingCamps1, IntensiveCoachingCamps2, WeeklyAndSurpriseTests,
+      MentorshipPrograms, TeachingApproach1, TeachingApproach2, TeachingBanner,
+      AboutUs_background, Volunteer1, Volunteer2, Volunteer3, Volunteer4,
+      Volunteer5, Volunteer6, Volunteer7, Volunteer8, Volunteer9, Volunteer10
+    ];
+    
+    const totalImages = imageSources.length;
+  
+    useEffect(() => {
+      // Preload all images when this hook is used
+      const imagePromises = imageSources.map(src => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => {
+            setLoadedCount(prevCount => prevCount + 1);
+            resolve();
+          };
+          img.onerror = () => {
+            console.error(`Failed to load image: ${src}`);
+            // Still resolve so one failing image doesn't prevent the page from loading
+            setLoadedCount(prevCount => prevCount + 1);
+            resolve();
+          };
+        });
+      });
+  
+      // When all images are loaded, update state
+      Promise.all(imagePromises).then(() => {
+        setImagesLoaded(true);
+      });
+    }, []);
+  
+    return { imagesLoaded, loadedCount, totalImages };
+  };
+  
+  // Helper component to use in your pages
+  export const LoadingIndicator = ({ loadedCount, totalImages }) => {
+    const percentage = Math.round((loadedCount / totalImages) * 100);
+    
+    return (
+      <div className="loading-container" style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        width: '100%',
+        backgroundColor: '#f5f5f5'
+      }}>
+        <h2>Loading content...</h2>
+        <div style={{
+          width: '300px',
+          height: '20px',
+          backgroundColor: '#e0e0e0',
+          borderRadius: '10px',
+          overflow: 'hidden',
+          margin: '20px 0'
+        }}>
+          <div style={{
+            width: `${percentage}%`,
+            height: '100%',
+            backgroundColor: '#4caf50',
+            transition: 'width 0.3s ease'
+          }}></div>
+        </div>
+        <p>{percentage}% loaded ({loadedCount}/{totalImages} images)</p>
+      </div>
+    );
+  };
