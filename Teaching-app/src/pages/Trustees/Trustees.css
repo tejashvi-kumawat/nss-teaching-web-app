@@ -1,7 +1,7 @@
 .TrusteesBody {
     background-color: #f5f9f3; 
     font-family: "Montserrat", "Helvetica Neue", sans-serif;
-    margin: 0;
+    margin: 2%;
     /* padding: 40px; */
     color: #2F4F2F;
 }
@@ -89,6 +89,7 @@
     position: relative;
 }
 
+.TrusteesNumberHeading-odd,
 .TrusteesNumberHeading{
     opacity: 0.15;
     color: rgb(25, 85, 80);
@@ -164,7 +165,7 @@
 .TrusteesTrustImage {
     border-radius: 10px; 
     width: 300px; 
-    height: 300px;
+    aspect-ratio: 1/1;
     object-fit: cover;
     object-position: top;
     transition: all 0.3s ease-in-out;
@@ -175,4 +176,72 @@
     border: 4px solid #A5C7A1; 
     box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.2); 
     border-radius: 12px; 
+}
+
+@media screen and (max-width: 700px) and (min-width:450px) {
+    .TrusteesBannerOverlayText h2{
+        font-size: 1.5rem;
+    }
+    .TrusteesBannerOverlayText h1{
+        font-size: 1.8rem;
+    }
+    
+    .TrusteesTrustImage{
+        width: 200px;
+    }
+    .Trustees-Object-Points li{
+        font-size: 0.9rem;
+    }
+    .TrusteesTextHeading{
+        font-size: 1.3rem;
+    }
+    .TrusteesNumberHeading-odd,
+    .TrusteesNumberHeading{
+        font-size: 3rem;
+        top: -29px;
+        left: -7px;
+    }
+    .TrusteesNumberHeading-odd{
+        top: -33px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .TrusteesBannerOverlayText h2{
+        font-size: 1.1rem;
+    }
+    .TrusteesBannerOverlayText h1{
+        font-size: 1.3rem;
+    }
+    .TrusteesBannerDescription{
+        font-size: 0.8rem;
+    }
+    
+    .TrusteesContainer{
+        flex-direction: column;
+    }
+    .TrusteesContainer-odd{
+        flex-direction: column-reverse;
+    }
+    .TrusteesTextBox{
+        width: 100%;
+    }
+    .TrusteesTrustImage{
+        width: 70vw;
+    }
+    .Trustees-Object-Points li{
+        font-size: 0.9rem;
+    }
+    .TrusteesTextHeading{
+        font-size: 1.3rem;
+    }
+    .TrusteesNumberHeading-odd,
+    .TrusteesNumberHeading{
+        font-size: 3rem;
+        top: -29px;
+        left: -7px;
+    }
+    .TrusteesNumberHeading-odd{
+        top: -32px;
+    }
 }

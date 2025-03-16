@@ -121,7 +121,7 @@ const Trustees = () => {
                         <img className="TrusteesTrustImage" src={TrustObject.image} />
                     </div>
                     <div className="TrusteesTextBox">
-                        <span className="TrusteesNumberHeading">{TrustObject.number}</span>
+                        <span className="TrusteesNumberHeading-odd">{TrustObject.number}</span>
                         <h2 className="TrusteesTextHeading">
                             {TrustObject.name}
                         </h2>
