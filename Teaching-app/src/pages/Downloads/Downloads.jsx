@@ -101,7 +101,6 @@ const Downloads = () => {
   const navigate = useNavigate();
 
   const handleClick = (campLocation) => {
-    console.log("Navigating to gallery with location:", campLocation);
     window.scrollTo(0, 0);
     navigate(`/gallery/${campLocation.toLowerCase().replace(/\s+/g, '-')}`, {
       state: {

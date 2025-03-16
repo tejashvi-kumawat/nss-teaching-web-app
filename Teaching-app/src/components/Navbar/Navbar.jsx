@@ -46,7 +46,7 @@ const Navbar = () => {
         <li><Link to="/for-students" className={location.pathname === '/for-students' ? 'active' : ''}>For Students</Link></li>
         <li><Link to="/trustees" className={location.pathname === '/trustees' ? 'active' : ''}>Trustees</Link></li>
         <li><Link to="/get-involved" className={location.pathname === '/get-involved' ? 'active' : ''}>Get Involved</Link></li>
-        <li><Link to="/downloads" className={location.pathname === '/download' ? 'active' : ''}>Download</Link></li>
+        <li><Link to="/downloads" className={location.pathname === '/downloads' ? 'active' : ''}>Downloads</Link></li>
         <li><Link to="/contact-us" className={location.pathname === '/contact-us' ? 'active' : ''}>Contact Us</Link></li>
         <li className='login-button-navbar-me'>
             <Link to="/login" className={location.pathname === '/login' ? 'active' : ''} >
@@ -73,7 +73,7 @@ const Navbar = () => {
           <li><Link to="/for-students" className={location.pathname === '/for-students' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>For Students</Link></li>
           <li><Link to="/trustees" className={location.pathname === '/trustees' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>Trustees</Link></li>  
           <li><Link to="/get-involved" className={location.pathname === '/get-involved' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>Get Involved</Link></li>
-          <li><Link to="/download" className={location.pathname === '/download' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>Download</Link></li>
+          <li><Link to="/downloads" className={location.pathname === '/downloads' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>Downloads</Link></li>
           <li><Link to="/contact-us" className={location.pathname === '/contact-us' ? 'active' : ''} onClick={() => document.getElementById("menu-toggle").checked = false}>Contact Us</Link></li>
           {/* Show Profile if user is logged in, otherwise show Login */}
           {/* {isAuth ? (

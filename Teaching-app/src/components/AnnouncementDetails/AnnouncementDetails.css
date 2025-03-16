@@ -1,7 +1,8 @@
 .announcement-details-container {
-    width: 95%;
+    width: 90%;
     max-width: 1440px;
-    margin: 0 auto 25vh auto;
+    /* margin: 0 auto 25vh auto; */
+    margin:0 auto;
     /* padding: 40px; */
     background-color: #F5FAF5;
     height: 60vh;
@@ -73,7 +74,8 @@
 /* Small enhancements for responsiveness */
 @media (max-width: 1200px) {
     .announcement-details-container {
-        padding: 20px;
+        /* padding: 20px; */
+        width: 90%;
     }
 
     .announcement-details-announcement-title {
@@ -87,12 +89,12 @@
 
 @media (max-width: 768px) {
     .announcement-details-container {
-        width: 100%;
-        padding: 15px;
+        width: 90%;
+        /* padding: 15px; */
     }
 
     .announcement-details-announcement-content {
-        padding: 15px;
+        /* padding: 15px; */
     }
 
     .announcement-details-announcement-title {
