@@ -2,7 +2,6 @@
     background-color: #f5f9f3; 
     font-family: "Montserrat", "Helvetica Neue", sans-serif;
     margin: 0 auto;
-    margin: 0 auto;
     /* padding: 40px; */
     color: #2F4F2F;
 }
@@ -179,7 +178,7 @@
     border-radius: 12px; 
 }
 
-@media screen and (max-width: 700px) and (min-width:450px) {
+@media screen and (max-width: 700px) {
     .TrusteesBannerOverlayText h2{
         font-size: 1.5rem;
     }
@@ -205,6 +204,13 @@
     .TrusteesNumberHeading-odd{
         top: -33px;
     }
+    .TrusteesContainer{
+        flex-direction: column;
+        margin-bottom: 2rem;
+    }
+    .TrusteesContainer-odd{
+        flex-direction: column-reverse;
+    }
 }
 
 @media screen and (max-width:450px) {
@@ -218,12 +224,6 @@
         font-size: 0.8rem;
     }
     
-    .TrusteesContainer{
-        flex-direction: column;
-    }
-    .TrusteesContainer-odd{
-        flex-direction: column-reverse;
-    }
     .TrusteesTextBox{
         width: 100%;
     }
@@ -249,9 +249,6 @@
 @media (max-width: 1500px) {
     .TrusteesBody{
         width: 90%;
-    }
-    .TrusteesContainer{
-
     }
 }
 
