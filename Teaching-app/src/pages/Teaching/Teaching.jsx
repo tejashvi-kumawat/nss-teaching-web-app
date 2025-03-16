@@ -107,7 +107,7 @@ const Teaching = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p>Loading... {imagesLoaded}/{allImages.length} images loaded</p>
+        <p>Loading...</p>
       </div>
     );
   }
