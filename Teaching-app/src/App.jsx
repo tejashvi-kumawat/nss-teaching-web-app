@@ -16,7 +16,7 @@ import Downloads from "./pages/Downloads/Downloads.jsx";
 import { DataContext } from "./store/Data";
 import ContactUs from "./pages/ContactUs/ContactUs.jsx";
 import Teaching from "./pages/Teaching/Teaching.jsx"
-
+import ContributionBanner from "./components/ContributionBanner/ContributionBanner.jsx";
 
 function App() {
   // const { isAuth, workshops } = useContext(DataContext);
@@ -48,6 +48,7 @@ function App() {
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/get-involved" element={<GetInvolved />} />
           </Routes>
+          <ContributionBanner/>
           <Footer className="app-footer" />
         </>
       )}
