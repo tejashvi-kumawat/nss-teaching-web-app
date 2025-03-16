@@ -41,12 +41,12 @@
 }
 
 html {
-  background: #F5FAF5;
+  background: #F5FAF5 !important;
 }
 
 body {
   font-family: 'Open Sans', sans-serif;
-  background: #F5FAF5;
+  background: #F5FAF5 !important;
   margin: 0;
   padding: 0;
 }
