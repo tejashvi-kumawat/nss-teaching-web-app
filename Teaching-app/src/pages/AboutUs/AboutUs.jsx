@@ -3,12 +3,12 @@ import "./AboutUs.css"; // Make sure the filename matches
 import MessageContainer from "../../components/MessageContainer/MessageContainer";
 import founderImage from "../../assets/founder.png";
 import nidhi_pandey from "../../assets/nidhi_pandey.svg";
-import AboutUs_background from "../../assets/AboutUs_background.png";
 // import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png";
 import AboutUs_Ourvision from "../../assets/AboutUs_OurVision.png";
 import AboutUs_Mission from "../../assets/AboutUs_OurMission.png";
 import { Link } from "react-router-dom";
 // import checkbox from "../../assets/checkbox.svg";
+import { BannerSection_About} from '../Teaching/TeachingData'
 const AboutUs = () => {
   // Data for multiple personalities
   const messageData = [
@@ -48,13 +48,12 @@ const AboutUs = () => {
         </div>
 
       {/* Hero section with background image and overlay */}
-      <div
-        className="about-us-hero"
-        style={{ backgroundImage: `url(${AboutUs_background})` }}
-      >
-        <div className="hero-overlay">
-          <h1 className="hero-title">About us</h1>
+      <div className="TeachingBannerSection">
+        <div className="TeachingBannerImageBox">
+          {BannerSection_About.image}
+          {BannerSection_About.overlaytext}
         </div>
+        {/* {BannerSection_About.description} */}
       </div>
 
       {/* About Us Section */}

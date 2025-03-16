@@ -5,6 +5,7 @@ import MentorshipPrograms from "../../assets/MentorshipProgram.png"
 import TeachingApproach1 from "../../assets/TeachingApproach1.jpeg"
 import TeachingApproach2 from "../../assets/TeachingApproach2.jpeg"
 import TeachingBanner from "../../assets/TeachingBanner.png"
+import AboutUs_background from "../../assets/AboutUs_background.png";
 import Volunteer1 from "../../assets/Volunteer1.jpeg"
 import Volunteer2 from "../../assets/Volunteer2.jpeg"
 import Volunteer3 from "../../assets/Volunteer3.jpeg"
@@ -22,6 +23,13 @@ export const BannerSection={
         including coaching camps, tests, and mentorship. With innovative methods, we inspire students. </p>,
     overlaytext: <span className='TeachingBannerOverlayText'>Teaching</span>
 }
+export const BannerSection_About={
+    image: <img className='TeachingBannerImage' src={AboutUs_background} alt="students studying" />,
+    description: <p className="TeachingBannerDescription" >Our teaching focuses on transformative educational programs, 
+        including coaching camps, tests, and mentorship. With innovative methods, we inspire students. </p>,
+    overlaytext: <span className='TeachingBannerOverlayText'>About</span>
+}
+
 
 export const TeachingPrograms=[
     {

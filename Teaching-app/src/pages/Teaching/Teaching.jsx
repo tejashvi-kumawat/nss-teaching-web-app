@@ -1,10 +1,15 @@
 import React from 'react'
 import "./Teaching.css"
 import { BannerSection,TeachingPrograms,TeachingApproach,TeachingVolunteerList } from './TeachingData'
-
+import { Link } from 'react-router-dom'
 const Teaching = () => {
   return (
     <div className="TeachingBody">
+        <div className="breadcrumb">
+          <Link to="/" className="breadcrumb-link">Home</Link>
+          <span className="breadcrumb-separator">&gt;</span>
+          <span className="breadcrumb-current">About Us</span>
+        </div>
       <div className="TeachingBannerSection">
         <div className="TeachingBannerImageBox">
           {BannerSection.image}
