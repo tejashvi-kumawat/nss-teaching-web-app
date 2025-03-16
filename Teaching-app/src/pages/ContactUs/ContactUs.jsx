@@ -1,47 +1,26 @@
 import React from 'react';
 import './ContactUs.css';
-import contactInfoImage from '../../assets/ContactUs_info.png';
-
+import { Link } from 'react-router-dom';
+import ContactComponent from "../../components/ContactComponent/ContactComponent.jsx"
 const ContactUs = () => {
+  const contactData =
+  {
+    contactAddress: "F2, 842, Green Street, Sector 5, Vaishali, Ghaziabad, UP- 201010",
+    contactPhone: "+91 888-214-8359",
+    contactMail: "hvdt.uk@gmail.com"
+  }
+
   return (
     <div className="contact-us">
-      <div className="contact-info">
       <div className="breadcrumb">
-        <a href="/">Home</a>
-        <span className="separator">›</span>
-        <span>Contact us</span>
-        </div>
-        <h1>Contact us</h1>
-        <p>Any question or remarks? Write us a message!</p>
-
-        {/* Display the image */}
-        <img src={contactInfoImage} alt="Contact Info" className="contact-image" />
+        <Link to="/" className='breadcrumb-link'>Home </Link>
+        <span className="breadcrumb-separator">&gt;</span>
+        <span className='breadcrumb-current'>Contact us</span>
       </div>
 
-      <div className="contact-form">
-        <div className="name-group">
-          <div>
-            <label>First name</label>
-            <input type="text" placeholder="" />
-          </div>
-          <div>
-            <label>Last name</label>
-            <input type="text" placeholder="" />
-          </div>
-        </div>
+      <ContactComponent contactData={contactData} />
 
-        <div className="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="" />
-        </div>
 
-        <div className="form-group">
-          <label>Message</label>
-          <textarea placeholder=""></textarea>
-        </div>
-
-        <button type="submit" className="send-btn">Send Message</button>
-      </div>
     </div>
   );
 };

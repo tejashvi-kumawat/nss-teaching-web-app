@@ -6,7 +6,6 @@
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 
@@ -185,7 +184,7 @@
 
 @media screen and (max-width: 768px) {
   .downloads {
-    padding: 0 16px;
+    width: 90%;
   }
 
   .downloads-header h1 {
@@ -209,7 +208,7 @@
   }
 
   .downloads {
-    padding: 0 12px;
+    width: 90%;
   }
 
   .downloads-header h1 {
