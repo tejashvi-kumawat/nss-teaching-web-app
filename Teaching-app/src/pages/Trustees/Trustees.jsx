@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import JPDabral from "../../assets/JP_Dabral.png"
 import RajeevJain from "../../assets/Rajeev Jain.png"
 import RajendraMohan from "../../assets/Rajendra Mohan.png"
@@ -78,63 +78,116 @@ const TrusteesList=[
     }
 ]
 
-const Trustees = () => {  
-
-    return(
-        <>
+const Trustees = () => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [imagesLoaded, setImagesLoaded] = useState(0);
+    
+    // All images that need to be preloaded
+    const allImages = [
+      JPDabral,
+      RajeevJain,
+      RajendraMohan,
+      RajKumarKohli,
+      NareshChand,
+      Banner,
+      AboutUs_background_cover
+    ];
+    
+    useEffect(() => {
+      // Preload all images
+      const imagePromises = allImages.map(src => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => {
+            setImagesLoaded(prev => prev + 1);
+            resolve();
+          };
+          img.onerror = () => {
+            console.error(`Failed to load image: ${src}`);
+            // Still count this as "loaded" to avoid getting stuck
+            setImagesLoaded(prev => prev + 1);
+            resolve();
+          };
+        });
+      });
+      
+      // When all images are loaded, set loading to false
+      Promise.all(imagePromises)
+        .then(() => {
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.error("Failed to load images:", error);
+          // Set loading to false even if some images fail
+          setIsLoading(false);
+        });
+    }, []);
+    
+    // Show loading state or render the component
+    if (isLoading) {
+      return (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Loading... {imagesLoaded}/{allImages.length} images loaded</p>
+        </div>
+      );
+    }
+    
+    return (
+      <>
         <div className='TrusteesBody'>
-
-            <div className="TrusteesBannerSection">
+          <div className="TrusteesBannerSection">
             {/* Breadcrumb Navigation */}
             <div className="breadcrumb">
-                <Link to="/" className="breadcrumb-link">Home</Link>
-                <span className="breadcrumb-separator">&gt;</span>
-                <span className="breadcrumb-current">Trustees</span>
+              <Link to="/" className="breadcrumb-link">Home</Link>
+              <span className="breadcrumb-separator">&gt;</span>
+              <span className="breadcrumb-current">Trustees</span>
             </div>
-                <div className="TrusteesBannerImageBox">
-                    <img className='TrusteesBannerImage' src={Banner} />
-                    <img src={AboutUs_background_cover} alt="" className="Trustees_background_cover" />
-                    <div className="TrusteesBannerOverlayText">
-                        <h2>Meet the visionaries behind the</h2>
-                        <h1>Himalayan Vidya Daan Trust</h1>
-                    </div>
-                </div>
-                <p className='TrusteesBannerDescription'>
-                The trust is guided by five dedicated individuals who bring their unique
-                expertise and unwavering commitment to the cause of education in Uttarakhand.
-                </p>
+            <div className="TrusteesBannerImageBox">
+              <img className='TrusteesBannerImage' src={Banner} alt="Trustees Banner" />
+              <img src={AboutUs_background_cover} alt="" className="Trustees_background_cover" />
+              <div className="TrusteesBannerOverlayText">
+                <h2>Meet the visionaries behind the</h2>
+                <h1>Himalayan Vidya Daan Trust</h1>
+              </div>
             </div>
-            {TrusteesList.map((TrustObject,index) => index%2===0 ? (
-                <div className="TrusteesContainer TrusteesContainer-even" key={index}>
-                    <div className="TrusteesTextBox">
-                        <span className="TrusteesNumberHeading">{TrustObject.number}</span>
-                        <h2 className="TrusteesTextHeading">
-                            <div className='Trusteestrust-object'>{TrustObject.name}</div>
-                        </h2>
-                        {TrustObject.points}
-                    </div>
-                    <div className="TrusteesTrustImageBox">
-                        <img className="TrusteesTrustImage" src={TrustObject.image} />
-                    </div>
-                </div>
-            ) : (
-                <div className="TrusteesContainer TrusteesContainer-odd" key={index}>
-                    <div className="TrusteesTrustImageBox">
-                        <img className="TrusteesTrustImage" src={TrustObject.image} />
-                    </div>
-                    <div className="TrusteesTextBox">
-                        <span className="TrusteesNumberHeading-odd">{TrustObject.number}</span>
-                        <h2 className="TrusteesTextHeading">
-                            {TrustObject.name}
-                        </h2>
-                        {TrustObject.points}
-                    </div>
-                </div>
-            ))}
+            <p className='TrusteesBannerDescription'>
+              The trust is guided by five dedicated individuals who bring their unique
+              expertise and unwavering commitment to the cause of education in Uttarakhand.
+            </p>
+          </div>
+          {TrusteesList.map((TrustObject, index) => index % 2 === 0 ? (
+            <div className="TrusteesContainer TrusteesContainer-even" key={index}>
+              <div className="TrusteesTextBox">
+                <span className="TrusteesNumberHeading">{TrustObject.number}</span>
+                <h2 className="TrusteesTextHeading">
+                  <div className='Trusteestrust-object'>{TrustObject.name}</div>
+                </h2>
+                {TrustObject.points}
+              </div>
+              <div className="TrusteesTrustImageBox">
+                <img className="TrusteesTrustImage" src={TrustObject.image} alt={TrustObject.name} />
+              </div>
+            </div>
+          ) : (
+            <div className="TrusteesContainer TrusteesContainer-odd" key={index}>
+              <div className="TrusteesTrustImageBox">
+                <img className="TrusteesTrustImage" src={TrustObject.image} alt={TrustObject.name} />
+              </div>
+              <div className="TrusteesTextBox">
+                <span className="TrusteesNumberHeading-odd">{TrustObject.number}</span>
+                <h2 className="TrusteesTextHeading">
+                  {TrustObject.name}
+                </h2>
+                {TrustObject.points}
+              </div>
+            </div>
+          ))}
         </div>
-        <ContributionBanner/>
-        </>
-  )
-}
-
-export default Trustees
+        <ContributionBanner />
+      </>
+    );
+  };
+  
+  export default Trustees;

@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AboutUs.css"; // Make sure the filename matches
 import MessageContainer from "../../components/MessageContainer/MessageContainer";
 import founderImage from "../../assets/founder.png";
 import nidhi_pandey from "../../assets/nidhi_pandey.svg";
-// import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png";
 import AboutUs_Ourvision from "../../assets/AboutUs_OurVision.png";
 import AboutUs_Mission from "../../assets/AboutUs_OurMission.png";
 import { Link } from "react-router-dom";
-// import checkbox from "../../assets/checkbox.svg";
-import { BannerSection_About} from '../Teaching/TeachingData'
-import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx'
+import { BannerSection_About } from '../Teaching/TeachingData';
+import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx';
+
 const AboutUs = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [imagesLoaded, setImagesLoaded] = useState(0);
+
   // Data for multiple personalities
   const messageData = [
     {
@@ -32,121 +34,168 @@ const AboutUs = () => {
         "I am Nidhi Pandey, Coordinator of the Uttarakhand Teaching Project and Secretary at NSS IIT Delhi. This initiative was founded with the belief that education has the power to transform lives. Through this project, we aim to provide structured learning, mentorship, and academic support to students from class 9th to 12th who aspire to excel in their studies and prepare for competitive exams like JEE and NEET.",
         "With the support of IIT Delhi students, our goal is to create an environment where learning is not just about textbooks but about critical thinking, problem-solving, and holistic development. Over the years, we have seen students from Narayan Bagar, Saikot, Dugadda, and other remote areas of Uttarakhand make significant progress and achieve their dreams through this initiative",
         "At Uttarakhand Teaching Project, we believe that no dream is too big, and no obstacle is too tough when guided with the right mentorship. If you are a student looking for guidance, a mentor willing to contribute, or someone who shares our vision, we welcome you to be part of this journey.",
-        "Let’s work together to build a brighter future for young minds.",
+        "Let's work together to build a brighter future for young minds.",
       ],
       title: "Coordinator's Message",
       photo: nidhi_pandey,
       position: "Coordinate",
     },
   ];
+  
+  // All images that need to be preloaded
+  const allImages = [
+    founderImage,
+    nidhi_pandey,
+    AboutUs_Ourvision,
+    AboutUs_Mission,
+    // Add any images from BannerSection_About that need preloading
+    // You may need to extract these from the BannerSection_About data
+  ];
+  
+  useEffect(() => {
+    // Preload all images
+    const imagePromises = allImages.map(src => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          setImagesLoaded(prev => prev + 1);
+          resolve();
+        };
+        img.onerror = reject;
+      });
+    });
+    
+    // When all images are loaded, set loading to false
+    Promise.all(imagePromises)
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error("Failed to load images:", error);
+        // Optionally set loading to false even if some images fail
+        // Uncomment the line below if you want to show the component even if some images fail
+        // setIsLoading(false);
+      });
+  }, []);
+  
+  // Show loading state or render the component
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading... {imagesLoaded}/{allImages.length} images loaded</p>
+      </div>
+    );
+  }
+  
   return (
     <>
-    <div className="about-us-container">
-            {/* Breadcrumb Navigation */}
+      <div className="about-us-container">
+        {/* Breadcrumb Navigation */}
         <div className="breadcrumb">
           <Link to="/" className="breadcrumb-link">Home</Link>
           <span className="breadcrumb-separator">&gt;</span>
           <span className="breadcrumb-current">About Us</span>
         </div>
 
-      {/* Hero section with background image and overlay */}
-      <div className="TeachingBannerSection">
-        <div className="TeachingBannerImageBox">
-          {BannerSection_About.image}
-          {BannerSection_About.overlaytext}
-        </div>
-        {/* {BannerSection_About.description} */}
-      </div>
-
-      {/* About Us Section */}
-      {/* About Us Section */}
-      <div className="about-us-container">
-        {/* Mission statement introduction */}
-        <div className="about-us-intro">
-          <p>
-            We strive to bridge the education gap in rural Uttarakhand,
-            empowering students for success. J.P. Dabral has dedicated over
-            three decades to this mission, transforming countless lives.
-          </p>
-        </div>
-
-        {/* Vision Section */}
-        <div className="about-us-vision-section">
-          <h1>Our Vision</h1>
-          <div className="vision-content">
-            <ul className="about-us-our-vision">
-              <li>
-                Develop a sustainable educational model for rural Uttarakhand
-              </li>
-              <li>Bridge the gap in quality education for students</li>
-              <li>
-                Equip students to excel in academics and competitive exams
-              </li>
-              <li>Prepare students for success in life</li>
-            </ul>
-            <img
-              src={AboutUs_Ourvision}
-              alt="Students and staff"
-              className="our-vision-image"
-            />
+        {/* Hero section with background image and overlay */}
+        <div className="TeachingBannerSection">
+          <div className="TeachingBannerImageBox">
+            {BannerSection_About.image}
+            {BannerSection_About.overlaytext}
           </div>
         </div>
 
-        {/* Mission Section - Modified to remove box styling */}
-        <div
-          className="about-us-mission-section"
-          style={{
-            backgroundColor: "transparent",
-            boxShadow: "none",
-            padding: "40px 0",
-          }}
-        >
-          <h1>Our Mission</h1>
-          <div className="mission-content">
-            <div className="mission-points">
-              <div className="mission-point">
-                <div className="checkbox">✓</div>
-                <p>
-                  Provide{" "}
-                  <span className="highlight">free, high-quality coaching</span>{" "}
-                  for competitive exams such as JEE, NEET, and NDA.
-                </p>
-              </div>
-              <div className="mission-point">
-                <div className="checkbox">✓</div>
-                <p>
-                  Enhance educational standards in underserved areas through
-                  innovative teaching approaches.
-                </p>
-              </div>
-              <div className="mission-point">
-                <div className="checkbox">✓</div>
-                <p>
-                  Inspire students to pursue higher education and professional
-                  careers by addressing their academic and psychological needs.
-                </p>
-              </div>
+        {/* About Us Section */}
+        <div className="about-us-container">
+          {/* Mission statement introduction */}
+          <div className="about-us-intro">
+            <p>
+              We strive to bridge the education gap in rural Uttarakhand,
+              empowering students for success. J.P. Dabral has dedicated over
+              three decades to this mission, transforming countless lives.
+            </p>
+          </div>
+
+          {/* Vision Section */}
+          <div className="about-us-vision-section">
+            <h1>Our Vision</h1>
+            <div className="vision-content">
+              <ul className="about-us-our-vision">
+                <li>
+                  Develop a sustainable educational model for rural Uttarakhand
+                </li>
+                <li>Bridge the gap in quality education for students</li>
+                <li>
+                  Equip students to excel in academics and competitive exams
+                </li>
+                <li>Prepare students for success in life</li>
+              </ul>
+              <img
+                src={AboutUs_Ourvision}
+                alt="Students and staff"
+                className="our-vision-image"
+              />
             </div>
-            <img
-              src={AboutUs_Mission}
-              alt="Teacher with student"
-              className="our-mission-image"
-            />
+          </div>
+
+          {/* Mission Section - Modified to remove box styling */}
+          <div
+            className="about-us-mission-section"
+            style={{
+              backgroundColor: "transparent",
+              boxShadow: "none",
+              padding: "40px 0",
+            }}
+          >
+            <h1>Our Mission</h1>
+            <div className="mission-content">
+              <div className="mission-points">
+                <div className="mission-point">
+                  <div className="checkbox">✓</div>
+                  <p>
+                    Provide{" "}
+                    <span className="highlight">free, high-quality coaching</span>{" "}
+                    for competitive exams such as JEE, NEET, and NDA.
+                  </p>
+                </div>
+                <div className="mission-point">
+                  <div className="checkbox">✓</div>
+                  <p>
+                    Enhance educational standards in underserved areas through
+                    innovative teaching approaches.
+                  </p>
+                </div>
+                <div className="mission-point">
+                  <div className="checkbox">✓</div>
+                  <p>
+                    Inspire students to pursue higher education and professional
+                    careers by addressing their academic and psychological needs.
+                  </p>
+                </div>
+              </div>
+              <img
+                src={AboutUs_Mission}
+                alt="Teacher with student"
+                className="our-mission-image"
+              />
+            </div>
           </div>
         </div>
+        
+        {messageData.map((data, index) => (
+          <MessageContainer
+            key={index}
+            name={data.name}
+            message={data.message}
+            title={data.title}
+            photo={data.photo}
+            position={data.position}
+          />
+        ))}
       </div>
-      {messageData.map((data, index) => (
-        <MessageContainer
-          key={index}
-          name={data.name}
-          message={data.message}
-          title={data.title}
-          photo={data.photo}
-          position={data.position}
-        />
-      ))}
-    </div>
-    <ContributionBanner/>
+      <ContributionBanner/>
     </>
   );
 };
