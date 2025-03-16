@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import calendarlogo from '../../assets/bx-calendar.svg'
 import './AnnouncementDetails.css';
 import { Link } from 'react-router-dom';
+import BackButton from '../BackButton/BackButton';
+
 
 const AnnouncementDetails = () => {
     const location = useLocation();
@@ -25,6 +27,8 @@ const AnnouncementDetails = () => {
                     <span className="breadcrumb-separator">&gt;</span>
                     <span className="breadcrumb-current">Announcement Details</span>
                 </div>
+                <BackButton to="/for-students" />
+
                 <div className="announcement-details-announcement-date">
                     <span>
                         <img className='announcement-details-calendar-icon' src={calendarlogo} alt="Calendar Logo" />
