@@ -7,6 +7,7 @@ const MessageContainer = (props) => {
   return (
     <div className="message-container">
       {/* Header with title */}
+      <hr />
       <div className="message-header">
         <h2>{title}</h2>
       </div>
