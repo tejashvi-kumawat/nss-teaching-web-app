@@ -30,7 +30,7 @@ export const BannerSection_About={
     image: <img className='TeachingBannerImage' src={AboutUs_background} alt="students studying" />,
     description: <p className="TeachingBannerDescription" >Our teaching focuses on transformative educational programs, 
         including coaching camps, tests, and mentorship. With innovative methods, we inspire students. </p>,
-    overlaytext: <span className='TeachingBannerOverlayText'>About</span>
+    overlaytext: <span className='TeachingBannerOverlayText'>About Us</span>
 }
 
 export const TeachingPrograms=[

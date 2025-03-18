@@ -211,20 +211,6 @@
   background-color: var(--primary-color);
 }
 
-/* Image styling with improved hover effects */
-.our-vision-image {
-  max-width: 30%;
-  border-radius: var(--border-radius);
-  flex: 1;
-  object-fit: cover;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
-}
-
-.our-vision-image:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
 
 /* Mission section with improved visual consistency */
 .about-us-mission-section {
@@ -295,6 +281,21 @@
   color: var(--primary-color);
 }
 
+/* Image styling with improved hover effects */
+.our-vision-image {
+  max-width: 30%;
+  border-radius: var(--border-radius);
+  flex: 1;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.our-vision-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
 .our-mission-image {
   flex: 1;
   max-width: 30%;
@@ -307,6 +308,22 @@
 .our-mission-image:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.our-vision-image,
+.our-mission-image {
+  animation: slideDown 0.8s ease-out;
 }
 
 /* Improved responsive styles with better breakpoints */
