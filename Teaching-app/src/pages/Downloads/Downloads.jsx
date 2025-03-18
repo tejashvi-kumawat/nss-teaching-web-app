@@ -1,113 +1,224 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './Downloads.css';
 import DownloadPageCard from '../../components/DownloadPageCard/DownloadPageCard.jsx';
 import downloadspagearrowicon from '../../assets/downloadspage-arrowicon.svg';
-import greaterthanicon from '../../assets/greaterthan-icon.svg'
+import greaterthanicon from '../../assets/greaterthan-icon.svg';
+import { DataContext } from '../../store/Data';
+import api, { brochureService, reportService, galleryService } from '../../services/api';
 
 const Downloads = () => {
-  const brochure = {
-    title: 'Brochure_2024',
-    year: '2024',
-    lastUpdated: '2025-03-13T14:30:00' // ISO date string
+  const { gallery, downloads, loading } = useContext(DataContext);
+  const [galleryByLocation, setGalleryByLocation] = useState({});
+  const [loadingGallery, setLoadingGallery] = useState(false);
+  const [brochures, setBrochures] = useState([]);
+  const [reports, setReports] = useState([]);
+  const [loadingBrochures, setLoadingBrochures] = useState(false);
+  const [loadingReports, setLoadingReports] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Helper function to format image URLs
+  const formatImageUrl = (imageUrl) => {
+    if (!imageUrl) return '';
+    
+    // If it's already an absolute URL, return it
+    if (imageUrl.startsWith('http')) {
+      return imageUrl;
+    }
+    
+    // If it's a relative URL starting with /media, add the backend URL
+    if (imageUrl.startsWith('/media')) {
+      return `http://localhost:8001${imageUrl}`;
+    }
+    
+    // For other relative URLs
+    return imageUrl;
   };
 
-  const reports = [
-    {
-      title: 'Report_title1',
-      placeName: 'Salkot',
-      year: "2024",
-      lastUpdated: "2025-03-14T14:30:00", // ISO date string
-    },
-    {
-      title: 'Report_title2',
-      placeName: 'Narayan Bhagar',
-      year: "2023",
-      lastUpdated: "2024-03-15T14:30:00", // ISO date string
-    },
-    {
-      title: 'Report_title3',
-      placeName: 'Place name',
-      year: "20XX",
-      lastUpdated: "2024-02-15T14:30:00", // ISO date string
-    },
-  ];
+  // Fetch brochures and reports
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoadingBrochures(true);
+        setLoadingReports(true);
+        setError(null);
 
-  // Gallery images
-  const galleryItems = [
-    {
-      id: 1,
-      image: "/downloadspagetestimage.svg",
-      location: "Salkot"
-    },
-    {
-      id: 2,
-      image: "/downloadspagetestimage2.svg",
-      location: "Narayan Bagar"
+        // Fetch brochures
+        const brochuresData = await brochureService.getAll();
+        console.log('Brochures data:', brochuresData); // For debugging
+        setBrochures(Array.isArray(brochuresData) ? brochuresData : []);
+
+        // Fetch reports
+        const reportsData = await reportService.getAll();
+        console.log('Reports data:', reportsData); // For debugging
+        setReports(Array.isArray(reportsData) ? reportsData : []);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to load some content. Please try again later.');
+        // Set default empty arrays
+        setBrochures([]);
+        setReports([]);
+      } finally {
+        setLoadingBrochures(false);
+        setLoadingReports(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Fetch gallery data if not available from context
+// Fetch gallery data if not available from context
+useEffect(() => {
+  // Only fetch if gallery is not available from context
+  if (!gallery || !Array.isArray(gallery) || gallery.length === 0) {
+    const fetchGallery = async () => {
+      try {
+        setLoadingGallery(true);
+        const response = await galleryService.getAll();
+        // Make sure we handle the response structure correctly
+        const galleryItems = response.data || response || [];
+        // Store gallery data in local state
+        setGalleryByLocation(groupGalleryData(galleryItems));
+      } catch (error) {
+        console.error('Error fetching gallery data:', error);
+      } finally {
+        setLoadingGallery(false);
+      }
+    };
+    
+    fetchGallery();
+  } else if (gallery.length > 0) {
+    // If gallery is available from context, group it
+    setGalleryByLocation(groupGalleryData(gallery));
+  }
+}, [gallery]);
+
+  // Helper function to group gallery data by location
+  const groupGalleryData = (galleryData) => {
+    if (!Array.isArray(galleryData) || galleryData.length === 0) {
+      return {};
     }
-  ];
-  const DownloadsInsideAnyCampGalleryData = [
-    {
-      id: 'Regular Classes',
-      image: "/downloadspagetestimage.svg",
-    },
-    {
-      id: 'Doubts',
-      image: "/downloadspagetestimage2.svg",
-    },
-    {
-      id: 'Exams',
-      image: "/downloadspagetestimage.svg",
-    },
-    {
-      id: 'Regular Classes',
-      image: "/downloadspagetestimage.svg",
-    },
-    {
-      id: 'Doubts',
-      image: "/downloadspagetestimage2.svg",
-    },
-    {
-      id: 'Exams',
-      image: "/downloadspagetestimage.svg",
-    },
-    {
-      id: 'Regular Classes',
-      image: "/downloadspagetestimage.svg",
-    },
-    {
-      id: 'Doubts',
-      image: "/downloadspagetestimage2.svg",
-    },
-    {
-      id: 'Exams',
-      image: "/downloadspagetestimage.svg",
-    },
-    {
-      id: 'Regular Classes',
-      image: "/downloadspagetestimage.svg",
-    },
-    {
-      id: 'Doubts',
-      image: "/downloadspagetestimage2.svg",
-    },
-    {
-      id: 'Exams',
-      image: "/downloadspagetestimage.svg",
-    },
-  ];
+    
+    // Get unique locations
+    const uniqueLocations = [...new Set(galleryData.map(item => item.location))];
+    
+    // Create grouped object
+    const grouped = {};
+    uniqueLocations.forEach(location => {
+      const itemsForLocation = galleryData.filter(item => item.location === location);
+      if (itemsForLocation.length > 0) {
+        const year = itemsForLocation[0].date ? new Date(itemsForLocation[0].date).getFullYear() : '2024';
+        const formattedItems = itemsForLocation.map(item => ({
+          ...item,
+          image: formatImageUrl(item.image)
+        }));
+        
+        grouped[location] = {
+          items: formattedItems,
+          year: year
+        };
+      }
+    });
+    
+    return grouped;
+  };
 
   const navigate = useNavigate();
 
-  const handleClick = (campLocation) => {
+  const handleClick = async (campLocation) => {
     window.scrollTo(0, 0);
-    navigate(`/gallery/${campLocation.toLowerCase().replace(/\s+/g, '-')}`, {
-      state: {
-        DownloadsInsideAnyCampGalleryData,
-        location: campLocation
+    
+    try {
+      // Get gallery images for this location from the API
+      const response = await galleryService.getAll({ location: campLocation });
+      const locationGallery = response.data || response || [];
+      
+      console.log('Raw gallery data:', locationGallery); // Debug log
+      
+      // Process the gallery data to maintain the original category
+      const processedGallery = locationGallery.map(item => {
+        // Debug log for each item's category
+        console.log('Processing item:', {
+          id: item.id,
+          originalCategory: item.category,
+          title: item.title
+        });
+        
+        // Ensure we're using the correct category field from the backend
+        const category = item.category || item.type || 'regularclasses';
+        
+        return {
+          ...item,
+          category: category
+        };
+      });
+      
+      console.log('Processed gallery data:', processedGallery); // Debug log
+      
+      // Navigate to the gallery view with the processed data
+      navigate(`/downloads/${campLocation.toLowerCase().replace(/\s+/g, '-')}`, {
+        state: {
+          DownloadsInsideAnyCampGalleryData: processedGallery,
+          location: campLocation,
+          year: galleryByLocation[campLocation]?.year || new Date().getFullYear()
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching gallery for location:', error);
+      navigate(`/downloads/${campLocation.toLowerCase().replace(/\s+/g, '-')}`, {
+        state: {
+          DownloadsInsideAnyCampGalleryData: [],
+          location: campLocation
+        }
+      });
+    }
+  };
+
+  // Handle file download
+  const handleDownload = async (file, id, type) => {
+    try {
+      let response;
+      if (type === 'brochure') {
+        response = await brochureService.download(id);
+      } else if (type === 'report') {
+        response = await reportService.download(id);
       }
-    });
+
+      if (!response || !response.data) {
+        throw new Error('No data received from server');
+      }
+
+      // Create blob from response data
+      const blob = new Blob([response.data], { 
+        type: response.headers['content-type'] || 'application/octet-stream' 
+      });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      
+      // Get filename from Content-Disposition header or fallback to URL
+      const contentDisposition = response.headers['content-disposition'];
+      let filename;
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+        filename = filenameMatch ? filenameMatch[1].replace(/['"]/g, '') : undefined;
+      }
+      if (!filename) {
+        filename = file.split('/').pop() || `download-${type}-${id}`;
+      }
+      
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+      // Show error message to user
+      setError('Failed to download file. Please try again later.');
+    }
   };
 
   return (
@@ -128,52 +239,88 @@ const Downloads = () => {
           </p>
         </div>
 
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+
         <div className='downloads-content-container'>
           <h2>Brochure</h2>
           <div className="brochure-cards-container">
-            <DownloadPageCard
-              title={brochure.title}
-              year={brochure.year}
-              lastUpdated={brochure.lastUpdated}
-            />
+            {loadingBrochures ? (
+              <div className="loading-message">Loading brochures...</div>
+            ) : brochures && brochures.length > 0 ? (
+              brochures.map((brochure) => (
+                <DownloadPageCard
+                  key={brochure.id}
+                  title={brochure.title}
+                  subtitle={`Year ${brochure.year || new Date(brochure.created_at).getFullYear()}`}
+                  lastUpdated={brochure.updated_at}
+                  onClick={() => handleDownload(brochure.file, brochure.id, 'brochure')}
+                />
+              ))
+            ) : (
+              <div className="no-data-message">No brochures available</div>
+            )}
           </div>
         </div>
 
         <div className='downloads-content-container'>
           <h2>Reports</h2>
           <div className="reports-cards-container">
-            {reports.map((report, index) => (
-              <DownloadPageCard
-                key={index}
-                title={report.title}
-                placeName={report.placeName}
-                year={report.year}
-                lastUpdated={report.lastUpdated}
-              />
-            ))}
+            {loadingReports ? (
+              <div className="loading-message">Loading reports...</div>
+            ) : reports && reports.length > 0 ? (
+              reports.map((report) => (
+                <DownloadPageCard
+                  key={report.id}
+                  title={report.title}
+                  subtitle={`${report.location || 'Unknown Location'}, Year ${report.year || new Date(report.created_at).getFullYear()}`}
+                  lastUpdated={report.updated_at}
+                  onClick={() => handleDownload(report.file, report.id, 'report')}
+                />
+              ))
+            ) : (
+              <div className="no-data-message">No reports available</div>
+            )}
           </div>
         </div>
 
         <div className='downloads-gallery-container'>
           <h2>Gallery</h2>
           <p>Highlights from our past camps in pictures</p>
-          <div className="gallery-grid">
-            {galleryItems.map((item) => (
-              <div
-                key={item.id}
-                className="gallery-item-card"
-                onClick={() => handleClick(item.location)}
-              >
-                <span className='location-image-container'>
-                  <img className='location-image' src={item.image} alt={`Camp at ${item.location}`} />
-                </span>
-                <span className="gallery-item-caption">
-                  <span>{item.location}</span>
-                  <img className='downloadspagearrowicon' src={downloadspagearrowicon} alt="" />
-                </span>
-              </div>
-            ))}
-          </div>
+          {loading || loadingGallery ? (
+            <div className="loading-message">Loading gallery...</div>
+          ) : (
+            <div className="gallery-grid">
+              {Object.keys(galleryByLocation).length > 0 ? (
+                Object.keys(galleryByLocation).map((location) => (
+                  <div
+                    key={location}
+                    className="gallery-item-card"
+                    onClick={() => handleClick(location)}
+                  >
+                    <span className='location-image-container'>
+                      <img 
+                        className='location-image' 
+                        src={galleryByLocation[location].items[0].image} 
+                        alt={`Camp at ${location}`} 
+                      />
+                    </span>
+                    <span className="gallery-item-caption">
+                      <span>{location} ({galleryByLocation[location].year})</span>
+                      <img className='downloadspagearrowicon' src={downloadspagearrowicon} alt="" />
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <div className="no-gallery-message">
+                  <p>No gallery images available</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
       <div className='downloads-contribution-container'>

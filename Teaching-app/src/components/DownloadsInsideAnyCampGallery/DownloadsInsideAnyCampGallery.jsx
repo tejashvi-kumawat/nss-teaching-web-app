@@ -52,9 +52,14 @@ const DownloadsInsideAnyCampGallery = () => {
     };
 
     // Filter images for the current tab (case insensitive comparison)
-    const filteredImages = galleryData.filter(image =>
-        image.id.toLowerCase().replace(/\s+/g, '') === activeTab.toLowerCase().replace(/\s+/g, '')
+    const filteredImages = galleryData.filter(image => 
+        (image.category || 'regularclasses').toLowerCase() === activeTab.toLowerCase()
     );
+    useEffect(() => {
+        console.log("Gallery Data Received:", galleryData);
+        console.log("Current Active Tab:", activeTab);
+        console.log("Filtered Images:", filteredImages);
+    }, [galleryData, activeTab, filteredImages]);
 
     return (
         <div className="DownloadsInsideAnyCampGallery-container">

@@ -3,7 +3,7 @@ import './DownloadPageCard.css'
 import attachfileicon from '../../assets/attach-file-icon.svg'
 import greaterthanicon from '../../assets/greaterthan-icon.svg'
 
-const DownloadPageCard = (props) => {
+const DownloadPageCard = ({ title, subtitle, lastUpdated, onClick }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -43,18 +43,14 @@ const DownloadPageCard = (props) => {
         }
     };
 
-    // Format the title based on available data
-    const formatTitle = () => {
-        if (props.placeName) {
-            return `${props.placeName}, Year ${props.year}`;
-        } else {
-            return `Year ${props.year}`;
-        }
-    };
-
     return (
-        <div className='DownloadPageCard-outer-container' onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}>
+        <div 
+            className='DownloadPageCard-outer-container' 
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={onClick}
+            style={{ cursor: 'pointer' }}
+        >
             <div className='DownloadPageCard-container'>
                 <div className='attachment-icon-container' style={{
                     opacity: isHovered ? 0 : 1,
@@ -64,13 +60,13 @@ const DownloadPageCard = (props) => {
                 </div>
                 <div className='DownloadPageCard-Content-container'>
                     <div className='DownloadPageCard-Content-Title'>
-                        <div className="title-text">{props.title}</div>
-                        <div className="subtitle-text">{formatTitle()}</div>
+                        <div className="title-text">{title}</div>
+                        <div className="subtitle-text">{subtitle}</div>
                     </div>
                     <div className='DownloadPageCard-Content-Update-date'>
-                        Last updated {typeof props.lastUpdated === 'string' && props.lastUpdated.includes('T')
-                            ? getTimeAgo(props.lastUpdated)
-                            : props.lastUpdated}
+                        Last updated {typeof lastUpdated === 'string' && lastUpdated.includes('T')
+                            ? getTimeAgo(lastUpdated)
+                            : lastUpdated}
                     </div>
                 </div>
                 <div className='arrow-icon-container' style={{
@@ -81,7 +77,6 @@ const DownloadPageCard = (props) => {
                 </div>
             </div>
         </div>
-
     )
 }
 

@@ -1,0 +1,349 @@
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001/api';
+
+// Function to get CSRF token from cookies
+function getCsrfToken() {
+    const name = 'csrftoken';
+    const cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith(name))
+        ?.split('=')[1];
+    return cookieValue;
+}
+
+const axiosInstance = axios.create({
+    baseURL: API_URL,
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    withCredentials: true // This is important for cookies to be sent
+});
+
+// Add a request interceptor
+axiosInstance.interceptors.request.use(
+    (config) => {
+        // Add Authorization header if token exists
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Token ${token}`; // Changed to 'Token' for Django's Token auth
+        }
+        
+        // Add CSRF token for all non-GET requests
+        if (config.method !== 'get') {
+            const csrfToken = getCsrfToken();
+            if (csrfToken) {
+                config.headers['X-CSRFToken'] = csrfToken;
+            }
+        }
+        
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+// Add a response interceptor
+axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            localStorage.removeItem('token');
+            // Don't redirect here to avoid infinite loops
+            // We'll handle redirects in the component
+        }
+        return Promise.reject(error);
+    }
+);
+
+// Export the axios instance with additional methods
+const api = {
+    // Auth services
+    auth: {
+        login: async (username, password) => {
+            try {
+                // First get CSRF token from Django
+                await axios.get(`${API_URL}/csrf/`, { withCredentials: true });
+                
+                // Make direct axios call to ensure full control
+                const response = await axios.post(`${API_URL}/login/`, {
+                    username,
+                    password
+                }, {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCsrfToken()
+                    }
+                });
+                
+                console.log('Login API response:', response);
+                
+                // Store tokens
+                if (response.data && response.data.token) {
+                    localStorage.setItem('token', response.data.token);
+                    
+                    // Also store username if available
+                    if (response.data.username) {
+                        localStorage.setItem('username', response.data.username);
+                    }
+                } else {
+                    throw new Error('No token received from server');
+                }
+                
+                return response.data;
+            } catch (error) {
+                console.error('Login API error:', {
+                    data: error.response?.data || {},
+                    status: error.response?.status,
+                    statusText: error.response?.statusText,
+                    message: error.message
+                });
+                throw error;
+            }
+        },
+
+        register: async (userData) => {
+            try {
+                // First get CSRF token from Django
+                await axios.get(`${API_URL}/csrf/`, { withCredentials: true });
+                
+                const response = await axiosInstance.post('/register/', userData);
+                return response.data;
+            } catch (error) {
+                // Improved error logging to show details
+                console.error('Registration error:', {
+                    data: error.response?.data || {},
+                    status: error.response?.status,
+                    statusText: error.response?.statusText,
+                    message: error.message
+                });
+                throw new Error(error.response?.data?.detail || error.response?.data?.error || 'Registration failed');
+            }
+        },
+
+        logout: () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+        },
+
+        getProfile: async () => {
+            try {
+                const response = await axiosInstance.get('/profile/');
+                return response.data;
+            } catch (error) {
+                console.error('Error fetching profile:', error);
+                throw error;
+            }
+        }
+    },
+
+    // Contact form submission
+    contact: {
+        submitForm: async (formData) => {
+            try {
+                const response = await axiosInstance.post('/contact/', formData);
+                return response.data;
+            } catch (error) {
+                console.error('Contact form submission error:', error.response?.data || error);
+                throw new Error(error.response?.data?.detail || 'Failed to send message');
+            }
+        }
+    },
+
+    // Announcements
+    announcements: {
+        getAll: async () => {
+            try {
+                const response = await axiosInstance.get('/announcements/');
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch announcements:', error);
+                throw error;
+            }
+        },
+        getById: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/announcements/${id}/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to fetch announcement ${id}:`, error);
+                throw error;
+            }
+        }
+    },
+
+    // Downloads
+    downloads: {
+        getAll: async () => {
+            try {
+                const response = await axiosInstance.get('/downloads/');
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch downloads:', error);
+                throw error;
+            }
+        }
+    },
+
+    // Gallery
+    gallery: {
+        getAll: async (params = {}) => {
+            try {
+                console.log('Fetching gallery items with params:', params);
+                const response = await axiosInstance.get('/gallery/', { params });
+                console.log('Gallery response:', response);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch gallery items:', error);
+                return [];
+            }
+        },
+        getById: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/gallery/${id}/`);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch gallery item:', error);
+                return {};
+            }
+        },
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/gallery/${id}/download/`, {
+                    responseType: 'blob'
+                });
+                return response;
+            } catch (error) {
+                console.error('Failed to download gallery item:', error);
+                throw error;
+            }
+        }
+    },
+    
+    // Brochures
+    brochures: {
+        getAll: async () => {
+            try {
+                console.log('Fetching brochures from:', `${API_URL}/brochures/`);
+                const response = await axiosInstance.get('/brochures/');
+                console.log('Brochures response:', response);
+                // Ensure each brochure has a year field
+                const brochuresWithYear = response.data.map(brochure => ({
+                    ...brochure,
+                    year: brochure.year || new Date(brochure.created_at).getFullYear()
+                }));
+                return brochuresWithYear; // Return array directly
+            } catch (error) {
+                console.error('Failed to fetch brochures:', error);
+                return []; // Return empty array directly
+            }
+        },
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/brochures/${id}/download/`, {
+                    responseType: 'blob',
+                    withCredentials: true
+                });
+                return response;
+            } catch (error) {
+                console.error(`Failed to download brochure ${id}:`, error);
+                throw error;
+            }
+        }
+    },
+    
+    // Reports
+    reports: {
+        getAll: async (params = {}) => {
+            try {
+                console.log('Fetching reports from:', `${API_URL}/reports/`, params);
+                const response = await axiosInstance.get('/reports/', { params });
+                console.log('Reports response:', response);
+                // Ensure each report has year and location fields
+                const reportsWithFields = response.data.map(report => ({
+                    ...report,
+                    year: report.year || new Date(report.created_at).getFullYear(),
+                    location: report.location || 'Unknown Location'
+                }));
+                return reportsWithFields; // Return array directly
+            } catch (error) {
+                console.error('Failed to fetch reports:', error);
+                return []; // Return empty array directly
+            }
+        },
+        
+        getById: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/reports/${id}/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to fetch report ${id}:`, error);
+                return {}; // Return an empty object
+            }
+        },
+        
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/reports/${id}/download/`, {
+                    responseType: 'blob',
+                    withCredentials: true
+                });
+                return response;
+            } catch (error) {
+                console.error(`Failed to download report ${id}:`, error);
+                throw error;
+            }
+        }
+    },
+
+    // Event services
+    events: {
+        getAll: async (params = {}) => {
+            try {
+                const response = await axiosInstance.get('/events/', { params });
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch events:', error);
+                throw error;
+            }
+        },
+        
+        getFeatured: async () => {
+            try {
+                const response = await axiosInstance.get('/events/', { 
+                    params: { featured: true } 
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch featured events:', error);
+                throw error;
+            }
+        },
+        
+        getById: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/events/${id}/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to fetch event ${id}:`, error);
+                throw error;
+            }
+        }
+    },
+
+    // Generic HTTP methods
+    get: axiosInstance.get.bind(axiosInstance),
+    post: axiosInstance.post.bind(axiosInstance),
+    put: axiosInstance.put.bind(axiosInstance),
+    delete: axiosInstance.delete.bind(axiosInstance)
+};
+
+// Create named exports for individual services
+export const brochureService = api.brochures;
+export const reportService = api.reports;
+export const galleryService = api.gallery;
+
+// Default export for backward compatibility
+export default api;
