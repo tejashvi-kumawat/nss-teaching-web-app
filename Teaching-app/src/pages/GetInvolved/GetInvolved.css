@@ -290,3 +290,68 @@
 .get-involved-partner-section{
   width: 100%;
 }
+
+/* Responsive styles for the form */
+@media screen and (max-width: 768px) {
+  .get-involved-form-container {
+    width: 100%;
+    padding: 30px 20px;
+    margin: 0 15px;
+  }
+  
+  .get-involved-intro h1 {
+    font-size: 28px;
+  }
+  
+  .get-involved-intro p {
+    font-size: 18px;
+    padding: 0 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .get-involved-form-container {
+    padding: 25px 15px;
+  }
+  
+  .get-involved-form-group label {
+    font-size: 14px;
+  }
+  
+  .get-involved-form-input,
+  .dropdown-header,
+  .dropdown-item {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .submit-button {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .get-involved-intro h1 {
+    font-size: 24px;
+  }
+  
+  .get-involved-intro p {
+    font-size: 16px;
+  }
+  
+  .dropdown-content {
+    max-height: 150px;
+  }
+}
+
+/* Fix for very small screens */
+@media screen and (max-width: 320px) {
+  .get-involved-form-container {
+    padding: 20px 10px;
+  }
+  
+  .get-involved-form-input,
+  .dropdown-header,
+  .dropdown-item {
+    padding: 8px 10px;
+  }
+}
