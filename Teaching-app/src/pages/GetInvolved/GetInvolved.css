@@ -128,6 +128,11 @@
   color: white;
 }
 
+.get-involved-tab-active:hover {
+  background-color: #4a8522;
+  color: white;
+}
+
 /* Tab content container */
 .get-involved-tab-content-container {
   width: 100%;
@@ -280,4 +285,8 @@
 .submit-button:disabled {
   background-color: #90C590;
   cursor: not-allowed;
+}
+
+.get-involved-partner-section{
+  width: 100%;
 }

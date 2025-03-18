@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./GetInvolved.css";
+import DonateForm from "../../components/GetInvolved/DonateForm";
+import PartnerUs from "../../components/GetInvolved/PartnerwithUs"
 
 // Define components outside of the main component
 const VolunteerForm = ({ 
@@ -124,6 +126,9 @@ const Donate = () => (
         brighter future.
       </p>
     </div>
+    <div className="get-involved-partner-section">
+      <DonateForm/>
+    </div>
   </div>
 );
 
@@ -138,6 +143,9 @@ const PartnerWithUs = () => (
         Uttarakhand. Together, we can bridge the education gap and transform
         young lives.
       </p>
+    </div>
+    <div className="get-involved-partner-section">
+      <PartnerUs/>
     </div>
   </div>
 );

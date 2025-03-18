@@ -1,0 +1,116 @@
+.partnerWithUs-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #F1F8F1;
+    padding: 0;
+  }
+  
+  .partnerWithUs-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0 2%;
+    background-color: #F1F8F1;
+    border-radius: 8px;
+    margin: 0;
+    width: 100%;
+    height: 13vh;
+    transition: transform 0.3s ease;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+  }
+  
+  .partnerWithUs-item:last-child {
+    border-bottom: none;
+  }
+  
+  .partnerWithUs-item:hover {
+    animation: shake 0.5s;
+    background: #e0f5dd;
+  }
+
+  .partnerWithUs-arrow {
+    width: 24px;
+    height: 24px;
+    color: #2E7D32;
+    transition: transform 0.3s ease;
+  }
+  
+  .partnerWithUs-item:hover .partnerWithUs-arrow {
+    transform: translateX(5px);
+  }
+  
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(3px);
+      transform: translateY(3px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .partnerWithUs-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #132611;
+    font-size: 18px;
+    font-weight: 400;
+  }
+  
+  .partnerWithUs-arrow {
+    width: 24px;
+    height: 24px;
+    color: #2E7D32;
+    transition: transform 0.3s ease;
+  }
+  
+  .partnerWithUs-item:hover .partnerWithUs-arrow {
+    transform: rotate(-45deg);
+  }
+  
+  @media (max-width: 1200px) {
+    .partnerWithUs-content {
+      font-size: 15px;
+      font-weight: 400;
+    }
+    
+    .partnerWithUs-arrow {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .partnerWithUs-item {
+      height: auto;
+      padding: 15px 2%;
+    }
+    
+    .partnerWithUs-arrow {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .partnerWithUs-content {
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    
+    .partnerWithUs-arrow {
+      width: 16px;
+      height: 16px;
+    }
+  }
