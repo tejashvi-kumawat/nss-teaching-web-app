@@ -4,7 +4,7 @@
 
 /* Main container styles */
 .get-involved-main-container {
-  width: 100%;
+  width: 85%;
   max-width: 1440px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
@@ -294,7 +294,7 @@
 /* Responsive styles for the form */
 @media screen and (max-width: 768px) {
   .get-involved-form-container {
-    width: 100%;
+    width: 90%;
     padding: 30px 20px;
     margin: 0 15px;
   }
