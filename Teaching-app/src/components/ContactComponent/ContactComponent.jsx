@@ -6,6 +6,15 @@ import phoneicon from "../../assets/bxs-phone.svg";
 import mailicon from "../../assets/bxl-gmail.svg";
 import api from '../../services/api';
 
+// Create a dedicated axios instance for the form submission
+const formAxios = axios.create({
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
+    withCredentials: true,
+    headers: {
+        'Content-Type': 'application/json'
+    }
+});
+
 const ContactComponent = ({ contactData }) => {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -16,6 +25,37 @@ const ContactComponent = ({ contactData }) => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+    const [csrfToken, setCsrfToken] = useState('');
+
+    // Get CSRF token from cookies
+    const getCsrfToken = () => {
+        const name = 'csrftoken';
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith(name))
+            ?.split('=')[1];
+        return cookieValue;
+    };
+
+    // Fetch CSRF token on component mount
+    useEffect(() => {
+        const fetchCsrfToken = async () => {
+            try {
+                await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/csrf/`, { 
+                    withCredentials: true 
+                });
+                const token = getCsrfToken();
+                if (token) {
+                    setCsrfToken(token);
+                    console.log('CSRF token obtained:', token);
+                }
+            } catch (error) {
+                console.warn('Failed to get CSRF token:', error);
+            }
+        };
+        
+        fetchCsrfToken();
+    }, []);
 
     // Clear success message after 2 seconds
     useEffect(() => {
@@ -47,16 +87,6 @@ const ContactComponent = ({ contactData }) => {
         setSubmitStatus({ type: '', message: '' });
 
         try {
-            // First get CSRF token if needed
-            try {
-                await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8001/api'}/csrf/`, { 
-                    withCredentials: true 
-                });
-            } catch (csrfError) {
-                console.warn('Failed to get CSRF token:', csrfError);
-                // Continue anyway as the api instance should handle it
-            }
-
             // Prepare contact data
             const contactData = {
                 name: `${formData.firstName} ${formData.lastName}`.trim(),
@@ -65,8 +95,21 @@ const ContactComponent = ({ contactData }) => {
                 message: formData.message
             };
 
-            // Submit form using the contact API service
-            await api.contact.submitForm(contactData);
+            // Try using the api service directly first
+            try {
+                await api.contact.submitForm(contactData);
+            } catch (apiError) {
+                console.warn('Failed with API service, trying direct axios:', apiError);
+                
+                // If that fails, try direct axios call
+                const response = await formAxios.post('/contact/', contactData, {
+                    headers: {
+                        'X-CSRFToken': csrfToken || getCsrfToken()
+                    }
+                });
+                
+                console.log('Contact form submission response:', response);
+            }
 
             setSubmitStatus({
                 type: 'success',

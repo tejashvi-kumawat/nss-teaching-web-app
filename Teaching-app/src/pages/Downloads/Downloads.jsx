@@ -29,7 +29,7 @@ const Downloads = () => {
     
     // If it's a relative URL starting with /media, add the backend URL
     if (imageUrl.startsWith('/media')) {
-      return `http://localhost:8001${imageUrl}`;
+      return `${import.meta.env.VITE_API_URL}${imageUrl}`;
     }
     
     // For other relative URLs

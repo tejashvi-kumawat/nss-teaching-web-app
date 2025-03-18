@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import './Login.css';
 import { useAuth } from '../contexts/AuthContext';
 import { DataContext } from '../store/Data';
+import api from '../services/api';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -32,48 +32,17 @@ const Login = () => {
         setLoading(true);
 
         try {
-            // Get API URL from environment or use default
-            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001/api';
+            // Use the API service for login
+            const response = await api.auth.login(formData.username, formData.password);
             
-            // First get CSRF token directly with axios
-            const csrfResponse = await axios.get(`${API_URL}/csrf/`, { 
-                withCredentials: true 
-            });
-            // console.log('CSRF response:', csrfResponse);
-            
-            // Get the CSRF token from cookies
-            let csrfToken = '';
-            const cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                const [name, value] = cookie.trim().split('=');
-                if (name === 'csrftoken') {
-                    csrfToken = value;
-                    break;
-                }
-            }
-            // console.log('Got CSRF token:', csrfToken);
-
-            // Make the login request directly with axios
-            // console.log('Sending login request with credentials:', { username: formData.username });
-            const loginResponse = await axios.post(`${API_URL}/login/`, {
-                username: formData.username,
-                password: formData.password
-            }, {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
-                }
-            });
-            
-            // console.log('Login successful! Response:', loginResponse.data);
+            console.log('Login successful! Response:', response);
             
             // Store the token and user info
-            if (loginResponse.data && loginResponse.data.token) {
-                localStorage.setItem('token', loginResponse.data.token);
+            if (response && response.token) {
+                localStorage.setItem('token', response.token);
                 
-                if (loginResponse.data.username) {
-                    localStorage.setItem('username', loginResponse.data.username);
+                if (response.username) {
+                    localStorage.setItem('username', response.username);
                 }
                 
                 // Update auth contexts - if these fail, we still have the token stored

@@ -429,3 +429,105 @@ def login_view(request):
         response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRFToken"
         response["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
         return response
+
+# Class-based views for direct API access
+class GalleryList(generics.ListCreateAPIView):
+    queryset = Gallery.objects.all().order_by('-date')
+    serializer_class = GallerySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Gallery.objects.all().order_by('-date')
+        location = self.request.query_params.get('location')
+        if location:
+            queryset = queryset.filter(location=location)
+        return queryset
+
+class GalleryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Gallery.objects.all()
+    serializer_class = GallerySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class GalleryDownload(generics.RetrieveAPIView):
+    queryset = Gallery.objects.all()
+    serializer_class = GallerySerializer
+    permission_classes = [permissions.AllowAny]
+    
+    def retrieve(self, request, *args, **kwargs):
+        gallery = self.get_object()
+        if not gallery.image:
+            raise Http404("Image not found")
+        
+        try:
+            response = FileResponse(gallery.image.open('rb'))
+            response['Content-Disposition'] = f'attachment; filename="{gallery.image.name.split("/")[-1]}"'
+            return response
+        except Exception as e:
+            raise Http404(f"Error serving file: {str(e)}")
+
+class BrochureList(generics.ListCreateAPIView):
+    queryset = Brochure.objects.all()
+    serializer_class = BrochureSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class BrochureDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Brochure.objects.all()
+    serializer_class = BrochureSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class BrochureDownload(generics.RetrieveAPIView):
+    queryset = Brochure.objects.all()
+    serializer_class = BrochureSerializer
+    permission_classes = [permissions.AllowAny]
+    
+    def retrieve(self, request, *args, **kwargs):
+        brochure = self.get_object()
+        if not brochure.file:
+            raise Http404("File not found")
+        
+        try:
+            response = FileResponse(brochure.file.open('rb'), content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="{brochure.file.name.split("/")[-1]}"'
+            return response
+        except Exception as e:
+            raise Http404(f"Error serving file: {str(e)}")
+
+class ReportList(generics.ListCreateAPIView):
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class ReportDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class ReportDownload(generics.RetrieveAPIView):
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+    permission_classes = [permissions.AllowAny]
+    
+    def retrieve(self, request, *args, **kwargs):
+        report = self.get_object()
+        if not report.file:
+            raise Http404("File not found")
+        
+        try:
+            response = FileResponse(report.file.open('rb'), content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="{report.file.name.split("/")[-1]}"'
+            return response
+        except Exception as e:
+            raise Http404(f"Error serving file: {str(e)}")
+
+# Simple view for API index
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def api_index(request):
+    return Response({
+        "endpoints": {
+            "gallery": "/gallery/",
+            "brochures": "/brochures/",
+            "reports": "/reports/",
+            "admin": "/admin/",
+        }
+    })

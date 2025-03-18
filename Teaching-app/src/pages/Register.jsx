@@ -99,7 +99,7 @@ const Register = () => {
         try {
             // Get CSRF token first
             try {
-                await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8001/api'}/csrf/`, { 
+                await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/csrf/`, { 
                     withCredentials: true 
                 });
             } catch (csrfError) {

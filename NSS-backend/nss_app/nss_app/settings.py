@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-9y)($%@$_aj9su_y!^3_q=(ktwnd6l2x21_4m&uj=s4e&f%hle
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'api.himalayanvidyadaan.org', 'www.himalayanvidyadaan.org', 'himalayanvidyadaan.org']
 
 
 # Application definition
@@ -133,18 +133,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "https://www.himalayanvidyadaan.org",
-    "https://himalayanvidyadaan.org"
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "http://localhost:5174",
 ]
 
-# Add CORS debugging
-CORS_ALLOW_ALL_ORIGINS = True  # Only use in development!
-CORS_ORIGIN_ALLOW_ALL = True   # Additional setting
-
-# Add CORS credentials support
+# Custom middleware CORS headers
+CORS_ALLOW_ALL_ORIGINS = True  # For development only
+CORS_ORIGIN_ALLOW_ALL = True   # For development only
 CORS_ALLOW_CREDENTIALS = True
 
-# Allow all headers
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -157,7 +157,6 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-# Allow all methods
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -174,7 +173,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ]
 }
 
@@ -236,14 +235,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.himalayanvidyadaan.org",
     "https://himalayanvidyadaan.org"
 ]
-
-# Make sure all relevant domains are included
-if "http://localhost:3000" not in CORS_ALLOWED_ORIGINS:
-    CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
-if "http://localhost:5173" not in CORS_ALLOWED_ORIGINS:
-    CORS_ALLOWED_ORIGINS.append("http://localhost:5173")
-if "http://localhost:5174" not in CORS_ALLOWED_ORIGINS:
-    CORS_ALLOWED_ORIGINS.append("http://localhost:5174")
 
 # Session settings
 SESSION_COOKIE_SECURE = False  # Set to False for development

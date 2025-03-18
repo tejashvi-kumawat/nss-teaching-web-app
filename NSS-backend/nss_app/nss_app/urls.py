@@ -18,17 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework.authtoken import views as auth_views
+
 admin.site.site_header ="NSS Admin Portal"
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include('home.urls')),
-    path('api/', include('api.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/', include('api.urls')),  # This includes all API endpoints including login and register
+    path('brochures/', include('api.brochure_urls')),
+    path('reports/', include('api.report_urls')),
+    path('gallery/', include('api.gallery_urls')),
+    path('contact/', include('api.contact_urls')),
 ]
 
 # Serve media files in development

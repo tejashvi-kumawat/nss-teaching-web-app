@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 // Function to get CSRF token from cookies
 function getCsrfToken() {
@@ -63,18 +63,21 @@ const api = {
     auth: {
         login: async (username, password) => {
             try {
-                // First get CSRF token from Django
-                await axios.get(`${API_URL}/csrf/`, { withCredentials: true });
+                // First get CSRF token
+                await axios.get(`${API_URL}/api/csrf/`, { withCredentials: true });
+                
+                // Get the CSRF token from cookies
+                const csrfToken = getCsrfToken();
                 
                 // Make direct axios call to ensure full control
-                const response = await axios.post(`${API_URL}/login/`, {
+                const response = await axios.post(`${API_URL}/api/login/`, {
                     username,
                     password
                 }, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': getCsrfToken()
+                        'X-CSRFToken': csrfToken
                     }
                 });
                 
@@ -106,10 +109,19 @@ const api = {
 
         register: async (userData) => {
             try {
-                // First get CSRF token from Django
-                await axios.get(`${API_URL}/csrf/`, { withCredentials: true });
+                // First get CSRF token
+                await axios.get(`${API_URL}/api/csrf/`, { withCredentials: true });
                 
-                const response = await axiosInstance.post('/register/', userData);
+                // Get the CSRF token from cookies
+                const csrfToken = getCsrfToken();
+                
+                const response = await axios.post(`${API_URL}/api/register/`, userData, {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    }
+                });
                 return response.data;
             } catch (error) {
                 // Improved error logging to show details
@@ -130,7 +142,16 @@ const api = {
 
         getProfile: async () => {
             try {
-                const response = await axiosInstance.get('/profile/');
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('No authentication token found');
+                }
+                
+                const response = await axiosInstance.get('/api/profile/', {
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    }
+                });
                 return response.data;
             } catch (error) {
                 console.error('Error fetching profile:', error);
@@ -248,7 +269,7 @@ const api = {
                 });
                 return response;
             } catch (error) {
-                console.error(`Failed to download brochure ${id}:`, error);
+                console.error('Failed to download brochure:', error);
                 throw error;
             }
         }
@@ -259,31 +280,14 @@ const api = {
         getAll: async (params = {}) => {
             try {
                 console.log('Fetching reports from:', `${API_URL}/reports/`, params);
-                const response = await axiosInstance.get('/reports/', { params });
+                const response = await axiosInstance.get('/reports/');
                 console.log('Reports response:', response);
-                // Ensure each report has year and location fields
-                const reportsWithFields = response.data.map(report => ({
-                    ...report,
-                    year: report.year || new Date(report.created_at).getFullYear(),
-                    location: report.location || 'Unknown Location'
-                }));
-                return reportsWithFields; // Return array directly
-            } catch (error) {
-                console.error('Failed to fetch reports:', error);
-                return []; // Return empty array directly
-            }
-        },
-        
-        getById: async (id) => {
-            try {
-                const response = await axiosInstance.get(`/reports/${id}/`);
                 return response.data;
             } catch (error) {
-                console.error(`Failed to fetch report ${id}:`, error);
-                return {}; // Return an empty object
+                console.error('Failed to fetch reports:', error);
+                return [];
             }
         },
-        
         download: async (id) => {
             try {
                 const response = await axiosInstance.get(`/reports/${id}/download/`, {
@@ -292,7 +296,7 @@ const api = {
                 });
                 return response;
             } catch (error) {
-                console.error(`Failed to download report ${id}:`, error);
+                console.error('Failed to download report:', error);
                 throw error;
             }
         }
@@ -340,10 +344,14 @@ const api = {
     delete: axiosInstance.delete.bind(axiosInstance)
 };
 
-// Create named exports for individual services
-export const brochureService = api.brochures;
-export const reportService = api.reports;
+// Export the gallery service separately
 export const galleryService = api.gallery;
+
+// Export the brochure service separately
+export const brochureService = api.brochures;
+
+// Export the report service separately
+export const reportService = api.reports;
 
 // Default export for backward compatibility
 export default api;
