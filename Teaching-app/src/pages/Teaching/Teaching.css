@@ -14,6 +14,12 @@
     margin-bottom: 5%;
 }
 
+.TeachingDescription{
+    color: #526652;
+    font-size: max(1.6vw,0.7rem);
+    margin-bottom: 40px;
+}
+
 /* Banner */
 .TeachingBannerSection {
     position: relative;
@@ -250,33 +256,42 @@ ul.TeachingProgramsInnerText li{
 }
 
 /* Testimonials */
+.TeachingTestimonials{
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+#Testimonials{
+    margin-bottom: 0;
+}
+
 .TeachingTestimonialsGrid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     --move-grid: 100%;
-    column-gap: 4%;
-    row-gap: 100px;
+    column-gap: 7%;
+    row-gap: 80px;
 }
-
 .TeachingTestimonialsBox{
-    background-color: yellow;
     position: relative;
     --box-width: 100%;
-} 
-.TeachingTestimonialsBox:nth-child(4):hover ~ .TeachingTestimonialsBox:nth-child(-n+6),
-.TeachingTestimonialsBox:nth-child(1):hover ~ .TeachingTestimonialsBox:nth-child(-n+3) {
-    transform: translateX(calc(var(--move-grid)*2));
+    height: 95%;
+    opacity: 0.7;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
 }
-.TeachingTestimonialsBox:nth-child(5):hover ~ .TeachingTestimonialsBox:nth-child(6),
-.TeachingTestimonialsBox:nth-child(2):hover ~ .TeachingTestimonialsBox:nth-child(3) {
-    transform: translateX(calc(var(--move-grid)));
+.TeachingTestimonialsBox:hover{
+    scale: 1.1;
+    z-index: 3;
+    opacity: 2;
 }
-/* .TeachingTestimonialsBox:nth-child(5):hover ~ .TeachingTestimonialsBox:nth-child(4), */
-.TeachingTestimonialsBox:nth-child(2):hover .TeachingTestimonialsBox:nth-child(1) {
-    visibility: hidden;
-}
-.TeachingTestimonialsBox:nth-child(3n+2):hover{
-    transform: translateX(calc(-1*var(--move-grid))); 
+@media screen and (min-width:750px) {
+    .TeachingTestimonialsBox:nth-child(3n+2):hover{
+        transform: translateX(calc(-1*var(--move-grid)));
+    }
+    .TeachingTestimonialsBox:nth-child(3n):hover{
+        transform: translateX(calc(-2*var(--move-grid)));
+    }
 }
 
 .TeachingTestimonialsImage{
@@ -286,21 +301,27 @@ ul.TeachingProgramsInnerText li{
     --radius-of-text: 5%;
     border: 3px solid #A5C7A1;
     object-fit: cover;
-    object-position: top;
+    object-position: center;
     margin-bottom: 5%;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
 }
-.TeachingTestimonialsBox:hover .TeachingTestimonialsImage{
-    background-image: radial-gradient(#ffffff,transparent,#2E7D3233);
-    box-shadow: 0.2vw 0.2vw 1vw 0.2vw #2E7D3233;
+@media screen and (min-width: 750px) {
+    .TeachingTestimonialsBox:hover .TeachingTestimonialsImage{
+        background-image: radial-gradient(#ffffff,transparent,#2E7D3233);
+        box-shadow: 0.2vw 0.2vw 1vw 0.2vw #2E7D3233;
+    }
 }
 
 .TeachingTestimonialsDescription{
     position: absolute;
-    color: green;
+    color: #526652;
+    font-size: max(1.1vw,0.65rem);
+    background-color: #f7f7f7;
     width: calc(var(--box-width)*2);
     aspect-ratio: 2/1;
     top: 0;
-    left: calc(var(--box-width)*1.1);
+    left: calc(var(--box-width)*1.01);
     border: 3px solid #A5C7A1;
     border-radius: 1vw;
     padding-left: 2vw;
@@ -309,6 +330,8 @@ ul.TeachingProgramsInnerText li{
     align-items: center;
     justify-content: center;
     z-index: 2;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
 }
 .TeachingTestimonialsBox:hover .TeachingTestimonialsDescription{
     display: flex;
@@ -318,11 +341,18 @@ ul.TeachingProgramsInnerText li{
     color: #526652;
     font-weight: 700;
     font-size: max(1.4vw, 15px);
-    padding-left: 1%;
+    position: absolute;
+    bottom: 3%;
+    left: 5%;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
 }
-.TeachingTestimonialsBox:hover .TeachingTestimonialsName{
-    color: #2E7D32;
-    text-shadow: 0.1vw 0.1vw 0.1vw #2E7D3233;
+@media screen and (min-width: 750px) {
+    .TeachingTestimonialsBox:hover .TeachingTestimonialsName{
+        color: #2E7D32;
+        text-shadow: 0.1vw 0.1vw 0.1vw #2E7D3233;
+        bottom: -8%;
+    }
 }
 
 @media screen and (max-width:1650px){
@@ -369,6 +399,40 @@ ul.TeachingProgramsInnerText li{
     }.TeachingVolunteerBox:hover .TeachingVolunteerImage{
         transform: translatey(25px);
     }
+
+    .TeachingTestimonials{
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .TeachingTestimonialsGrid{
+        grid-template-columns: 100%;
+        column-gap: 0;
+        row-gap: 10px;
+    }
+    .TeachingTestimonialsBox{
+        display: flex;
+        opacity: 1;
+    }
+    .TeachingTestimonialsBox:hover{
+        scale: 1.05;
+    }
+    .TeachingTestimonialsImage{
+        width: 150px;
+        height: 150px;
+    }
+    .TeachingTestimonialsDescription{
+        display: flex;
+        align-items: flex-start;
+        position: static;
+        font-size: max(0.65rem,1.8vw);
+        height: fit-content;
+        border: 0;
+        background-color: transparent;
+    }
+    .TeachingTestimonialsName{
+        top: 150px;
+        left: 0;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -407,6 +471,37 @@ ul.TeachingProgramsInnerText li{
     }
     .TeachingVolunteerHeading{
         padding-top: 50px;
+    }
+
+    .TeachingTestimonials{
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .TeachingTestimonialsGrid{
+        grid-template-columns: 100%;
+        column-gap: 2px;
+        row-gap: 80px;
+    }
+    .TeachingTestimonialsBox{
+        display: flex;
+        opacity: 1;
+    }
+    .TeachingTestimonialsImage{
+        width: 100px;
+        height: 100px;
+    }
+    .TeachingTestimonialsDescription{
+        display: flex;
+        align-items: flex-start;
+        position: static;
+        font-size: max(0.6rem,1.6vw);
+        height: fit-content;
+        border: 0;
+    }
+    .TeachingTestimonialsName{
+        top: 100px;
+        left: 0;
+        font-size: max(0.6rem, 1.5vw);
     }
 }
 

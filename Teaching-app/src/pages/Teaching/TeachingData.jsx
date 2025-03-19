@@ -17,6 +17,11 @@ import Volunteer7 from "../../assets/Volunteer7.jpeg";
 import Volunteer8 from "../../assets/Volunteer8.jpeg";
 import Volunteer9 from "../../assets/Volunteer9.jpeg";
 import Volunteer10 from "../../assets/Volunteer10.jpeg";
+import Testimonial1 from "../../assets/Testimonial1.png"
+import Testimonial2 from "../../assets/Testimonial2.png"
+import Testimonial3 from "../../assets/Testimonial3.png"
+import Testimonial4 from "../../assets/Testimonial4.png"
+import Testimonial5 from "../../assets/Testimonial5.png"
 
 // Define all your data exports as they were in the original file
 export const BannerSection={
@@ -142,6 +147,79 @@ export const TeachingApproach={
         </div>
     )
 }
+
+export const TeachingTestimonials=[
+    {
+        image: <img src={Testimonial1} alt="Sneha Kandari Testimonial" className="TeachingTestimonialsImage" />,
+        name: <span className="TeachingTestimonialsName">
+            Sneha Kandari
+        </span>,
+        description: <div className="TeachingTestimonialsDescription" >
+            I am Sneha Kandari, and I had the privilege of attending the program in Narayan Bagar in 2023 and 
+            in Saikot in 2024. Thanks to the coaching and support I received, I made it to the merit list of 
+            the 10th Class Board exams in 2024. Not only that, but my marks in school improved significantly, 
+            and I feel more confident in my studies now. Because of the continuous support I have got I am now 
+            determined to crack JEE and seek admission in IIT.
+        </div>
+    },
+    {
+        image: <img src={Testimonial2} alt="Harshita Rawat Testimonial" className="TeachingTestimonialsImage" />,
+        name: <span className="TeachingTestimonialsName">
+            Harshita Rawat
+        </span>,
+        description: <div className="TeachingTestimonialsDescription" >
+            My name is Harshita Rawat, and I'm a Class 9 student. I attended the program in Narayan Bagar and 
+            Saikot, and it completely changed my academic journey. I used to be a low scorer, but after participating 
+            in the program, I've been consistently scoring over 90%. Now, I even help my fellow students by 
+            teaching them how to solve numerical problems in maths, physics, and chemistry. This program has 
+            truly boosted my confidence and love for learning.
+        </div>
+    },
+    {
+        image: <img src={Testimonial3} alt="Khushi Bisht Testimonial" className="TeachingTestimonialsImage" />,
+        name: <span className="TeachingTestimonialsName">
+            Khushi Bisht
+        </span>,
+        description: <div className="TeachingTestimonialsDescription" >
+            My name is Khushi Bisht, and I'm now a Class 12 student at GIC, Garhkot, Chamoli. I attended the program 
+            in Narayan Bagar and Saikot, and it has been a turning point in my life. I used to be a mediocre student, 
+            scoring between 40-50%, but now I rank first in my class and consistently score 90%. In the teaching program 
+            we got very good counselling and came to know of various opportunities that we can avail. This year I 
+            will attempt for JEE also.
+            Numerous students who have participated in our program have achieved outstanding success, securing 
+            admissions to prestigious institutions such as the National Defence Academy (NDA), Govind 
+            Ballabh Pant University, NIT Srinagar, B.Sc. Nursing and B. Pharma programs, among others.
+        </div>
+    },
+    {
+        image: <img src={Testimonial4} alt="Chitranshi Negi Testimonial" className="TeachingTestimonialsImage" />,
+        name: <span className="TeachingTestimonialsName">
+            Chitranshi Negi
+        </span>,
+        description: <div className="TeachingTestimonialsDescription" >
+            I am Chitranshi Negi I attended these classes during summer vacation in 2024 at saikot and had the great 
+            experience of exploring things and learning things in new way. Before this camp I was a 
+            totally different person who don't know how to study and be focused but this camp taught me soo 
+            many new things and opportunities , I got to know about exams and job opportunities .This camp told 
+            me soo many way to explore things .This camp still helps me in my studies, provided me a 
+            mentor who tracks my progress every week and help me with the problems.
+        </div>
+    },
+    {
+        image: <img src={Testimonial5} alt="Aditya Sharma Testimonial" className="TeachingTestimonialsImage" />,
+        name: <span className="TeachingTestimonialsName">
+            Aditya Sharma
+        </span>,
+        description: <div className="TeachingTestimonialsDescription" >
+            I am Aditya, a JEE 2025 aspirant, and this program has been a game-changer for me. It gave my 
+            preparation a significant boost, helping me build confidence and improve my grades at school.
+            It also motivated me to go beyond academics, and with this newfound confidence, I cracked the 
+            Young Innovators Internship at Scalar Institute of Technology. This program has strengthened 
+            my determination to give my best and achieve my dream of getting into IIT.
+            Highly recommended for serious aspirants!
+        </div>
+    },
+]
 
 export const TeachingVolunteerList=[
     {
