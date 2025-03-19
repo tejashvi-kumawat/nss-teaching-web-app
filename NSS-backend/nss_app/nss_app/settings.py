@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-9y)($%@$_aj9su_y!^3_q=(ktwnd6l2x21_4m&uj=s4e&f%hle
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'api.himalayanvidyadaan.org', 'www.himalayanvidyadaan.org', 'himalayanvidyadaan.org']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'api.himalayanvidyadaan.org', 'www.himalayanvidyadaan.org', 'himalayanvidyadaan.org', '*']
 
 
 # Application definition
@@ -134,16 +134,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:3000",
-    "http://localhost:8000",
     "http://localhost:5174",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
+    "https://www.himalayanvidyadaan.org",
+    "https://himalayanvidyadaan.org"
 ]
 
-# Custom middleware CORS headers
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True  # For development only
 CORS_ORIGIN_ALLOW_ALL = True   # For development only
-CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -225,21 +225,25 @@ if DEBUG:
     ssl._create_default_https_context = ssl._create_unverified_context
 
 # CSRF Settings
-CSRF_COOKIE_SAMESITE = 'None'  # Changed to None for cross-site requests
+CSRF_COOKIE_SAMESITE = 'Lax'  # Changed to Lax for better security
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript to read the cookie
 CSRF_COOKIE_SECURE = False  # Set to False for development
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:5173", 
+    "http://localhost:5173",
     "http://localhost:5174",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
     "https://www.himalayanvidyadaan.org",
     "https://himalayanvidyadaan.org"
 ]
 
 # Session settings
 SESSION_COOKIE_SECURE = False  # Set to False for development
-SESSION_COOKIE_SAMESITE = 'None'  # Changed to None for cross-site requests
+SESSION_COOKIE_SAMESITE = 'Lax'  # Changed to Lax for better security
 SESSION_COOKIE_HTTPONLY = True
 
-# VITE_API_URL
-VITE_API_URL = 'https://api.himalayanvidyadaan.org'
+# VITE_API_URL for development
+if DEBUG:
+    VITE_API_URL = 'http://localhost:8000'
+else:
+    VITE_API_URL = 'https://api.himalayanvidyadaan.org'

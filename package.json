@@ -6,5 +6,8 @@
   },
   "scripts": {
     "generate:sitemap": "node ./scripts/sitemap-generator.js"
+  },
+  "devDependencies": {
+    "terser": "^5.39.0"
   }
 }

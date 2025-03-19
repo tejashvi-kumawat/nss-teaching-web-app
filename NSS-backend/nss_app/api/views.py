@@ -358,6 +358,9 @@ def get_csrf_token(request):
     response = JsonResponse({"success": "CSRF cookie set"})
     # Add CORS headers directly to bypass any middleware issues
     response["Access-Control-Allow-Origin"] = "http://localhost:5174"
+    response["Access-Control-Allow-Origin"] = "http://localhost:5173"
+    response["Access-Control-Allow-Origin"] = "himalayanvidyadaan.org"
+    response["Access-Control-Allow-Origin"] = "www.himalayanvidyadaan.org"
     response["Access-Control-Allow-Credentials"] = "true"
     response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRFToken"
     response["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
@@ -417,6 +420,7 @@ def login_view(request):
         })
         # Add CORS headers directly to bypass any middleware issues
         response["Access-Control-Allow-Origin"] = "http://localhost:5174"
+        response["Access-Control-Allow-Origin"] = "http://localhost:5173"
         response["Access-Control-Allow-Credentials"] = "true"
         response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRFToken"
         response["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
@@ -424,6 +428,7 @@ def login_view(request):
     else:
         response = Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         # Add CORS headers to error response too
+        response["Access-Control-Allow-Origin"] = "http://localhost:5173"
         response["Access-Control-Allow-Origin"] = "http://localhost:5174"
         response["Access-Control-Allow-Credentials"] = "true"
         response["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRFToken"
