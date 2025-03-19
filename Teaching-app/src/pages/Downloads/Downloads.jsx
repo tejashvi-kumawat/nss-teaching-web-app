@@ -19,22 +19,22 @@ const Downloads = () => {
   const [error, setError] = useState(null);
 
   // Helper function to format image URLs
-  const formatImageUrl = (imageUrl) => {
-    if (!imageUrl) return '';
-    
-    // If it's already an absolute URL, return it
-    if (imageUrl.startsWith('http')) {
-      return imageUrl;
-    }
-    
-    // If it's a relative URL starting with /media, add the backend URL
-    if (imageUrl.startsWith('/media')) {
-      return `${import.meta.env.VITE_API_URL}${imageUrl}`;
-    }
-    
-    // For other relative URLs
-    return imageUrl;
-  };
+const formatImageUrl = (imageUrl) => {
+  if (!imageUrl) return '';
+  
+  // If it's already an absolute URL, ensure it uses HTTPS
+  if (imageUrl.startsWith('http')) {
+    return imageUrl.replace('http://', 'https://');
+  }
+  
+  // For relative URLs, add the backend URL with HTTPS
+  if (imageUrl.startsWith('/media')) {
+    const apiUrl = import.meta.env.VITE_API_URL.replace('http://', 'https://');
+    return `${apiUrl}${imageUrl}`;
+  }
+  
+  return imageUrl;
+};
 
   // Fetch brochures and reports
   useEffect(() => {
