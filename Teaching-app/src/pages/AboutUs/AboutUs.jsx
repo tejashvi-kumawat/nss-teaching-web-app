@@ -36,7 +36,7 @@ const AboutUs = () => {
       ],
       title: "Coordinator's Message",
       photo: nidhi_pandey,
-      position: "Coordinate",
+      position: "Coordinator"
     },
   ];
 
