@@ -196,8 +196,8 @@ ul.TeachingProgramsInnerText li{
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 40px;
-    row-gap: 120px;
-    margin-top: 120px;
+    row-gap: 150px;
+    margin-top: 150px;
 }
 
 .TeachingVolunteerBox{
@@ -392,6 +392,8 @@ ul.TeachingProgramsInnerText li{
 
     .TeachingVolunteerExperienceGrid{
         grid-template-columns: 1fr;
+        row-gap: 110px;
+        margin-top: 100px;
     }
     .TeachingVolunteerImage{
         height: 20vw;
@@ -459,9 +461,11 @@ ul.TeachingProgramsInnerText li{
     .TeachingProgramsBox-odd{
         flex-direction: column-reverse;
     }
-
+    
     .TeachingVolunteerExperienceGrid{
         grid-template-columns: 1fr;
+        row-gap: 110px;
+        margin-top: 100px;
     }
     .TeachingVolunteerImage{
         height: 100px;
