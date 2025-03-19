@@ -12,26 +12,54 @@ function getCsrfToken() {
     return cookieValue;
 }
 
+async function getCsrfTokenFromServer() {
+    try {
+      // First try to get the token from cookies
+      const existingToken = getCsrfToken();
+      console.log('Existing CSRF token found:', existingToken ? 'Yes' : 'No');
+      
+      if (existingToken) {
+        console.log('Using existing token');
+        return existingToken;
+      }
+  
+      console.log('Fetching new CSRF token from server');
+      const response = await axios.get(`${API_URL}/api/csrf/`, {
+        withCredentials: true
+      });
+      console.log('CSRF response:', response.status);
+      
+      // Get the token from cookies after the request
+      const newToken = getCsrfToken();
+      console.log('New token obtained:', newToken ? 'Yes' : 'No');
+      return newToken;
+    } catch (error) {
+      console.error('Failed to get CSRF token:', error);
+      return null;
+    }
+  }
+
 const axiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
     },
     withCredentials: true // This is important for cookies to be sent
 });
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
-    (config) => {
+    async (config) => {
         // Add Authorization header if token exists
         const token = localStorage.getItem('token');
         if (token) {
-            config.headers.Authorization = `Token ${token}`; // Changed to 'Token' for Django's Token auth
+            config.headers.Authorization = `Token ${token}`;
         }
         
         // Add CSRF token for all non-GET requests
         if (config.method !== 'get') {
-            const csrfToken = getCsrfToken();
+            const csrfToken = await getCsrfTokenFromServer();
             if (csrfToken) {
                 config.headers['X-CSRFToken'] = csrfToken;
             }
@@ -50,8 +78,6 @@ axiosInstance.interceptors.response.use(
     (error) => {
         if (error.response?.status === 401) {
             localStorage.removeItem('token');
-            // Don't redirect here to avoid infinite loops
-            // We'll handle redirects in the component
         }
         return Promise.reject(error);
     }
@@ -63,13 +89,10 @@ const api = {
     auth: {
         login: async (username, password) => {
             try {
-                // First get CSRF token
-                await axios.get(`${API_URL}/api/csrf/`, { withCredentials: true });
+                // Get CSRF token
+                const csrfToken = await getCsrfTokenFromServer();
                 
-                // Get the CSRF token from cookies
-                const csrfToken = getCsrfToken();
-                
-                // Make direct axios call to ensure full control
+                // Make login request
                 const response = await axios.post(`${API_URL}/api/login/`, {
                     username,
                     password
@@ -77,6 +100,7 @@ const api = {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json',
                         'X-CSRFToken': csrfToken
                     }
                 });
@@ -109,29 +133,26 @@ const api = {
 
         register: async (userData) => {
             try {
-                // First get CSRF token
-                await axios.get(`${API_URL}/api/csrf/`, { withCredentials: true });
-                
-                // Get the CSRF token from cookies
-                const csrfToken = getCsrfToken();
+                // Get CSRF token
+                const csrfToken = await getCsrfTokenFromServer();
                 
                 const response = await axios.post(`${API_URL}/api/register/`, userData, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json',
                         'X-CSRFToken': csrfToken
                     }
                 });
                 return response.data;
             } catch (error) {
-                // Improved error logging to show details
                 console.error('Registration error:', {
                     data: error.response?.data || {},
                     status: error.response?.status,
                     statusText: error.response?.statusText,
                     message: error.message
                 });
-                throw new Error(error.response?.data?.detail || error.response?.data?.error || 'Registration failed');
+                throw error;
             }
         },
 
@@ -164,11 +185,31 @@ const api = {
     contact: {
         submitForm: async (formData) => {
             try {
-                const response = await axiosInstance.post('/contact/', formData);
+                // Get CSRF token
+                const csrfToken = await getCsrfTokenFromServer();
+                console.log('Using CSRF token for contact submission:', csrfToken);
+                
+                // Log the full URL being used
+                const endpointUrl = `${API_URL}/contact/`; // Remove 'api/' if not needed
+                console.log('Submitting form to endpoint:', endpointUrl);
+                
+                // Make the request with proper headers
+                const response = await axios.post(endpointUrl, formData, {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    }
+                });
+                
+                if (!response.data) {
+                    throw new Error('No response data received');
+                }
+                
                 return response.data;
             } catch (error) {
-                console.error('Contact form submission error:', error.response?.data || error);
-                throw new Error(error.response?.data?.detail || 'Failed to send message');
+                // Your existing error handling code...
             }
         }
     },
