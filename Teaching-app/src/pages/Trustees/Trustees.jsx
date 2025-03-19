@@ -6,6 +6,7 @@ import RajKumarKohli from "../../assets/Raj Kumar Kohli.png"
 import NareshChand from "../../assets/Naresh Chand.png"
 import Banner from "../../assets/TrusteesBanner.png"
 import AboutUs_background_cover from "../../assets/AboutUs_background_cover.png";
+import VectorHome from "../../assets/Vector.png";
 import "./Trustees.css"
 import { Link } from 'react-router-dom';
 import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx'
@@ -149,5 +150,27 @@ const Trustees = () => {
       </>
     );
   };
-
-  export default Trustees;
+export default Trustees;
+  
+  
+// home thing
+export const TrusteesHome = () => {
+  return (
+    <div className="TrusteesHomeBody">
+      <h1 className='TrusteesHomeHeading'>Our trustees</h1>
+      <p className='TrusteesHomeDescription'>Meet the visionaries behind the Himalayan Vidya Daan Trust</p>
+      <div className="TrusteesHomeFlexbox">
+        {TrusteesList.map((TrustHomeObject, index) => (
+          <div className='TrusteesHomeFlex'>
+            <img className="TrusteesHomeImage" src={TrustHomeObject.image} alt={TrustHomeObject.name} />
+            <h2 className="TrusteesHomeName">
+              {TrustHomeObject.name}
+              <img src={VectorHome} alt="Pointer" className="TrusteesHomePointer" />
+            </h2>
+            {index==0 ? <h3 className="TrusteesHomeImageDescription">Founder and Chairperson</h3> : ''}
+          </div>
+        ))}        
+      </div>
+    </div>
+  )
+}

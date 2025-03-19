@@ -3,6 +3,7 @@ import React from "react";
 import './Home.css';
 import ContributionBanner from "../../components/ContributionBanner/ContributionBanner";
 import ContactComponent from "../../components/ContactComponent/ContactComponent";
+import {TrusteesHome} from "../../pages/Trustees/Trustees.jsx";
 
 const contactData =
 {
@@ -26,6 +27,7 @@ const Home = () => {
       <div className="contribution-on-home">
           <ContributionBanner/>
         </div>
+      <TrusteesHome />
     </>
   );
 };
