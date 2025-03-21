@@ -1,5 +1,5 @@
 .TrusteesBody {
-    background-color: #f5f9f3; 
+    background-color: #f5f9f3;
     font-family: "Montserrat", "Helvetica Neue", sans-serif;
     margin: 0 auto;
     max-width: 1440px;
@@ -17,7 +17,7 @@
 
 .TrusteesBannerImageBox {
     position: relative;
-    border-radius: 20px; 
+    border-radius: 20px;
     overflow: hidden;
 }
 
@@ -28,6 +28,7 @@
     border-radius: 20px;
     z-index: 1;
 }
+
 .Trustees_background_cover {
     width: 100%;
     background-color: green;
@@ -37,7 +38,7 @@
     opacity: 0.4;
     bottom: 0%;
     border-radius: 24px;
-  }
+}
 
 .TrusteesBannerOverlayText {
     position: absolute;
@@ -52,7 +53,7 @@
 .TrusteesBannerOverlayText h2 {
     font-size: 2.2rem;
     font-weight: 600;
-    opacity: 0.9; 
+    opacity: 0.9;
     color: #ADCCAF;
 }
 
@@ -62,13 +63,13 @@
     color: #F5FAF5;
 }
 
-.TrusteesBannerDescription{
+.TrusteesBannerDescription {
     margin-top: 25px;
     font-size: 1rem;
     color: #555;
     line-height: 1.6;
     max-width: 550px;
-    text-align:left;
+    text-align: left;
     margin: 2rem 0rem 2rem 0rem;
 
 }
@@ -91,7 +92,7 @@
 }
 
 .TrusteesNumberHeading-odd,
-.TrusteesNumberHeading{
+.TrusteesNumberHeading {
     opacity: 0.15;
     color: rgb(25, 85, 80);
     font-size: 4rem;
@@ -105,7 +106,7 @@
 .TrusteesTextHeading {
     font-family: "Montserrat", "Helvetica Neue", sans-serif;
     font-weight: 600;
-    color: #174f4b; 
+    color: #174f4b;
     font-size: 1.8rem;
     margin-bottom: 10px;
     z-index: 2;
@@ -118,9 +119,11 @@
     line-height: 1.6;
     font-family: Arial, sans-serif;
 }
-.Trustees-Object-Points{
+
+.Trustees-Object-Points {
     list-style: none;
 }
+
 .Trustees-Object-Points li {
 
     color: #526652;
@@ -129,7 +132,8 @@
     margin-bottom: 25px;
     font-weight: 300;
     line-height: 1.4;
-  }
+}
+
 .Trustees-Object-Points li::before {
     content: "";
     position: absolute;
@@ -138,22 +142,27 @@
     top: 6px;
     width: 12px;
     height: 12px;
-    background-color: #2E7D32; /* Green bullet */
+    background-color: #2E7D32;
+    /* Green bullet */
     border-radius: 50%;
-  }
-  
-  /* Creates the connecting line between bullets */
-  .Trustees-Object-Points li:not(:last-child)::after {
+}
+
+/* Creates the connecting line between bullets */
+.Trustees-Object-Points li:not(:last-child)::after {
     content: "";
     margin-left: 30px;
     position: absolute;
-    left: 6px; /* Center the line with the bullet */
-    top: 16px; /* Start below the bullet */
+    left: 6px;
+    /* Center the line with the bullet */
+    top: 16px;
+    /* Start below the bullet */
     width: 0.6px;
     opacity: 50%;
-    height: calc(100% + 18px); /* Extend to the next bullet */
-    background-color: #2E7D32; /* Green connector */
-  }
+    height: calc(100% + 18px);
+    /* Extend to the next bullet */
+    background-color: #2E7D32;
+    /* Green connector */
+}
 
 .TrusteesTrustImageBox {
     width: 30%;
@@ -164,147 +173,169 @@
 }
 
 .TrusteesTrustImage {
-    border-radius: 10px; 
-    width: 300px; 
+    border-radius: 10px;
+    width: 300px;
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: top;
     transition: all 0.3s ease-in-out;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .TrusteesTrustImage:hover {
-    border: 4px solid #A5C7A1; 
-    box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.2); 
-    border-radius: 12px; 
+    border: 4px solid #A5C7A1;
+    box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.2);
+    border-radius: 12px;
 }
 
 @media screen and (max-width: 700px) {
-    .TrusteesBannerOverlayText h2{
+    .TrusteesBannerOverlayText h2 {
         font-size: 1.5rem;
     }
-    .TrusteesBannerOverlayText h1{
+
+    .TrusteesBannerOverlayText h1 {
         font-size: 1.8rem;
     }
-    
-    .TrusteesTrustImage{
+
+    .TrusteesTrustImage {
         width: 200px;
     }
-    .Trustees-Object-Points li{
+
+    .Trustees-Object-Points li {
         font-size: 0.9rem;
     }
-    .TrusteesTextHeading{
+
+    .TrusteesTextHeading {
         font-size: 1.3rem;
     }
+
     .TrusteesNumberHeading-odd,
-    .TrusteesNumberHeading{
+    .TrusteesNumberHeading {
         font-size: 3rem;
         top: -29px;
         left: -7px;
     }
-    .TrusteesNumberHeading-odd{
+
+    .TrusteesNumberHeading-odd {
         top: -33px;
     }
-    .TrusteesContainer{
+
+    .TrusteesContainer {
         flex-direction: column;
         margin-bottom: 2rem;
     }
-    .TrusteesContainer-odd{
+
+    .TrusteesContainer-odd {
         flex-direction: column-reverse;
     }
 }
 
 @media screen and (max-width:450px) {
-    .TrusteesBannerOverlayText h2{
+    .TrusteesBannerOverlayText h2 {
         font-size: 1.1rem;
     }
-    .TrusteesBannerOverlayText h1{
+
+    .TrusteesBannerOverlayText h1 {
         font-size: 1.3rem;
     }
-    .TrusteesBannerDescription{
+
+    .TrusteesBannerDescription {
         font-size: 0.8rem;
     }
-    
-    .TrusteesTextBox{
+
+    .TrusteesTextBox {
         width: 100%;
     }
-    .TrusteesTrustImage{
+
+    .TrusteesTrustImage {
         width: 70vw;
     }
-    .Trustees-Object-Points li{
+
+    .Trustees-Object-Points li {
         font-size: 0.9rem;
     }
-    .TrusteesTextHeading{
+
+    .TrusteesTextHeading {
         font-size: 1.3rem;
     }
+
     .TrusteesNumberHeading-odd,
-    .TrusteesNumberHeading{
+    .TrusteesNumberHeading {
         font-size: 3rem;
         top: -29px;
         left: -7px;
     }
-    .TrusteesNumberHeading-odd{
+
+    .TrusteesNumberHeading-odd {
         top: -32px;
     }
 }
+
 @media (max-width: 1650px) {
-    .TrusteesBody{
+    .TrusteesBody {
         width: 85%;
     }
 }
 
 @media (max-width: 768px) {
-    .TrusteesContainer{
+    .TrusteesContainer {
         padding: 0px;
     }
-    .TrusteesTextBox{
+
+    .TrusteesTextBox {
         width: 100%;
     }
-    .TrusteesBody{
+
+    .TrusteesBody {
         width: 90%;
     }
 
 }
 
 @media (max-width: 480px) {
-    .TrusteesContainer-even{
+    .TrusteesContainer-even {
         flex-direction: column;
     }
-    .TrusteesContainer-odd{
+
+    .TrusteesContainer-odd {
         flex-direction: column-reverse;
     }
 }
 
 /* Home components */
-.TrusteesHomeBody{
-    margin: 0 7%;
+.TrusteesHomeBody {
     font-weight: 700;
-    font-family: "Open Sans",sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
-.TrusteesHomeHeading{
+
+.TrusteesHomeHeading {
     color: #132611;
     font-size: 30px;
     margin-top: 30px;
 }
-.TrusteesHomeDescription{
+
+.TrusteesHomeDescription {
     color: #526652;
     font-size: 20px;
     margin: 20px 0;
     font-weight: 400;
 }
-.TrusteesHomeFlexbox{
+
+.TrusteesHomeFlexbox {
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
     justify-content: center;
-    column-gap: 5%;
+    column-gap: 10%;
 }
-.TrusteesHomeFlex{
+
+.TrusteesHomeFlex {
     width: 280px;
     background-color: #F5FAF5;
     margin-bottom: 2%;
 }
-.TrusteesHomeImage{
+
+.TrusteesHomeImage {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
@@ -312,79 +343,106 @@
     border: 3px solid #ADCCAF;
     border-radius: 7%;
 }
-.TrusteesHomeName{
+
+.TrusteesHomeName {
     color: #526652;
     font-size: 18px;
     position: relative;
 }
-.TrusteesHomePointer{
+
+.TrusteesHomePointer {
     position: absolute;
     height: 60%;
     aspect-ratio: 1/1;
     bottom: 4px;
     right: 10px;
 }
-.TrusteesHomeImageDescription{
+
+.TrusteesHomeImageDescription {
     color: #526652;
     font-size: 16px;
     font-weight: 400;
-}@media screen and (min-width: 700px) {
-    .TrusteesHomeFlex:hover .TrusteesHomeImage{
+}
+
+@media screen and (min-width: 700px) {
+    .TrusteesHomeFlex:hover .TrusteesHomeImage {
         background-color: #2E7D3210;
         border: 0;
         box-shadow: 2px 2px 10px 5px #2E7D3220;
         transition-duration: 300ms;
         transition-timing-function: ease;
     }
-    .TrusteesHomeFlex:hover .TrusteesHomeName{
+
+    .TrusteesHomeFlex:hover .TrusteesHomeName {
         color: #2E7D32;
         transition-duration: 300ms;
         transition-timing-function: ease;
     }
-    .TrusteesHomeFlex:hover .TrusteesHomePointer{
+
+    .TrusteesHomeFlex:hover .TrusteesHomePointer {
         rotate: 45deg;
         transition-duration: 300ms;
         transition-timing-function: ease;
     }
-    .TrusteesHomeFlex:hover .TrusteesHomeDescription{
+
+    .TrusteesHomeFlex:hover .TrusteesHomeDescription {
         color: #2E7D32;
         transition-duration: 300ms;
         transition-timing-function: ease;
     }
-}@media screen and (min-width: 450px) and (max-width: 700px) {
-    .TrusteesHomeHeading{
+}
+
+@media screen and (min-width: 450px) and (max-width: 700px) {
+    .TrusteesHomeHeading {
         font-size: 18px;
     }
-    .TrusteesHomeDescription{
+
+    .TrusteesHomeDescription {
         font-size: 14px;
         margin: 0;
         margin-bottom: 10px;
     }
-    .TrusteesHomeFlexbox{
+
+    .TrusteesHomeFlexbox {
         column-gap: 10px;
         justify-content: center;
-    }.TrusteesHomeFlex{
+    }
+
+    .TrusteesHomeFlex {
         width: 200px
-    }.TrusteesHomePointer{
+    }
+
+    .TrusteesHomePointer {
         right: none;
         left: 175px;
     }
-}@media screen and (max-width: 450px) {
-    .TrusteesHomeHeading{
+}
+
+@media screen and (max-width: 450px) {
+    .TrusteesHomeHeading {
         font-size: 18px;
     }
-    .TrusteesHomeDescription{
+
+    .TrusteesHomeDescription {
         font-size: 14px;
         margin: 0;
         margin-bottom: 10px;
-    }.TrusteesHomeFlexbox{
+    }
+
+    .TrusteesHomeFlexbox {
         flex-direction: column;
         align-content: center;
-    }.TrusteesHomeFlex{
+    }
+
+    .TrusteesHomeFlex {
         width: 150px;
-    }.TrusteesHomeName{
+    }
+
+    .TrusteesHomeName {
         font-size: 12px;
-    }.TrusteesHomeImageDescription{
+    }
+
+    .TrusteesHomeImageDescription {
         font-size: 12px;
     }
 }

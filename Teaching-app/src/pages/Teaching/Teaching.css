@@ -2,35 +2,35 @@
 
 .TeachingBody {
     background-color: #f7f7f7;
-    font-family: "Open Sans",sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     max-width: 1440px;
     margin: 0 auto;
 }
 
-.TeachingHeadings{
+.TeachingHeadings {
     color: #132611;
-    font-size: 30px;
+    font-size: max(2vw, 1rem);
     margin-bottom: 5%;
 }
 
-.TeachingDescription{
+.TeachingDescription {
     color: #526652;
-    font-size: 20px;    
+    font-size: max(1.6vw, 0.7rem);
     margin-bottom: 40px;
 }
 
 /* Banner */
 .TeachingBannerSection {
     position: relative;
-    margin-bottom: 3%;
+    margin-bottom: 4%;
 }
-  
-.TeachingBannerImageBox{
+
+.TeachingBannerImageBox {
     position: relative;
     width: 100%;
     height: auto;
-    background-image: linear-gradient(to bottom,#2E7D3299,#2E7D32);
+    background-image: linear-gradient(to bottom, #2E7D3299, #2E7D32);
     border-radius: 2vw;
 }
 
@@ -41,37 +41,39 @@
     opacity: 0.65;
     display: flex;
     align-self: center;
-    
+
     /* Animation properties */
     animation: slideDown 1s ease forwards;
-  }
-  
-  @keyframes slideDown {
+}
+
+@keyframes slideDown {
     0% {
-      opacity: 0;
-      transform: translateY(-50%);
+        opacity: 0;
+        transform: translateY(-50%);
     }
+
     100% {
-      opacity: 0.65; /* Maintain your desired opacity */
-      transform: translateY(0);
+        opacity: 0.65;
+        /* Maintain your desired opacity */
+        transform: translateY(0);
     }
-  }
-  
+}
+
 .TeachingBannerOverlayText {
     color: #f7f7f7;
     position: absolute;
-    font-family: "Roboto",sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 700;
-    font-size: max(3.2vw,25px);
+    font-size: max(3.2vw, 25px);
     bottom: 0;
     left: 0;
-    transform: translate(20%,-50%);
+    transform: translate(20%, -50%);
     text-shadow: 0.1vw 0.1vw 0.1vw #132611;
 }
-  
+
 .TeachingBannerDescription {
-    padding-top: 30px;
-    font-size: 18px;
+    padding-top: 5vw;
+    font-size: max(1.3vw, 0.8rem);
     font-weight: 400;
     color: #526652;
     width: 50%;
@@ -82,13 +84,13 @@
 .TeachingProgramsBox {
     display: flex;
     gap: 10%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 6%;
+    margin-bottom: 6%;
 }
 
-.TeachingProgramsImageBox{
+.TeachingProgramsImageBox {
     flex: 1;
-    margin-top: -2%;
+    margin-top: 2%;
     margin-bottom: 2%;
 }
 
@@ -100,10 +102,11 @@
     border-radius: 1.1vw;
     transition-duration: 200ms;
 }
-.TeachingProgramsImages:hover{
+
+.TeachingProgramsImages:hover {
     border: 0.3vw solid #A5C7A1;
     box-shadow: 0.1vw 0.1vw 0.2vw #A5C7A1,
-    -0.1vw -0.1vw 0.2vw #A5C7A1;
+        -0.1vw -0.1vw 0.2vw #A5C7A1;
 }
 
 .TeachingProgramsTextBox {
@@ -112,7 +115,8 @@
     justify-items: left;
     position: relative;
 }
-.TeachingProgramsTextBox-odd{
+
+.TeachingProgramsTextBox-odd {
     flex: 1.75;
     padding-left: -1%;
     justify-items: right;
@@ -123,40 +127,45 @@
     width: 85%;
     font-size: max(1.28vw, 0.9rem);
 }
-ul.TeachingProgramsOuterText li{
+
+ul.TeachingProgramsOuterText li {
     color: #526652;
     padding-bottom: 2%;
-}  
+}
+
 .TeachingProgramsOuterText b {
-    color: #526652; 
+    color: #526652;
     font-weight: 700;
 }
 
-.TeachingProgramsInnerText{
+.TeachingProgramsInnerText {
     padding-top: 2%;
     padding-left: 12%;
 }
-ul.TeachingProgramsInnerText li{
+
+ul.TeachingProgramsInnerText li {
     color: #526652;
     padding-bottom: 2%;
 }
-.TeachingProgramsInnerText b{
+
+.TeachingProgramsInnerText b {
     color: #526652;
 }
 
 
-.TeachingProgramsNameHeading{
+.TeachingProgramsNameHeading {
     font-weight: 700;
-    font-size: max(2vw,1rem);
+    font-size: max(2vw, 1rem);
     color: #526652;
     transform: translateX(-15%);
     position: relative;
     z-index: 1;
     padding-bottom: 2%;
 }
-.TeachingProgramsNameHeading-odd{
+
+.TeachingProgramsNameHeading-odd {
     font-weight: 700;
-    font-size: max(2vw,1rem);
+    font-size: max(2vw, 1rem);
     color: #526652;
     padding-bottom: 2%;
     justify-self: left;
@@ -175,7 +184,8 @@ ul.TeachingProgramsInnerText li{
     left: -0.5vw;
     opacity: 0.6;
 }
-.TeachingProgramsNumberHeading-odd{
+
+.TeachingProgramsNumberHeading-odd {
     top: -2.6vw;
     left: -3vw;
 }
@@ -185,18 +195,15 @@ ul.TeachingProgramsInnerText li{
     display: flex;
     gap: 10%;
 }
-.TeachingApproachTextBox{
+
+.TeachingApproachTextBox {
     flex: 1.75;
     padding-left: 2%;
-    margin-top: -3%;
-}
-#TeachingApproachImageBox{
-    margin-top: -7%;
 }
 
 
 /* Volunteer */
-.TeachingVolunteerExperienceGrid{
+.TeachingVolunteerExperienceGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 40px;
@@ -204,18 +211,19 @@ ul.TeachingProgramsInnerText li{
     margin-top: 150px;
 }
 
-.TeachingVolunteerBox{
+.TeachingVolunteerBox {
     border: 2px solid #A5C7A1;
     border-radius: 15px;
     position: relative;
     transition-duration: 200ms;
 }
-.TeachingVolunteerBox:hover{
+
+.TeachingVolunteerBox:hover {
     box-shadow: 2px 2px 10px 2px #A5C7A1,
-    -2px -2px 10px 2px #A5C7A1;
+        -2px -2px 10px 2px #A5C7A1;
 }
 
-.TeachingVolunteerImage{
+.TeachingVolunteerImage {
     height: 11vw;
     aspect-ratio: 1/1;
     border-radius: 50%;
@@ -227,27 +235,29 @@ ul.TeachingProgramsInnerText li{
     margin-inline: auto;
     transition-duration: 200ms;
 }
-.TeachingVolunteerBox:hover .TeachingVolunteerImage{
+
+.TeachingVolunteerBox:hover .TeachingVolunteerImage {
     transform: translateY(2vw);
     border-bottom: 2px solid #A5C7A1;
     border-left: 1px solid #A5C7A1;
     border-right: 1px solid #A5C7A1;
 }
 
-.TeachingVolunteerHeading{
+.TeachingVolunteerHeading {
     color: #132611;
     font-weight: 700;
-    font-size: max(1.7vw,1rem);
+    font-size: max(1.7vw, 1rem);
     padding: 30px;
     padding-bottom: 0;
     transition-duration: 200ms;
 }
-.TeachingVolunteerBox:hover .TeachingVolunteerHeading{
+
+.TeachingVolunteerBox:hover .TeachingVolunteerHeading {
     color: #2E7D32;
     transform: translateY(-2px);
 }
 
-.TeachingVolunteerText{
+.TeachingVolunteerText {
     color: #526652;
     font-weight: 400;
     font-size: 15px !important;
@@ -255,296 +265,212 @@ ul.TeachingProgramsInnerText li{
     font-size: medium;
     transition-duration: 200ms;
 }
-.TeachingVolunteerBox:hover .TeachingVolunteerText{
+
+.TeachingVolunteerBox:hover .TeachingVolunteerText {
     transform: translateY(15px);
 }
 
-/* Testimonials */
-.TeachingTestimonials{
-    margin-bottom: 70px;
-}
 
-#Testimonials{
-    margin-bottom: 0;
-}
-
-.TeachingTestimonialsGrid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    --move-grid: 100%;
-    column-gap: 8%;
-    row-gap: 70px;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-.TeachingTestimonialsBox{
-    position: relative;
-    --box-width: 100%;
-    height: 100%;
-    opacity: 0.7;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
-}
-.TeachingTestimonialsBox:hover{
-    scale: 1.1;
-    z-index: 3;
-    opacity: 2;
-}
-@media screen and (min-width:750px) {
-    .TeachingTestimonialsBox:nth-child(3n+2):hover{
-        transform: translateX(calc(-1*var(--move-grid)));
-    }
-    .TeachingTestimonialsBox:nth-child(3n):hover{
-        transform: translateX(calc(-2*var(--move-grid)));
-    }
-}
-
-.TeachingTestimonialsImage{
-    width:100%;
-    aspect-ratio: 1/1;
-    border-radius: 5%;
-    --radius-of-text: 5%;
-    border: 3px solid #A5C7A1;
-    object-fit: cover;
-    object-position: center;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
-}
-@media screen and (min-width: 750px) {
-    .TeachingTestimonialsBox:hover .TeachingTestimonialsImage{
-        background-image: radial-gradient(#ffffff,transparent,#2E7D3233);
-        box-shadow: 0.2vw 0.2vw 1vw 0.2vw #2E7D3233;
-    }
-}
-
-.TeachingTestimonialsDescription{
-    position: absolute;
-    color: #526652;
-    font-size: 16px;
-    background-color: #f7f7f7;
-    width: calc(var(--box-width)*2);
-    aspect-ratio: 2/1;
-    top: 0;
-    left: calc(var(--box-width)*1.01);
-    border: 3px solid #A5C7A1;
-    border-radius: 1vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
-}
-.TeachingTestimonialsBox:hover .TeachingTestimonialsDescription{
-    display: flex;
-}
-
-.TeachingTestimonialsName{
-    color: #526652;
-    font-weight: 700;
-    font-size: max(1.4vw, 15px);
-    position: absolute;
-    bottom: 3%;
-    left: 5%;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
-}
-@media screen and (min-width: 750px) {
-    .TeachingTestimonialsBox:hover .TeachingTestimonialsName{
-        color: #2E7D32;
-        text-shadow: 0.1vw 0.1vw 0.1vw #2E7D3233;
-        bottom: -8%;
-    }
-}
-
-@media screen and (max-width:1650px){
-    .TeachingBody{
+@media screen and (max-width:1650px) {
+    .TeachingBody {
         width: 85%;
     }
-    
+
 }
+
 @media screen and (max-width: 750px) and (min-width: 450px) {
-    .TeachingHeadings{
-        margin-top: 0;
-        font-size: 18px;
+    .TeachingHeadings {
+        margin-top: 10%;
     }
-    .TeachingDescription{
-        font-size: 14px;
-    }
-    .TeachingBannerDescription{
+
+    .TeachingBannerDescription {
         width: 100%;
-        font-size: 14px;
     }
-    .TeachingApproachBox,
-    .TeachingProgramsBox{
-        gap: 0;
-    }
-    .TeachingProgramsImageBox{
+
+    .TeachingProgramsImageBox {
         flex: 1.25;
     }
-    .TeachingProgramsTextBox{
+
+    .TeachingProgramsTextBox {
         flex: 1.75;
     }
-    .TeachingProgramsOuterText{
+
+    .TeachingProgramsOuterText {
         font-size: 2vw;
     }
+
     .TeachingProgramsNameHeading-odd,
-    .TeachingProgramsNameHeading{
+    .TeachingProgramsNameHeading {
         font-size: 2.8vw;
     }
+
     .TeachingProgramsNumberHeading-odd,
-    .TeachingProgramsNumberHeading{
+    .TeachingProgramsNumberHeading {
         top: -1.8vw;
     }
-    .TeachingApproachTextBox{
+
+    .TeachingApproachTextBox {
         flex: 2;
     }
 
-    .TeachingVolunteerExperienceGrid{
+    .TeachingVolunteerExperienceGrid {
         grid-template-columns: 1fr;
         row-gap: 110px;
         margin-top: 100px;
     }
-    .TeachingVolunteerImage{
+
+    .TeachingVolunteerImage {
         height: 20vw;
         top: -13vw;
-    }.TeachingVolunteerBox:hover .TeachingVolunteerImage{
+    }
+
+    .TeachingVolunteerBox:hover .TeachingVolunteerImage {
         transform: translatey(25px);
     }
 
-    .TeachingTestimonials{
+    .TeachingTestimonials {
         margin-top: 50px;
         margin-bottom: 50px;
     }
-    .TeachingTestimonialsGrid{
+
+    .TeachingTestimonialsGrid {
         grid-template-columns: 100%;
         column-gap: 0;
         row-gap: 10px;
     }
-    .TeachingTestimonialsBox{
+
+    .TeachingTestimonialsBox {
         display: flex;
         opacity: 1;
     }
-    .TeachingTestimonialsBox:hover{
+
+    .TeachingTestimonialsBox:hover {
         scale: 1.05;
     }
-    .TeachingTestimonialsImage{
+
+    .TeachingTestimonialsImage {
         width: 150px;
         height: 150px;
-        margin-bottom: 5%;
     }
-    .TeachingTestimonialsDescription{
+
+    .TeachingTestimonialsDescription {
         display: flex;
         align-items: flex-start;
         position: static;
-        font-size: max(0.65rem,1.8vw);
+        font-size: max(0.65rem, 1.8vw);
         height: fit-content;
         border: 0;
         background-color: transparent;
-        margin-bottom: 5%;
     }
-    .TeachingTestimonialsName{
+
+    .TeachingTestimonialsName {
         top: 150px;
         left: 0;
     }
 }
 
 @media screen and (max-width: 450px) {
-    .TeachingBody{
+    .TeachingBody {
         width: 90%;
     }
-    .TeachingHeadings{
+
+    .TeachingHeadings {
         font-size: medium;
         margin-top: 10%;
     }
-    .TeachingBannerDescription{
+
+    .TeachingBannerDescription {
         width: 100%;
     }
-    .TeachingBannerOverlayText{
+
+    .TeachingBannerOverlayText {
         font-size: 4vw;
     }
-    .TeachingBannerDescription{
+
+    .TeachingBannerDescription {
         font-size: 3vw;
     }
+
     .TeachingApproachBox,
-    .TeachingProgramsBox{
+    .TeachingProgramsBox {
         flex-direction: column;
     }
-    .TeachingProgramsBox-odd{
+
+    .TeachingProgramsBox-odd {
         flex-direction: column-reverse;
     }
-    .TeachingProgramsNumberHeading-odd,
-    .TeachingProgramsNumberHeading{
-        top: -7px;
-        left: -13px;
-        font-size: 24px;
-    }
-    .TeachingProgramsNumberHeading-odd{
-        left: -15px;   
-    }
-    
-    .TeachingVolunteerExperienceGrid{
+
+    .TeachingVolunteerExperienceGrid {
         grid-template-columns: 1fr;
         row-gap: 110px;
         margin-top: 100px;
     }
-    .TeachingVolunteerImage{
+
+    .TeachingVolunteerImage {
         height: 100px;
         top: -70px;
-    }.TeachingVolunteerBox:hover .TeachingVolunteerImage{
+    }
+
+    .TeachingVolunteerBox:hover .TeachingVolunteerImage {
         transform: translateY(20px);
     }
-    .TeachingVolunteerHeading{
+
+    .TeachingVolunteerHeading {
         padding-top: 50px;
     }
 
-    .TeachingTestimonials{
+    .TeachingTestimonials {
         margin-top: 50px;
         margin-bottom: 50px;
     }
-    .TeachingTestimonialsGrid{
+
+    .TeachingTestimonialsGrid {
         grid-template-columns: 100%;
         column-gap: 2px;
-        row-gap: 20px;
+        row-gap: 80px;
     }
-    .TeachingTestimonialsBox{
+
+    .TeachingTestimonialsBox {
         display: flex;
         opacity: 1;
     }
-    .TeachingTestimonialsImage{
+
+    .TeachingTestimonialsImage {
         width: 100px;
         height: 100px;
     }
-    .TeachingTestimonialsDescription{
+
+    .TeachingTestimonialsDescription {
         display: flex;
         align-items: flex-start;
         position: static;
-        font-size: max(0.6rem,1.6vw);
+        font-size: max(0.6rem, 1.6vw);
         height: fit-content;
         border: 0;
     }
-    .TeachingTestimonialsName{
+
+    .TeachingTestimonialsName {
         top: 100px;
         left: 0;
         font-size: max(0.6rem, 1.5vw);
     }
 }
 
-.teaching-content-container{
+.teaching-content-container {
     margin-top: 1.5rem;
 }
-.teaching-content-container h2{
+
+.teaching-content-container h2 {
     font-size: 28px;
     margin-bottom: 1.5rem;
 }
+
 .teaching-reports-cards-container {
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
-  }
-  
-  .teaching-reports-cards-container {
+}
+
+.teaching-reports-cards-container {
     margin-bottom: 40px;
-  }
+}

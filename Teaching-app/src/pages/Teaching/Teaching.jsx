@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Teaching.css";
-import { BannerSection, TeachingPrograms, TeachingApproach, TeachingVolunteerList,TeachingTestimonials } from './TeachingData';
+import Testimonials from "../../components/Testimonials/Testimonials";
+import { BannerSection, TeachingPrograms, TeachingApproach, TeachingVolunteerList, TeachingTestimonials } from './TeachingData';
 import { Link } from 'react-router-dom';
 import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx';
 import TeachingPageReportCard from '../../components/TeachingPageReportCard/TeachingPageReportCard.jsx';
@@ -35,10 +36,10 @@ const Teaching = () => {
     ...extractImageSources(TeachingApproach),
     ...extractImageSources(TeachingVolunteerList)
   ];
-  
+
   // Use the image preloader hook
   const { isLoading, loadingProgress } = useImagePreloader(allImageSources);
-  
+
   // Show loading indicator while images are loading
   if (isLoading) {
     return <LoadingIndicator progress={loadingProgress} />;
@@ -87,22 +88,9 @@ const Teaching = () => {
           </div>
           {TeachingApproach.image}
         </div>
-        
-        <div className="TeachingTestimonials">
-          <h2 className="TeachingHeadings" id="Testimonials">Testimonials</h2>
-          <p className="TeachingDescription">
-          How education transform lives in Uttarakhand
-          </p>
-          <div className="TeachingTestimonialsGrid">
-            {TeachingTestimonials.map((TestimonialObject,index2) => (
-              <div className="TeachingTestimonialsBox" key={index2}>
-                {TestimonialObject.image}
-                {TestimonialObject.description}
-                {TestimonialObject.name}
-              </div>
-            ))}
-          </div>
-        </div>
+
+        {/* Testimonials */}
+        <Testimonials />
 
         <h2 className="TeachingHeadings">Volunteer Experience</h2>
         <div className="TeachingVolunteerExperienceGrid">
@@ -128,7 +116,7 @@ const Teaching = () => {
           </div>
         </div>
       </div>
-      <ContributionBanner/>
+      <ContributionBanner />
     </>
   );
 };

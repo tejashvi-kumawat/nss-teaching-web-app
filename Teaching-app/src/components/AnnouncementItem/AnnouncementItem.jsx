@@ -4,11 +4,17 @@ import './AnnouncementItem.css';
 import calendarlogo from '../../assets/bx-calendar.svg'
 import arrowicon from '../../assets/bx-right-arrow-alt.svg'
 
-const AnnouncementItem = ({ date, title, showDivider, announcement }) => {
+const AnnouncementItem = ({ date, title, showDivider, announcement, comingFrom }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/announcement/${announcement.id}`, { state: { announcement } });
+        navigate(`/announcement/${announcement.id}`, {
+            state: {
+                announcement,
+                comingFrom: comingFrom,
+            }
+        });
+        window.scrollTo(0, 0);
     };
 
     return (

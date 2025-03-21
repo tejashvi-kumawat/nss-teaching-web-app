@@ -4,7 +4,7 @@ import './BackButton.css';
 import circleArrow from '../../assets/arrow-with-filled-circle.svg';
 import circleArrowColor from '../../assets/arrow-with-filled-circle-colored.svg';
 
-const BackButton = ({ to, onClick }) => {
+const BackButton = ({ to, onClick, title = 'Back' }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleClick = () => {
@@ -28,7 +28,7 @@ const BackButton = ({ to, onClick }) => {
                     alt="Back"
                 />
             </div>
-            <span>Back</span>
+            <span>{title}</span>
         </Link>
     );
 };

@@ -9,6 +9,7 @@ import BackButton from '../BackButton/BackButton';
 const AnnouncementDetails = () => {
     const location = useLocation();
     const announcement = location.state?.announcement;
+    const comingFrom = location.state?.comingFrom || '/';
 
     if (!announcement) {
         return <div>No announcement data found.</div>;
@@ -27,7 +28,8 @@ const AnnouncementDetails = () => {
                     <span className="breadcrumb-separator">&gt;</span>
                     <span className="breadcrumb-current">Announcement Details</span>
                 </div>
-                <BackButton to="/for-students" />
+                <BackButton to={comingFrom} scrolltop={scrolltop} />
+
 
                 <div className="announcement-details-announcement-date">
                     <span>

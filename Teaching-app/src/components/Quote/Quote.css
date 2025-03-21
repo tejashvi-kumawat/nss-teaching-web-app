@@ -1,0 +1,41 @@
+.quote-section {
+    display: flex;
+    align-items: center;
+    min-height: 200px;
+    height: 15vh;
+    background-color: #E9F2E9;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.quote-content {
+    max-width: 1043px;
+    margin: 0 auto;
+    position: relative;
+    display: inline-flex;
+    gap: 3%;
+}
+
+.quote-text-container {
+    display: inline-flex;
+    padding-right: 20px;
+    gap: 3%;
+    border-right: 2px solid #ADCCAF;
+}
+
+.quote-invcomma-close img {
+    transform: rotate(180deg);
+}
+
+.quote-text {
+    font-size: 26px;
+    font-style: italic;
+    color: #526652;
+    margin-bottom: 1rem;
+}
+
+.quote-author {
+    font-size: 26px;
+    font-weight: 400;
+    color: #526652;
+}

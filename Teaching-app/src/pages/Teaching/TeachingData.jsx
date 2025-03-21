@@ -141,7 +141,7 @@ export const TeachingApproach={
         </ul>
     ),
     image: (
-        <div className="TeachingProgramsImageBox" id="TeachingApproachImageBox">
+        <div className="TeachingProgramsImageBox">
             <img src={TeachingApproach1} alt="students engaged in open discussion" className="TeachingProgramsImages" />
             <img src={TeachingApproach2} alt="students studying together" className="TeachingProgramsImages" />
         </div>
