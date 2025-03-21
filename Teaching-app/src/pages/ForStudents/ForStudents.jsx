@@ -17,7 +17,9 @@ const ForStudents = () => {
             announcementDetails: [`Attention everyone! 💤 There is an important test coming up, so make sure you are fully prepared. 💤
                         Revise your notes, go through key topics, and practice questions to boost your confidence. 💤🐣 Time
                         management is crucial—start early and avoid last-minute stress. 💤 Stay focused, stay calm, and give it
-                        your best shot! 💤 Success comes with preparation, so make every moment count!`]
+                        your best shot! 💤 Success comes with preparation, so make every moment count!`],
+            venue: 'LH 121, LHC, IIT Delhi',
+            time: "8:00 AM - 10:00 AM",
         },
         {
             id: 2,
@@ -26,7 +28,9 @@ const ForStudents = () => {
             announcementDetails: [`Attention everyone! 💤 There is an important test coming up, so make sure you are fully prepared. 💤
                 Revise your notes, go through key topics, and practice questions to boost your confidence. 💤🐣 Time
                 management is crucial—start early and avoid last-minute stress. 💤 Stay focused, stay calm, and give it
-                your best shot! 💤 Success comes with preparation, so make every moment count!`]
+                your best shot! 💤 Success comes with preparation, so make every moment count!`],
+            venue: 'LH 121, LHC, IIT Delhi',
+            time: "8:00 AM - 10:00 AM",
         },
         {
             id: 3,
@@ -35,7 +39,9 @@ const ForStudents = () => {
             announcementDetails: [`Attention everyone! 💤 There is an important test coming up, so make sure you are fully prepared. 💤
                 Revise your notes, go through key topics, and practice questions to boost your confidence. 💤🐣 Time
                 management is crucial—start early and avoid last-minute stress. 💤 Stay focused, stay calm, and give it
-                your best shot! 💤 Success comes with preparation, so make every moment count!`]
+                your best shot! 💤 Success comes with preparation, so make every moment count!`],
+            venue: 'LH 121, LHC, IIT Delhi',
+            time: "8:00 AM - 10:00 AM",
         },
         {
             id: 4,
@@ -44,7 +50,9 @@ const ForStudents = () => {
             announcementDetails: [`Attention everyone! 💤 There is an important test coming up, so make sure you are fully prepared. 💤
                 Revise your notes, go through key topics, and practice questions to boost your confidence. 💤🐣 Time
                 management is crucial—start early and avoid last-minute stress. 💤 Stay focused, stay calm, and give it
-                your best shot! 💤 Success comes with preparation, so make every moment count!`]
+                your best shot! 💤 Success comes with preparation, so make every moment count!`],
+            venue: 'LH 121, LHC, IIT Delhi',
+            time: "8:00 AM - 10:00 AM",
         },
         {
             id: 5,
@@ -53,7 +61,9 @@ const ForStudents = () => {
             announcementDetails: [`Attention everyone! 💤 There is an important test coming up, so make sure you are fully prepared. 💤
                 Revise your notes, go through key topics, and practice questions to boost your confidence. 💤🐣 Time
                 management is crucial—start early and avoid last-minute stress. 💤 Stay focused, stay calm, and give it
-                your best shot! 💤 Success comes with preparation, so make every moment count!`]
+                your best shot! 💤 Success comes with preparation, so make every moment count!`],
+            venue: 'LH 121, LHC, IIT Delhi',
+            time: "8:00 AM - 10:00 AM",
         }
     ];
 

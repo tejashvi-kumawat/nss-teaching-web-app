@@ -1,8 +1,9 @@
 .quote-section {
     display: flex;
     align-items: center;
-    min-height: 200px;
-    height: 15vh;
+    min-height: 15vh;
+    padding: 24px 0;
+    height: fit-content;
     background-color: #E9F2E9;
     text-align: center;
     margin-bottom: 2rem;

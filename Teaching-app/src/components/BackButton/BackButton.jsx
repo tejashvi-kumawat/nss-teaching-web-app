@@ -4,21 +4,13 @@ import './BackButton.css';
 import circleArrow from '../../assets/arrow-with-filled-circle.svg';
 import circleArrowColor from '../../assets/arrow-with-filled-circle-colored.svg';
 
-const BackButton = ({ to, onClick, title = 'Back' }) => {
+const BackButton = ({ to, title = 'Back' }) => {
     const [isHovered, setIsHovered] = useState(false);
-
-    const handleClick = () => {
-        if (onClick) {
-            onClick();
-        }
-        window.scrollTo(0, 0);
-    };
 
     return (
         <Link
             to={to || '/'}
             className="back-button"
-            onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >

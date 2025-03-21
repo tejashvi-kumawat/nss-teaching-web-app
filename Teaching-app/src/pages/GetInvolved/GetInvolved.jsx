@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./GetInvolved.css";
+import "../ForStudents/ForStudents.css";
 import DonateForm from "../../components/GetInvolved/DonateForm";
 import PartnerUs from "../../components/GetInvolved/PartnerwithUs"
 
 // Define components outside of the main component
-const VolunteerForm = ({ 
-  selectedRole, 
-  setSelectedRole, 
-  isDropdownOpen, 
-  setIsDropdownOpen, 
-  fullName, 
-  setFullName, 
-  email, 
-  setEmail 
+const VolunteerForm = ({
+  selectedRole,
+  setSelectedRole,
+  isDropdownOpen,
+  setIsDropdownOpen,
+  fullName,
+  setFullName,
+  email,
+  setEmail
 }) => {
   const dropdownRef = useRef(null);
 
@@ -23,7 +24,7 @@ const VolunteerForm = ({
         setIsDropdownOpen(false);
       }
     };
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -127,7 +128,7 @@ const Donate = () => (
       </p>
     </div>
     <div className="get-involved-partner-section">
-      <DonateForm/>
+      <DonateForm />
     </div>
   </div>
 );
@@ -145,7 +146,7 @@ const PartnerWithUs = () => (
       </p>
     </div>
     <div className="get-involved-partner-section">
-      <PartnerUs/>
+      <PartnerUs />
     </div>
   </div>
 );
@@ -178,29 +179,26 @@ function GetInvolved() {
         </div>
 
         {/* Tabs Container*/}
-        <div className="get-involved-tabs-container">
+        <div className="for-students-tabs-container">
           {/* Tabs */}
-          <div className="get-involved-tabs-row">
+          <div className="for-students-resource-tabs">
             <div
-              className={`get-involved-tab ${
-                activeTab === "Volunteer" ? "get-involved-tab-active" : ""
-              }`}
+              className={`for-students-tab ${activeTab === "Volunteer" ? "active" : ""
+                }`}
               onClick={() => setActiveTab("Volunteer")}
             >
               Volunteer
             </div>
             <div
-              className={`get-involved-tab ${
-                activeTab === "Donate" ? "get-involved-tab-active" : ""
-              }`}
+              className={`for-students-tab ${activeTab === "Donate" ? "active" : ""
+                }`}
               onClick={() => setActiveTab("Donate")}
             >
               Donate
             </div>
             <div
-              className={`get-involved-tab ${
-                activeTab === "Partner with us" ? "get-involved-tab-active" : ""
-              }`}
+              className={`for-students-tab ${activeTab === "Partner with us" ? "active" : ""
+                }`}
               onClick={() => setActiveTab("Partner with us")}
             >
               Partner with us
@@ -208,9 +206,9 @@ function GetInvolved() {
           </div>
 
           {/* Tab Content */}
-          {activeTab === "Volunteer" && (
-            <div className="tab-content">
-              <VolunteerForm 
+          {activeTab === 'Volunteer' && (
+            <div className="for-students-tab-content announcementItem-announcements-container">
+              <VolunteerForm
                 selectedRole={selectedRole}
                 setSelectedRole={setSelectedRole}
                 isDropdownOpen={isDropdownOpen}
@@ -223,14 +221,14 @@ function GetInvolved() {
             </div>
           )}
 
-          {activeTab === "Donate" && (
-            <div className="tab-content">
+          {activeTab === 'Donate' && (
+            <div className="for-students-tab-content">
               <Donate />
             </div>
           )}
 
-          {activeTab === "Partner with us" && (
-            <div className="tab-content">
+          {activeTab === 'Partner with us' && (
+            <div className="for-students-tab-content">
               <PartnerWithUs />
             </div>
           )}

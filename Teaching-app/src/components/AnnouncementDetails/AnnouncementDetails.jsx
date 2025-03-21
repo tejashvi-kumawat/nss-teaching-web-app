@@ -28,7 +28,7 @@ const AnnouncementDetails = () => {
                     <span className="breadcrumb-separator">&gt;</span>
                     <span className="breadcrumb-current">Announcement Details</span>
                 </div>
-                <BackButton to={comingFrom} scrolltop={scrolltop} />
+                <BackButton to={comingFrom} />
 
 
                 <div className="announcement-details-announcement-date">
@@ -47,8 +47,8 @@ const AnnouncementDetails = () => {
                 </div>
                 <div className="announcement-details-important-info">
                     <h2>Important information:</h2>
-                    <p>Venue: LHC, IIT Delhi</p>
-                    <p>Time: 8:00 AM - 10:00 AM</p>
+                    <p>Venue: {announcement.venuw}</p>
+                    <p>Time: {announcement.time}</p>
                 </div>
             </div>
         </div>
