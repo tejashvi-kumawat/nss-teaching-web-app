@@ -44,7 +44,7 @@
 .TeachingTestimonialsImage {
     width: 100%;
     aspect-ratio: 1/1;
-    border-radius: 5%;
+    border-radius: 8px;
     --radius-of-text: 5%;
     border: 3px solid #A5C7A1;
     object-fit: cover;

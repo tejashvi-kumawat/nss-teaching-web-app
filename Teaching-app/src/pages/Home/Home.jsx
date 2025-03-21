@@ -1,4 +1,3 @@
-// pages/Home/Home.jsx
 import React from "react";
 import './Home.css';
 
@@ -11,8 +10,12 @@ import Home_Programs from "../../components/Home_Programs/Home_Programs";
 import ContributionBanner from "../../components/ContributionBanner/ContributionBanner";
 import ContactComponent from "../../components/ContactComponent/ContactComponent";
 import Quote from "../../components/Quote/Quote";
-import Testimonials from "../../components/Testimonials/Testimonials";
+import Home_Testimonials from "../../components/Home_Testimonials/Home_Testimonials";
+import Home_VolunteerExperience from "../../components/Home_VolunteerExperience/Home_VolunteerExperience";
 import { TrusteesHome } from "../../pages/Trustees/Trustees";
+
+// Asset imports
+import testimage from "../../assets/founder.png";
 
 // Contact information
 const contactData = {
@@ -22,6 +25,15 @@ const contactData = {
 };
 
 const Home = () => {
+  const images = [
+    testimage,
+    testimage,
+    testimage,
+    testimage,
+    testimage,
+    // Add more images here if needed
+  ];
+
   return (
     <>
       <div className="home-container">
@@ -41,17 +53,58 @@ const Home = () => {
         {/* Uttarakhand Teaching Project Section */}
         <Home_UttarakhandProject />
 
-        {/* Programs Section */}
-        <Home_Programs />
-
-        {/* Contact Section */}
-        <ContactComponent contactData={contactData} />
+        <div className="home-carousels-container">
+          {/* Programs Section */}
+          <Home_Programs />
+        </div>
 
         {/* Trustees Section */}
         <TrusteesHome />
 
-        {/* Testimonials Section */}
-        <Testimonials />
+        <div className="home-carousels-container">
+          {/* Testimonials Section */}
+          <Home_Testimonials />
+        </div>
+
+        <div className="home-carousels-container">
+          {/* Volunteer Experience Section */}
+          <Home_VolunteerExperience />
+        </div>
+
+        {/* Image Section */}
+        <div className="image-section">
+          <h2>IMAGES</h2>
+          <div className="image-scroller">
+            {/* First set */}
+            <div className="image-track">
+              {images.map((image, index) => (
+                <div className="image-card" key={`first-${index}`}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    loading="lazy" // Add lazy loading
+                  />
+                </div>
+              ))}
+            </div>
+            {/* Second set for seamless looping */}
+            <div className="image-track">
+              {images.map((image, index) => (
+                <div className="image-card" key={`second-${index}`}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    loading="lazy" // Add lazy loading
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Section */}
+        <ContactComponent contactData={contactData} />
+
       </div>
 
       {/* Contribution Banner */}

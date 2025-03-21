@@ -1,0 +1,97 @@
+/* components/CarouselTray/CarouselTray.css */
+.carousel-tray {
+    contain: layout;
+    width: 100%;
+    padding: 0 40px;
+    /* Add padding to allow peeking cards to be visible */
+    box-sizing: border-box;
+}
+
+.carousel-container {
+    width: 100%;
+    position: relative;
+}
+
+.carousel-grid {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+/* Gradient overlays for smooth transition */
+.carousel-container::before,
+.carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    /* Matches peakWidth */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.carousel-item {
+    opacity: 1;
+    min-width: 0;
+    transition: opacity 0.5s ease;
+    /* Smooth opacity transition */
+    /* Fully visible by default */
+}
+
+.carousel-item--overflown {
+    opacity: 0.5;
+}
+
+.carousel-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.carousel-nav-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carousel-nav-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.carousel-nav-button img {
+    width: 38px;
+    height: 38px;
+}
+
+.carousel-prev-nav:not(:disabled) img {
+    transform: rotate(180deg);
+}
+
+.carousel-prev-nav:disabled img {
+    transform: rotate(180deg);
+}
+
+/* Disable peeking effect on mobile (cardsPerView = 1) */
+@media screen and (max-width: 768px) {
+    .carousel-tray {
+        padding: 0;
+        /* Remove padding on mobile */
+    }
+
+    .carousel-container::before,
+    .carousel-container::after {
+        display: none;
+        /* Hide gradients on mobile */
+    }
+}

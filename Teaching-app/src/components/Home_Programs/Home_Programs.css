@@ -10,22 +10,7 @@
     font-weight: 700;
 }
 
-.programs-carousel {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-}
-
-.programs-grid {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease;
-}
-
 .program-card {
-    flex: 1;
-    min-width: calc(50% - 10px);
-    max-width: calc(50% - 10px);
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -49,6 +34,7 @@
 }
 
 .program-image {
+    max-width: 1440px;
     width: 100%;
     height: 75%;
     position: relative;
@@ -81,52 +67,8 @@
     transition: color 0.3s;
 }
 
-.programs-navigation {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
-}
-
-.programs-nav-button {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: none;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.programs-nav-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.programs-nav-button img {
-    width: 38px;
-    height: 38px;
-}
-
-.programs-prev-nav:not(:disabled) img {
-    transform: rotate(180deg);
-}
-
-.programs-prev-nav:disabled img {
-    transform: rotate(180deg);
-}
-
 .program-card:hover .home-programs-arrow {
     transform: rotate(45deg);
-}
-
-@media screen and (max-width: 1200px) {
-    .program-card {
-        flex: 0 0 calc(50% - 10px);
-    }
 }
 
 @media screen and (max-width: 768px) {

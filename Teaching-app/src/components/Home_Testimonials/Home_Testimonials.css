@@ -1,0 +1,125 @@
+/* Home_Testimonials.css */
+.HomeTeachingHeadings#Testimonials {
+    margin-bottom: 8px;
+    font-size: 30px;
+    color: #132611;
+    font-weight: 700;
+}
+
+.HomeTeachingDescription {
+    color: #526652;
+    font-size: 20px;
+    margin: 20px 0;
+    font-weight: 400;
+}
+
+.HomeTeachingTestimonialsGrid {
+    display: block;
+}
+
+.HomeTeachingTestimonialsBox {
+    position: relative;
+    background: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    height: auto;
+    opacity: 1;
+    transition: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: all;
+    /* Ensure hover works */
+    z-index: 1;
+}
+
+.HomeTeachingTestimonialsBox:hover {
+    scale: 1;
+    opacity: 1;
+    transform: none !important;
+}
+
+.HomeTeachingTestimonialsImage {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+    border: 2px solid #2E7D32;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 0;
+    transition: none;
+    z-index: 1;
+    /* Below description */
+}
+
+.HomeTeachingTestimonialsBox:hover .HomeTeachingTestimonialsImage {
+    background-image: none;
+    box-shadow: none;
+}
+
+.HomeTeachingTestimonialsDescription {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #526652;
+    font-size: 1rem;
+    background-color: #2E7D32;
+    opacity: 0.5;
+    border: none;
+    border-radius: 8px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: none;
+    z-index: 2;
+    /* Above image */
+    pointer-events: none;
+    /* Doesn’t block hover */
+}
+
+.HomeTeachingTestimonialsBox:hover .HomeTeachingTestimonialsDescription {
+    display: flex;
+}
+
+.HomeTeachingTestimonialsName {
+    padding: 5px 5px;
+    color: #526652;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: static;
+    margin: 8px 0;
+    transition: none;
+}
+
+.HomeTeachingTestimonialsBox:hover .HomeTeachingTestimonialsName {
+    color: #526652;
+    text-shadow: none;
+    bottom: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .HomeTeachingTestimonialsBox {
+        width: 100%;
+    }
+
+    .HomeTeachingTestimonialsName {
+        font-size: 1rem;
+    }
+
+    .HomeTeachingTestimonialsDescription {
+        font-size: 0.8rem;
+    }
+
+    .HomeTeachingHeadings#Testimonials {
+        font-size: 1.5rem;
+    }
+
+    .HomeTeachingDescription {
+        font-size: 0.9rem;
+    }
+}
