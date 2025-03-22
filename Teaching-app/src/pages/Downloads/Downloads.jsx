@@ -7,6 +7,7 @@ import downloadspagearrowicon from '../../assets/downloadspage-arrowicon.svg';
 import greaterthanicon from '../../assets/greaterthan-icon.svg';
 import { DataContext } from '../../store/Data';
 import api, { brochureService, reportService, galleryService } from '../../services/api';
+import { formatImageUrl, formatFileUrl } from '../../utils/mediaUtils';
 
 const Downloads = () => {
   const { gallery, downloads, loading } = useContext(DataContext);
@@ -46,12 +47,12 @@ const formatImageUrl = (imageUrl) => {
 
         // Fetch brochures
         const brochuresData = await brochureService.getAll();
-        console.log('Brochures data:', brochuresData); // For debugging
+        // console.log('Brochures data:', brochuresData); 
         setBrochures(Array.isArray(brochuresData) ? brochuresData : []);
 
         // Fetch reports
         const reportsData = await reportService.getAll();
-        console.log('Reports data:', reportsData); // For debugging
+        // console.log('Reports data:', reportsData); 
         setReports(Array.isArray(reportsData) ? reportsData : []);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -135,16 +136,16 @@ useEffect(() => {
       const response = await galleryService.getAll({ location: campLocation });
       const locationGallery = response.data || response || [];
       
-      console.log('Raw gallery data:', locationGallery); // Debug log
+      // console.log('Raw gallery data:', locationGallery); 
       
       // Process the gallery data to maintain the original category
       const processedGallery = locationGallery.map(item => {
         // Debug log for each item's category
-        console.log('Processing item:', {
-          id: item.id,
-          originalCategory: item.category,
-          title: item.title
-        });
+        // console.log('Processing item:', {
+        //   id: item.id,
+        //   originalCategory: item.category,
+        //   title: item.title
+        // });
         
         // Ensure we're using the correct category field from the backend
         const category = item.category || item.type || 'regularclasses';
@@ -155,7 +156,7 @@ useEffect(() => {
         };
       });
       
-      console.log('Processed gallery data:', processedGallery); // Debug log
+      // console.log('Processed gallery data:', processedGallery); 
       
       // Navigate to the gallery view with the processed data
       navigate(`/downloads/${campLocation.toLowerCase().replace(/\s+/g, '-')}`, {
@@ -177,49 +178,49 @@ useEffect(() => {
   };
 
   // Handle file download
-  const handleDownload = async (file, id, type) => {
-    try {
-      let response;
-      if (type === 'brochure') {
-        response = await brochureService.download(id);
-      } else if (type === 'report') {
-        response = await reportService.download(id);
-      }
-
-      if (!response || !response.data) {
-        throw new Error('No data received from server');
-      }
-
-      // Create blob from response data
-      const blob = new Blob([response.data], { 
-        type: response.headers['content-type'] || 'application/octet-stream' 
-      });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      
-      // Get filename from Content-Disposition header or fallback to URL
-      const contentDisposition = response.headers['content-disposition'];
-      let filename;
-      if (contentDisposition) {
-        const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
-        filename = filenameMatch ? filenameMatch[1].replace(/['"]/g, '') : undefined;
-      }
-      if (!filename) {
-        filename = file.split('/').pop() || `download-${type}-${id}`;
-      }
-      
-      link.setAttribute('download', filename);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Error downloading file:', error);
-      // Show error message to user
-      setError('Failed to download file. Please try again later.');
+// Handle file download
+const handleDownload = async (fileUrl, id, type) => {
+  try {
+    if (!fileUrl) {
+      console.error(`No file URL provided for ${type} download`);
+      return;
     }
-  };
+
+    // If direct file URL is available, use window.open
+    if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
+      window.open(fileUrl, '_blank');
+      return;
+    }
+
+    // Fallback to API download endpoint
+    let response;
+    if (type === 'brochure') {
+      response = await brochureService.download(id);
+    } else if (type === 'report') {
+      response = await reportService.download(id);
+    } else {
+      console.error('Invalid download type');
+      return;
+    }
+
+    // Create a blob from the response data
+    const blob = new Blob([response.data], { type: response.headers['content-type'] });
+    const url = window.URL.createObjectURL(blob);
+    
+    // Create a temporary link and click it
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${type}_${id}.pdf`); // Default filename
+    document.body.appendChild(link);
+    link.click();
+    
+    // Clean up
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error(`Error downloading ${type}:`, error);
+  }
+};
 
   return (
     <>
@@ -257,7 +258,7 @@ useEffect(() => {
                   title={brochure.title}
                   subtitle={`Year ${brochure.year || new Date(brochure.created_at).getFullYear()}`}
                   lastUpdated={brochure.updated_at}
-                  onClick={() => handleDownload(brochure.file, brochure.id, 'brochure')}
+                  onClick={() => handleDownload(brochure.fileUrl || formatFileUrl(brochure.file), brochure.id, 'brochure')}
                 />
               ))
             ) : (
@@ -278,7 +279,7 @@ useEffect(() => {
                   title={report.title}
                   subtitle={`${report.location || 'Unknown Location'}, Year ${report.year || new Date(report.created_at).getFullYear()}`}
                   lastUpdated={report.updated_at}
-                  onClick={() => handleDownload(report.file, report.id, 'report')}
+                  onClick={() => handleDownload(report.fileUrl || formatFileUrl(report.file), report.id, 'report')}
                 />
               ))
             ) : (
@@ -304,7 +305,7 @@ useEffect(() => {
                     <span className='location-image-container'>
                       <img 
                         className='location-image' 
-                        src={galleryByLocation[location].items[0].image} 
+                        src={galleryByLocation[location].items[0].imageUrl || formatImageUrl(galleryByLocation[location].items[0].image)} 
                         alt={`Camp at ${location}`} 
                       />
                     </span>
