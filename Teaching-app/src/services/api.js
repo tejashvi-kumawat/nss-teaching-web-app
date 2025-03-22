@@ -187,12 +187,9 @@ const api = {
             try {
                 // Get CSRF token
                 const csrfToken = await getCsrfTokenFromServer();
-                console.log('Using CSRF token for contact submission:', csrfToken);
-                
                 // Log the full URL being used
-                const endpointUrl = `${API_URL}/contact/`; // Remove 'api/' if not needed
+                const endpointUrl = `${API_URL}/contact/`; 
                 console.log('Submitting form to endpoint:', endpointUrl);
-                
                 // Make the request with proper headers
                 const response = await axios.post(endpointUrl, formData, {
                     withCredentials: true,
