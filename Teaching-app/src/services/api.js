@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// Ensure API_URL doesn't have a trailing slash
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
 
 // Function to get CSRF token from cookies
 function getCsrfToken() {
@@ -12,32 +13,30 @@ function getCsrfToken() {
     return cookieValue;
 }
 
+// Function to get CSRF token from server
 async function getCsrfTokenFromServer() {
     try {
-      // First try to get the token from cookies
-      const existingToken = getCsrfToken();
-      console.log('Existing CSRF token found:', existingToken ? 'Yes' : 'No');
-      
-      if (existingToken) {
-        console.log('Using existing token');
-        return existingToken;
-      }
-  
-      console.log('Fetching new CSRF token from server');
-      const response = await axios.get(`${API_URL}/api/csrf/`, {
-        withCredentials: true
-      });
-      console.log('CSRF response:', response.status);
-      
-      // Get the token from cookies after the request
-      const newToken = getCsrfToken();
-      console.log('New token obtained:', newToken ? 'Yes' : 'No');
-      return newToken;
+        // First try to get the token from cookies
+        const existingToken = getCsrfToken();
+        if (existingToken) {
+            return existingToken;
+        }
+
+        // If no token in cookies, fetch it from the server
+        const response = await axios.get(`${API_URL}/csrf/`, {
+            withCredentials: true,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        // Get the token from cookies after the request
+        return getCsrfToken();
     } catch (error) {
-      console.error('Failed to get CSRF token:', error);
-      return null;
+        console.warn('Failed to get CSRF token:', error);
+        return null;
     }
-  }
+}
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
@@ -187,11 +186,9 @@ const api = {
             try {
                 // Get CSRF token
                 const csrfToken = await getCsrfTokenFromServer();
-                // Log the full URL being used
-                const endpointUrl = `${API_URL}/contact/`; 
-                console.log('Submitting form to endpoint:', endpointUrl);
+                
                 // Make the request with proper headers
-                const response = await axios.post(endpointUrl, formData, {
+                const response = await axios.post(`${API_URL}/contact/`, formData, {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json',
@@ -206,7 +203,27 @@ const api = {
                 
                 return response.data;
             } catch (error) {
-                // Your existing error handling code...
+                console.error('Contact form submission error:', {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status,
+                    headers: error.response?.headers
+                });
+                
+                // Provide more specific error messages
+                if (error.response?.status === 403) {
+                    throw new Error('CSRF token validation failed. Please try again.');
+                } else if (error.response?.status === 500) {
+                    throw new Error('Server error occurred. Please try again later.');
+                } else if (error.response?.data?.error) {
+                    throw new Error(error.response.data.error);
+                } else if (error.response?.data?.detail) {
+                    throw new Error(error.response.data.detail);
+                } else if (error.code === 'ERR_NETWORK') {
+                    throw new Error('Network error. Please check your connection and try again.');
+                } else {
+                    throw new Error('Failed to send message. Please try again.');
+                }
             }
         }
     },
@@ -253,7 +270,16 @@ const api = {
                 console.log('Fetching gallery items with params:', params);
                 const response = await axiosInstance.get('/gallery/', { params });
                 console.log('Gallery response:', response);
-                return response.data;
+                
+                // Process the response to ensure image_url is used
+                const galleryWithCorrectUrls = response.data.map(item => ({
+                    ...item,
+                    // Use image_url if available, otherwise construct the URL
+                    imageUrl: item.image_url || 
+                             (item.image ? `${API_URL}${item.image.startsWith('/') ? '' : '/'}${item.image}` : '')
+                }));
+                
+                return galleryWithCorrectUrls;
             } catch (error) {
                 console.error('Failed to fetch gallery items:', error);
                 return [];
@@ -288,15 +314,20 @@ const api = {
                 console.log('Fetching brochures from:', `${API_URL}/brochures/`);
                 const response = await axiosInstance.get('/brochures/');
                 console.log('Brochures response:', response);
-                // Ensure each brochure has a year field
-                const brochuresWithYear = response.data.map(brochure => ({
+                
+                // Process the response to ensure file_url is used
+                const brochuresWithCorrectUrls = response.data.map(brochure => ({
                     ...brochure,
-                    year: brochure.year || new Date(brochure.created_at).getFullYear()
+                    year: brochure.year || new Date(brochure.created_at).getFullYear(),
+                    // Use file_url if available, otherwise construct the URL (with null checks)
+                    fileUrl: brochure.file_url || 
+                             (brochure.file ? `${API_URL}${brochure.file.startsWith('/') ? '' : '/'}${brochure.file}` : '')
                 }));
-                return brochuresWithYear; // Return array directly
+                
+                return brochuresWithCorrectUrls;
             } catch (error) {
                 console.error('Failed to fetch brochures:', error);
-                return []; // Return empty array directly
+                return [];
             }
         },
         download: async (id) => {
@@ -320,7 +351,17 @@ const api = {
                 console.log('Fetching reports from:', `${API_URL}/reports/`, params);
                 const response = await axiosInstance.get('/reports/');
                 console.log('Reports response:', response);
-                return response.data;
+                
+                // Process the response to ensure file_url is used
+                const reportsWithCorrectUrls = response.data.map(report => ({
+                    ...report,
+                    year: report.year || new Date(report.created_at).getFullYear(),
+                    // Use file_url if available, otherwise construct the URL (with null checks)
+                    fileUrl: report.file_url || 
+                             (report.file ? `${API_URL}${report.file.startsWith('/') ? '' : '/'}${report.file}` : '')
+                }));
+                
+                return reportsWithCorrectUrls;
             } catch (error) {
                 console.error('Failed to fetch reports:', error);
                 return [];
