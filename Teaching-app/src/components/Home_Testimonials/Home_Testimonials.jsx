@@ -10,10 +10,12 @@ import BackButton from '../BackButton/BackButton.jsx';
 const Testimonials = () => {
     const renderTestimonialCard = (testimonial) => (
         <div className="HomeTeachingTestimonialsBox">
-            {testimonial.image}
-            <div className="HomeTeachingTestimonialsDescription">
-                <p>{testimonial.description}</p>
-            </div>
+            <span className='HomeTeachingTestimonialsHeader'>
+                <img className='HomeTeachingTestimonialsImage' src={testimonial.image} alt={testimonial.imageAlt} />
+                <span className='HomeTeachingTestimonialsDescription'>
+                    {testimonial.description}
+                </span>
+            </span>
             <div className="HomeTeachingTestimonialsName">
                 {testimonial.name}
             </div>
@@ -25,7 +27,7 @@ const Testimonials = () => {
             <div className="home-announcements-section">
                 <h2 className="HomeTeachingHeadings" id="Testimonials">Testimonials</h2>
                 <div className="view-all-link">
-                    <BackButton to='/teaching' onClick={true} title='View All' />
+                    <BackButton to='/teaching' title='View All' />
                 </div>
             </div>
             <p className="HomeTeachingDescription">

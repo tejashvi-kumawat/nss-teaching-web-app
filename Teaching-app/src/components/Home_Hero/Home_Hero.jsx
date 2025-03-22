@@ -13,11 +13,14 @@ const Home_Hero = () => {
     return (
         <div className="home-hero-section-container">
             <div className="home-hero-section-content">
-                <span>
-                    <h1>
+                <span className="home-hero-heading">
+                    <h1>HIMALAYAN VIDYA DAAN TRUST</h1>
+                </span>
+                <span className="home-hero-title">
+                    <h2>
                         Empowering young minds in the hills of{" "}
                         <span className="home-hero-section-uk">Uttarakhand</span>
-                    </h1>
+                    </h2>
                 </span>
                 <span>
                     <p className="home-hero-description">

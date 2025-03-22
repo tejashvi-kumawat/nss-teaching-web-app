@@ -23,6 +23,7 @@ const allImages = [
 
 const TrusteesList = [
   {
+    id: 1,
     number: "01",
     name: "J.P. Dabral",
     image: JPDabral,
@@ -39,6 +40,7 @@ const TrusteesList = [
     )
   },
   {
+    id: 2,
     number: "02",
     name: "Rajeev Jain",
     image: RajeevJain,
@@ -52,6 +54,7 @@ const TrusteesList = [
     )
   },
   {
+    id: 3,
     number: "03",
     name: "Rajendra Mohan",
     image: RajendraMohan,
@@ -66,6 +69,7 @@ const TrusteesList = [
     )
   },
   {
+    id: 4,
     number: "04",
     name: "Raj Kumar Kohli",
     image: RajKumarKohli,
@@ -77,6 +81,7 @@ const TrusteesList = [
     )
   },
   {
+    id: 5,
     number: "05",
     name: "Naresh Chand",
     image: NareshChand,
@@ -163,7 +168,7 @@ export const TrusteesHome = () => {
       <p className='TrusteesHomeDescription'>Meet the visionaries behind the Himalayan Vidya Daan Trust</p>
       <div className="TrusteesHomeFlexbox">
         {TrusteesList.map((TrustHomeObject, index) => (
-          <div className='TrusteesHomeFlex'>
+          <div className='TrusteesHomeFlex' key={TrustHomeObject.id}>
             <img className="TrusteesHomeImage" src={TrustHomeObject.image} alt={TrustHomeObject.name} />
             <h2 className="TrusteesHomeName">
               {TrustHomeObject.name}

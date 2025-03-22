@@ -47,16 +47,16 @@ const AboutUs = () => {
     AboutUs_Ourvision,
     AboutUs_Mission
   ];
-  
+
   // Get image sources from BannerSection_About React elements
   const bannerImages = extractImageSources(BannerSection_About);
-  
+
   // Combine all image sources
   const allImageSources = [...directImages, ...bannerImages];
-  
+
   // Use the image preloader hook
   const { isLoading, loadingProgress } = useImagePreloader(allImageSources);
-  
+
   // Show loading indicator while images are loading
   if (isLoading) {
     return <LoadingIndicator progress={loadingProgress} />;
@@ -75,21 +75,14 @@ const AboutUs = () => {
         {/* Hero section with background image and overlay */}
         <div className="TeachingBannerSection">
           <div className="TeachingBannerImageBox">
-            {BannerSection_About.image}
-            {BannerSection_About.overlaytext}
+            <img className='TeachingBannerImage' src={BannerSection_About.image} alt={BannerSection_About.altImage} />
+            <span className='TeachingBannerOverlayText'>About Us</span>
           </div>
+          <p className="TeachingBannerDescription">{BannerSection_About.description}</p>
         </div>
 
         {/* About Us Section */}
         <div className="about-us-container">
-          {/* Mission statement introduction */}
-          <div className="about-us-intro">
-            <p>
-              We strive to bridge the education gap in rural Uttarakhand,
-              empowering students for success. J.P. Dabral has dedicated over
-              three decades to this mission, transforming countless lives.
-            </p>
-          </div>
 
           {/* Vision Section */}
           <div className="about-us-vision-section">
@@ -156,7 +149,7 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-        
+
         {messageData.map((data, index) => (
           <MessageContainer
             key={index}
@@ -168,7 +161,7 @@ const AboutUs = () => {
           />
         ))}
       </div>
-      <ContributionBanner/>
+      <ContributionBanner />
     </>
   );
 };

@@ -43,7 +43,7 @@ const Home = () => {
       {/* Quote Section */}
       <Quote />
 
-      <div className="home-container">
+      <div className="home-container" id="home-container-2">
         {/* Announcements Section */}
         <Home_Announcements />
 
@@ -70,6 +70,9 @@ const Home = () => {
           {/* Volunteer Experience Section */}
           <Home_VolunteerExperience />
         </div>
+
+        {/* Contact Section */}
+        <ContactComponent contactData={contactData} />
 
         {/* Image Section */}
         <div className="image-section">
@@ -101,10 +104,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        {/* Contact Section */}
-        <ContactComponent contactData={contactData} />
-
       </div>
 
       {/* Contribution Banner */}

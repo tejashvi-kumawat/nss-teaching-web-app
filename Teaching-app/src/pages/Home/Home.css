@@ -6,10 +6,14 @@
 .home-container {
   width: 100%;
   max-width: 1440px;
-  margin: 144px auto;
+  margin: 144px auto 64px auto;
   display: flex;
   flex-direction: column;
   gap: 64px;
+}
+
+#home-container-2 {
+  margin: 64px auto;
 }
 
 /* Contribution banner styling when on home page */

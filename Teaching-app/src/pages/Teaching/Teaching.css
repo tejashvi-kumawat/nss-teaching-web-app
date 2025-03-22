@@ -238,9 +238,7 @@ ul.TeachingProgramsInnerText li {
 
 .TeachingVolunteerBox:hover .TeachingVolunteerImage {
     transform: translateY(2vw);
-    border-bottom: 2px solid #A5C7A1;
-    border-left: 1px solid #A5C7A1;
-    border-right: 1px solid #A5C7A1;
+    box-shadow: -2px 2px 7px 0 #2E7D32, 2px 2px 7px 0 #2E7D32;
 }
 
 .TeachingVolunteerHeading {
