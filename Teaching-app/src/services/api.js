@@ -196,6 +196,7 @@ const api = {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
+                        'X-CSRFToken': csrfToken
                     }
                 });
                 
