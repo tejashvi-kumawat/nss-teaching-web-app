@@ -4,6 +4,7 @@ import './DownloadsInsideAnyCampGallery.css';
 import BackButton from '../BackButton/BackButton';
 import circleArrow from '../../assets/arrow-with-filled-circle.svg';
 import circleArrowColor from '../../assets/arrow-with-filled-circle-colored.svg';
+import { formatImageUrl } from '../../utils/mediaUtils';
 
 const DownloadsInsideAnyCampGallery = () => {
     const location = useLocation();
@@ -56,8 +57,8 @@ const DownloadsInsideAnyCampGallery = () => {
         (image.category || 'regularclasses').toLowerCase() === activeTab.toLowerCase()
     );
     useEffect(() => {
-        console.log("Gallery Data Received:", galleryData);
-        console.log("Current Active Tab:", activeTab);
+        // console.log("Gallery Data Received:", galleryData);
+        // console.log("Current Active Tab:", activeTab);
         console.log("Filtered Images:", filteredImages);
     }, [galleryData, activeTab, filteredImages]);
 
@@ -109,7 +110,7 @@ const DownloadsInsideAnyCampGallery = () => {
                                 <img
                                     key={index}
                                     className='DownloadsInsideAnyCampGalleryData-image'
-                                    src={image.image}
+                                    src={image.imageUrl || formatImageUrl(image.image)}
                                     alt={`${campLocation} - ${activeTab}`}
                                 />
                             ))
