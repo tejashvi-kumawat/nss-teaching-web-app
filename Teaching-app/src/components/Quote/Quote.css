@@ -28,14 +28,30 @@
 }
 
 .quote-text {
-    font-size: 26px;
+    font-size: 32px;
     font-style: italic;
+    font-weight: 400;
     color: #526652;
-    margin-bottom: 1rem;
 }
 
 .quote-author {
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 400;
     color: #526652;
+}
+
+@media screen and (max-width: 768px) {
+
+    .quote-text,
+    .quote-author {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .quote-text,
+    .quote-author {
+        font-size: 16px;
+    }
 }

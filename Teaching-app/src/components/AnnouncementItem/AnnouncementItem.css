@@ -7,7 +7,6 @@
     border-radius: 8px;
     background-color: #E9F2E9;
     padding: 0;
-
 }
 
 .announcementItem-announcement-item {
@@ -28,6 +27,7 @@
     animation: shake 0.5s;
     background: #e0f5dd;
 }
+
 
 @keyframes shake {
     0% {
@@ -51,10 +51,13 @@
 
 }
 
+/* Update in AnnouncementItem.css */
 .announcementItem-announcement-divider {
-    height: 2px;
-    background-color: #e0e0e0;
-    margin: 0 5%;
+    height: 1px;
+    background-color: #ADCCAF;
+    width: 100%;
+    margin: 0.5vh 0;
+    display: block;
 }
 
 .announcementItem-announcement-header {
@@ -135,10 +138,6 @@
     .announcementItem-announcement-arrow-icon {
         width: 36px;
         height: 36px;
-    }
-
-    .announcementItem-announcement-divider {
-        margin: 0 3%;
     }
 }
 

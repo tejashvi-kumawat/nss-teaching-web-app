@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: #F1F8F1;
+  background-color: #F5FAF5;
   padding: 0;
 }
 
@@ -17,13 +17,13 @@
   justify-content: center;
   box-sizing: border-box;
   padding: 0 2%;
-  background-color: #F1F8F1;
+  background-color: #F5FAF5;
   border-radius: 8px;
   margin: 0;
   width: 100%;
   height: 13vh;
   transition: transform 0.3s ease;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #ADCCAF;
   cursor: pointer;
 }
 
@@ -35,14 +35,14 @@
 /* Hover effect for partnership items */
 .partnerWithUs-item:hover {
   animation: shake 0.5s;
-  background: #e0f5dd;
+  background: #d1f7cd;
 }
 
 /* Hidden description that appears when an item is clicked */
 .hidden-desc-partner-with-us {
   width: 100%;
   padding: 15px 2%;
-  background-color: #ffffff;
+  background-color: #F5FAF5;
   color: #132611;
   font-size: 16px;
   line-height: 1.5;
@@ -71,10 +71,12 @@
   0% {
     transform: translateX(0);
   }
+
   50% {
     transform: translateX(3px);
     transform: translateY(3px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -102,7 +104,7 @@
     font-size: 15px;
     font-weight: 400;
   }
-  
+
   .partnerWithUs-arrow {
     width: 20px;
     height: 20px;
@@ -115,7 +117,7 @@
     height: auto;
     padding: 15px 2%;
   }
-  
+
   .partnerWithUs-arrow {
     width: 18px;
     height: 18px;
@@ -128,7 +130,7 @@
     font-size: 14px;
     margin-top: 8px;
   }
-  
+
   .partnerWithUs-arrow {
     width: 16px;
     height: 16px;

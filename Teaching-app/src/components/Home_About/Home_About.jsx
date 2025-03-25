@@ -34,9 +34,9 @@ const Home_About = () => {
                     </Link>
                 </span>
             </div>
-            <span className="about-image">
+            <div className="about-image">
                 <img className='home-about-img' src={homeaboutimg} alt="students studying" />
-            </span>
+            </div>
         </div>
     );
 };

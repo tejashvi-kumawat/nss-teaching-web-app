@@ -21,7 +21,7 @@ const ForStudents = () => {
                 setError(null);
                 const response = await api.announcements.getAll();
                 console.log('Fetched announcements:', response);
-                
+
                 // Transform the data to match the expected format
                 const formattedAnnouncements = response.map(announcement => ({
                     id: announcement.id,
@@ -34,7 +34,7 @@ const ForStudents = () => {
                     // Store the original for reference 
                     original: announcement
                 }));
-                
+
                 setAnnouncements(formattedAnnouncements);
             } catch (err) {
                 console.error('Error fetching announcements:', err);
@@ -45,20 +45,20 @@ const ForStudents = () => {
                 setLoading(false);
             }
         };
-        
+
         fetchAnnouncements();
     }, []);
-    
+
     // Helper function to format date to DD-MM-YYYY
     const formatDate = (dateString) => {
         try {
             const date = new Date(dateString);
             if (isNaN(date)) return 'Date not available';
-            
+
             const day = date.getDate().toString().padStart(2, '0');
             const month = (date.getMonth() + 1).toString().padStart(2, '0');
             const year = date.getFullYear();
-            
+
             return `${day}-${month}-${year}`;
         } catch (e) {
             console.error('Error formatting date:', e);
@@ -136,78 +136,76 @@ const ForStudents = () => {
             </div>
 
             {/* Main Content */}
-            <div className="for-students-student-resources">
 
-                <div className="for-students-title-container">
-                    <h1 className="for-students-page-title">Important Resources for students</h1>
-                    <p className="for-students-description">
-                        This section provides all the essential academic materials for students.
-                        Access Previous Year Question Papers (PYQs) to prepare effectively, view
-                        marks lists to track your progress, and download other important materials
-                        to support your studies. Check regularly for updates!
-                    </p>
-                </div>
+            <div className="for-students-title-container">
+                <h1 className="for-students-page-title">Important Resources for students</h1>
+                <p className="for-students-description">
+                    This section provides all the essential academic materials for students.
+                    Access Previous Year Question Papers (PYQs) to prepare effectively, view
+                    marks lists to track your progress, and download other important materials
+                    to support your studies. Check regularly for updates!
+                </p>
+            </div>
 
-                {/* Tabs Container */}
-                <div className="for-students-tabs-container">
-                    {/* Tabs */}
-                    <div className="for-students-resource-tabs">
-                        <div
-                            className={`for-students-tab ${activeTab === 'updates' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('updates')}
-                        >
-                            All updates
-                        </div>
-                        <div
-                            className={`for-students-tab ${activeTab === 'questions' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('questions')}
-                        >
-                            Previous year questions
-                        </div>
-                        <div
-                            className={`for-students-tab ${activeTab === 'results' ? 'active' : ''}`}
-                            onClick={() => setActiveTab('results')}
-                        >
-                            Results
-                        </div>
+            {/* Tabs Container */}
+            <div className="for-students-tabs-container">
+                {/* Tabs */}
+                <div className="for-students-resource-tabs">
+                    <div
+                        className={`for-students-tab ${activeTab === 'updates' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('updates')}
+                    >
+                        All updates
                     </div>
-
-                    {/* Tab Content */}
-                    {activeTab === 'updates' && (
-                        <div className="for-students-tab-content announcementItem-announcements-container">
-                            {loading ? (
-                                <div className="loading-message">Loading announcements...</div>
-                            ) : error ? (
-                                <div className="error-message">{error}</div>
-                            ) : announcements.length > 0 ? (
-                                announcements.map((announcement, index) => (
-                                    <AnnouncementItem
-                                        key={announcement.id}
-                                        date={announcement.date}
-                                        title={announcement.title}
-                                        showDivider={index > 0}
-                                        announcement={announcement}
-                                        comingFrom='/for-students'
-                                    />
-                                ))
-                            ) : (
-                                <div className="no-data-message">No announcements available at this time.</div>
-                            )}
-                        </div>
-                    )}
-
-                    {activeTab === 'questions' && (
-                        <div className="for-students-tab-content">
-                            <PreviousYearPapersWrapper paperSections={previousYearPapers} />
-                        </div>
-                    )}
-
-                    {activeTab === 'results' && (
-                        <div className="for-students-tab-content">
-                            <ResultsWrapper resultSections={resultSections} />
-                        </div>
-                    )}
+                    <div
+                        className={`for-students-tab ${activeTab === 'questions' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('questions')}
+                    >
+                        Previous year questions
+                    </div>
+                    <div
+                        className={`for-students-tab ${activeTab === 'results' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('results')}
+                    >
+                        Results
+                    </div>
                 </div>
+
+                {/* Tab Content */}
+                {activeTab === 'updates' && (
+                    <div className="for-students-tab-content announcementItem-announcements-container">
+                        {loading ? (
+                            <div className="loading-message">Loading announcements...</div>
+                        ) : error ? (
+                            <div className="error-message">{error}</div>
+                        ) : announcements.length > 0 ? (
+                            announcements.map((announcement, index) => (
+                                <AnnouncementItem
+                                    key={announcement.id}
+                                    date={announcement.date}
+                                    title={announcement.title}
+                                    showDivider={index > 0}
+                                    announcement={announcement}
+                                    comingFrom='/for-students'
+                                />
+                            ))
+                        ) : (
+                            <div className="no-data-message">No announcements available at this time.</div>
+                        )}
+                    </div>
+                )}
+
+                {activeTab === 'questions' && (
+                    <div className="for-students-tab-content">
+                        <PreviousYearPapersWrapper paperSections={previousYearPapers} />
+                    </div>
+                )}
+
+                {activeTab === 'results' && (
+                    <div className="for-students-tab-content">
+                        <ResultsWrapper resultSections={resultSections} />
+                    </div>
+                )}
             </div>
         </div>
     );

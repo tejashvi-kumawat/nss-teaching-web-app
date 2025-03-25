@@ -1,4 +1,3 @@
-// components/CarouselTray/CarouselTray.jsx
 import React, { useState, useEffect, useRef } from "react";
 import './CarouselTray.css';
 
@@ -9,6 +8,7 @@ const CarouselTray = ({ items, renderCard, cardsPerViewConfig = { desktop: 2, mo
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPrevHovered, setIsPrevHovered] = useState(false);
     const [isNextHovered, setIsNextHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
     const getCardsPerView = () => window.innerWidth <= 768 ? cardsPerViewConfig.mobile : cardsPerViewConfig.desktop;
     const [cardsPerView, setCardsPerView] = useState(getCardsPerView());
@@ -16,7 +16,10 @@ const CarouselTray = ({ items, renderCard, cardsPerViewConfig = { desktop: 2, mo
     const peakWidth = 20;
 
     useEffect(() => {
-        const handleResize = () => setCardsPerView(getCardsPerView());
+        const handleResize = () => {
+            setCardsPerView(getCardsPerView());
+            setIsMobile(window.innerWidth <= 768);
+        };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, [cardsPerViewConfig]);
@@ -36,7 +39,7 @@ const CarouselTray = ({ items, renderCard, cardsPerViewConfig = { desktop: 2, mo
 
     useEffect(() => {
         const calculateSlideWidth = () => {
-            if (gridRef.current) {
+            if (gridRef.current && !isMobile) {
                 const gridWidth = gridRef.current.offsetWidth;
                 const gap = 20;
                 const totalGapWidth = gap * (cardsPerView - 1);
@@ -48,10 +51,10 @@ const CarouselTray = ({ items, renderCard, cardsPerViewConfig = { desktop: 2, mo
         calculateSlideWidth();
         window.addEventListener('resize', calculateSlideWidth);
         return () => window.removeEventListener('resize', calculateSlideWidth);
-    }, [cardsPerView]);
+    }, [cardsPerView, isMobile]);
 
-    // Determine if an item is overflown
     const isItemOverflown = (index) => {
+        if (isMobile) return false; // No overflown items on mobile with scrolling
         const startVisibleIndex = currentIndex;
         const endVisibleIndex = currentIndex + cardsPerView - 1;
         return index < startVisibleIndex || index > endVisibleIndex;
@@ -63,17 +66,17 @@ const CarouselTray = ({ items, renderCard, cardsPerViewConfig = { desktop: 2, mo
                 <div
                     className="carousel-grid"
                     ref={gridRef}
-                    style={{
+                    style={!isMobile ? {
                         transform: `translateX(${((peakWidth * (currentIndex + 1)) - currentIndex * slideWidth)}px)`
-                    }}
+                    } : {}}
                 >
                     {items.map((item, index) => (
                         <div
                             key={index}
                             className={`carousel-item ${isItemOverflown(index) ? 'carousel-item--overflown' : ''}`}
-                            style={{
+                            style={!isMobile ? {
                                 flex: `0 0 calc(${(100 / cardsPerView)}% - ${(2 * peakWidth + 20 * (cardsPerView - 1)) / cardsPerView}px)`
-                            }}
+                            } : {}}
                         >
                             {renderCard(item)}
                         </div>
@@ -81,32 +84,34 @@ const CarouselTray = ({ items, renderCard, cardsPerViewConfig = { desktop: 2, mo
                 </div>
             </div>
 
-            <div className="carousel-navigation">
-                <button
-                    className="carousel-nav-button carousel-prev-nav"
-                    onClick={handlePrev}
-                    onMouseEnter={() => setIsPrevHovered(true)}
-                    onMouseLeave={() => setIsPrevHovered(false)}
-                    disabled={items.length <= cardsPerView}
-                >
-                    <img
-                        src={isPrevHovered ? nextOnButtonRightActive : nextOnButtonRight}
-                        alt="Previous"
-                    />
-                </button>
-                <button
-                    className="carousel-nav-button carousel-next-nav"
-                    onClick={handleNext}
-                    onMouseEnter={() => setIsNextHovered(true)}
-                    onMouseLeave={() => setIsNextHovered(false)}
-                    disabled={items.length <= cardsPerView}
-                >
-                    <img
-                        src={isNextHovered ? nextOnButtonRightActive : nextOnButtonRight}
-                        alt="Next"
-                    />
-                </button>
-            </div>
+            {!isMobile && (
+                <div className="carousel-navigation">
+                    <button
+                        className="carousel-nav-button carousel-prev-nav"
+                        onClick={handlePrev}
+                        onMouseEnter={() => setIsPrevHovered(true)}
+                        onMouseLeave={() => setIsPrevHovered(false)}
+                        disabled={items.length <= cardsPerView}
+                    >
+                        <img
+                            src={isPrevHovered ? nextOnButtonRightActive : nextOnButtonRight}
+                            alt="Previous"
+                        />
+                    </button>
+                    <button
+                        className="carousel-nav-button carousel-next-nav"
+                        onClick={handleNext}
+                        onMouseEnter={() => setIsNextHovered(true)}
+                        onMouseLeave={() => setIsNextHovered(false)}
+                        disabled={items.length <= cardsPerView}
+                    >
+                        <img
+                            src={isNextHovered ? nextOnButtonRightActive : nextOnButtonRight}
+                            alt="Next"
+                        />
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

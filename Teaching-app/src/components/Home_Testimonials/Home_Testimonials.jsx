@@ -4,7 +4,7 @@ import '../Testimonials/Testimonials.css';
 import '../Home_Announcements/Home_Announcements.css';
 import './Home_Testimonials.css';
 import CarouselTray from '../CarouselTray/CarouselTray';
-import { TeachingTestimonials } from '../../pages/Teaching/TeachingData.jsx';
+import { TeachingTestimonialsData } from '../../pages/Teaching/TeachingData.jsx';
 import BackButton from '../BackButton/BackButton.jsx';
 
 const Testimonials = () => {
@@ -16,8 +16,10 @@ const Testimonials = () => {
                     {testimonial.description}
                 </span>
             </span>
-            <div className="HomeTeachingTestimonialsName">
-                {testimonial.name}
+            <div className="HomeTeachingTestimonialsNameContainer">
+                <div className="HomeTeachingTestimonialsName">
+                    {testimonial.name}
+                </div>
             </div>
         </div>
     );
@@ -34,9 +36,9 @@ const Testimonials = () => {
                 How education transform lives in Uttarakhand
             </p>
             <CarouselTray
-                items={TeachingTestimonials}
+                items={TeachingTestimonialsData}
                 renderCard={renderTestimonialCard}
-                cardsPerViewConfig={{ desktop: 3, mobile: 1 }}
+                cardsPerViewConfig={{ desktop: 2, mobile: 1 }}
             />
         </div>
     );

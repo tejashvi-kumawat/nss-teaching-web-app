@@ -5,9 +5,7 @@
 }
 
 .DownloadPageCard-outer-container:hover {
-    /* transform: translateY(-3px);*/
-
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px #e0f5dd;
 
 }
 
@@ -22,9 +20,7 @@
     border: 1px solid #ADCCAF;
     border-left: 8px solid #2E7D32;
     padding: 16px;
-    margin-bottom: 0;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
 }
 
@@ -59,19 +55,19 @@
 }
 
 .DownloadPageCard-Content-Title .title-text {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     color: #526652;
     margin-bottom: 2px;
 }
 
 .DownloadPageCard-Content-Title .subtitle-text {
-    font-size: 14px;
+    font-size: 18px;
     color: #526652;
 }
 
 .DownloadPageCard-Content-Update-date {
-    font-size: 12px;
+    font-size: 14px;
     color: #ADCCAF;
 }
 
@@ -117,12 +113,16 @@
         margin-bottom: 16px;
     }
 
+    .DownloadPageCard-Content-Title {
+        margin-bottom: 12px;
+    }
+
     .DownloadPageCard-Content-Title .title-text {
         font-size: 16px;
     }
 
-    .DownloadPageCard-Content-Title {
-        margin-bottom: 12px;
+    .DownloadPageCard-Content-Title .subtitle-text {
+        font-size: 14px;
     }
 }
 
@@ -144,11 +144,11 @@
     }
 
     .DownloadPageCard-Content-Title .title-text {
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .DownloadPageCard-Content-Title .subtitle-text {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .DownloadPageCard-Content-Update-date {

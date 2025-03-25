@@ -25,7 +25,7 @@ import Dashboard from './pages/Dashboard';
 const ProtectedRoute = ({ children }) => {
     const { currentUser, loading: authLoading } = useAuth();
     const { user, loading: dataLoading } = useContext(DataContext);
-    
+
     // Check if we have a token regardless of context state
     const token = localStorage.getItem('token');
 
@@ -63,6 +63,7 @@ const App = () => {
                     />
                     <Route path="/for-students" element={<ForStudents />} />
                     <Route path="/announcement/:id" element={<AnnouncementDetails />} />
+                    <Route path="/partnership-option/:id" element={<AnnouncementDetails />} />
                     <Route path="/downloads/:location" element={<DownloadsInsideAnyCampGallery />} />
                     <Route path="/downloads" element={<Downloads />} />
                     <Route path="/trustees" element={<Trustees />} />

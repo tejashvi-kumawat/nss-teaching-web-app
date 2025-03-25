@@ -24,9 +24,7 @@ const Home_Hero = () => {
                 </span>
                 <span>
                     <p className="home-hero-description">
-                        Welcome to Himalayan Vidya Daan Trust, where education transforms lives.
-                        Our mission is to uplift students in rural and border areas of Uttarakhand
-                        by providing access to free, quality education.
+                        Welcome to Himalayan Vidya Daan Trust, where education transforms lives. Our mission is to uplift students in rural and border areas of Uttarakhand by providing access to free, quality education. Together, we are building a brighter future for the hill regions.
                     </p>
                 </span>
                 <Link

@@ -41,8 +41,8 @@ const ContactComponent = ({ contactData }) => {
     useEffect(() => {
         const fetchCsrfToken = async () => {
             try {
-                await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/csrf/`, { 
-                    withCredentials: true 
+                await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/csrf/`, {
+                    withCredentials: true
                 });
                 const token = getCsrfToken();
                 if (token) {
@@ -53,7 +53,7 @@ const ContactComponent = ({ contactData }) => {
                 console.warn('Failed to get CSRF token:', error);
             }
         };
-        
+
         fetchCsrfToken();
     }, []);
 
@@ -100,14 +100,14 @@ const ContactComponent = ({ contactData }) => {
                 await api.contact.submitForm(contactData);
             } catch (apiError) {
                 console.warn('Failed with API service, trying direct axios:', apiError);
-                
+
                 // If that fails, try direct axios call
                 const response = await formAxios.post('/contact/', contactData, {
                     headers: {
                         'X-CSRFToken': csrfToken || getCsrfToken()
                     }
                 });
-                
+
                 console.log('Contact form submission response:', response);
             }
 
@@ -115,7 +115,7 @@ const ContactComponent = ({ contactData }) => {
                 type: 'success',
                 message: 'Message sent successfully! We will get back to you soon.'
             });
-            
+
             // Clear form
             setFormData({
                 firstName: '',
@@ -188,27 +188,27 @@ const ContactComponent = ({ contactData }) => {
                 </div>
             </div>
 
-            <form className="contact-form" onSubmit={handleSubmit}>
-                <div className="name-group">
+            <form className="contact-us-contact-form" onSubmit={handleSubmit}>
+                <div className="contact-us-name-group">
                     <span>
-                        <label htmlFor="contact-firstName">First Name</label>
+                        <label htmlFor="contact-us-contact-firstName">First Name</label>
                         <input
                             type="text"
                             placeholder=""
                             name='contact-firstName'
-                            id='contact-firstName'
+                            id='contact-us-contact-firstName'
                             value={formData.firstName}
                             onChange={handleInputChange}
                             required
                         />
                     </span>
                     <span>
-                        <label htmlFor="contact-lastName">Last Name</label>
+                        <label htmlFor="contact-us-contact-lastName">Last Name</label>
                         <input
                             type="text"
                             placeholder=""
                             name='contact-lastName'
-                            id='contact-lastName'
+                            id='contact-us-contact-lastName'
                             value={formData.lastName}
                             onChange={handleInputChange}
                             required
@@ -216,12 +216,12 @@ const ContactComponent = ({ contactData }) => {
                     </span>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="contact-email">Email</label>
+                <div className="contact-us-form-group">
+                    <label htmlFor="contact-us-contact-email">Email</label>
                     <input
                         type="email"
                         placeholder=""
-                        id='contact-email'
+                        id='contact-us-contact-email'
                         name='contact-email'
                         value={formData.email}
                         onChange={handleInputChange}
@@ -229,12 +229,12 @@ const ContactComponent = ({ contactData }) => {
                     />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="contact-subject">Subject</label>
+                <div className="contact-us-form-group">
+                    <label htmlFor="contact-us-contact-subject">Subject</label>
                     <input
                         type="text"
                         placeholder=""
-                        id='contact-subject'
+                        id='contact-us-contact-subject'
                         name='contact-subject'
                         value={formData.subject}
                         onChange={handleInputChange}
@@ -242,11 +242,11 @@ const ContactComponent = ({ contactData }) => {
                     />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="contact-message">Message</label>
+                <div className="contact-us-form-group">
+                    <label htmlFor="contact-us-contact-message">Message</label>
                     <textarea
                         placeholder=""
-                        id='contact-message'
+                        id='contact-us-contact-message'
                         name='contact-message'
                         value={formData.message}
                         onChange={handleInputChange}
@@ -262,7 +262,7 @@ const ContactComponent = ({ contactData }) => {
 
                 <button
                     type="submit"
-                    className="send-btn"
+                    className="contact-us-send-btn"
                     disabled={isSubmitting}
                 >
                     {isSubmitting ? 'Sending...' : 'Send Message'}

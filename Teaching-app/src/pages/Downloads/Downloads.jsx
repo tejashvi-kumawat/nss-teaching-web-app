@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './Downloads.css';
+import ContributionBanner from "../../components/ContributionBanner/ContributionBanner.jsx";
 import DownloadPageCard from '../../components/DownloadPageCard/DownloadPageCard.jsx';
 import downloadspagearrowicon from '../../assets/downloadspage-arrowicon.svg';
 import greaterthanicon from '../../assets/greaterthan-icon.svg';
@@ -20,22 +21,22 @@ const Downloads = () => {
   const [error, setError] = useState(null);
 
   // Helper function to format image URLs
-const formatImageUrl = (imageUrl) => {
-  if (!imageUrl) return '';
-  
-  // If it's already an absolute URL, ensure it uses HTTPS
-  if (imageUrl.startsWith('http')) {
-    return imageUrl.replace('http://', 'https://');
-  }
-  
-  // For relative URLs, add the backend URL with HTTPS
-  if (imageUrl.startsWith('/media')) {
-    const apiUrl = import.meta.env.VITE_API_URL.replace('http://', 'https://');
-    return `${apiUrl}${imageUrl}`;
-  }
-  
-  return imageUrl;
-};
+  const formatImageUrl = (imageUrl) => {
+    if (!imageUrl) return '';
+
+    // If it's already an absolute URL, ensure it uses HTTPS
+    if (imageUrl.startsWith('http')) {
+      return imageUrl.replace('http://', 'https://');
+    }
+
+    // For relative URLs, add the backend URL with HTTPS
+    if (imageUrl.startsWith('/media')) {
+      const apiUrl = import.meta.env.VITE_API_URL.replace('http://', 'https://');
+      return `${apiUrl}${imageUrl}`;
+    }
+
+    return imageUrl;
+  };
 
   // Fetch brochures and reports
   useEffect(() => {
@@ -70,41 +71,41 @@ const formatImageUrl = (imageUrl) => {
   }, []);
 
   // Fetch gallery data if not available from context
-// Fetch gallery data if not available from context
-useEffect(() => {
-  // Only fetch if gallery is not available from context
-  if (!gallery || !Array.isArray(gallery) || gallery.length === 0) {
-    const fetchGallery = async () => {
-      try {
-        setLoadingGallery(true);
-        const response = await galleryService.getAll();
-        // Make sure we handle the response structure correctly
-        const galleryItems = response.data || response || [];
-        // Store gallery data in local state
-        setGalleryByLocation(groupGalleryData(galleryItems));
-      } catch (error) {
-        console.error('Error fetching gallery data:', error);
-      } finally {
-        setLoadingGallery(false);
-      }
-    };
-    
-    fetchGallery();
-  } else if (gallery.length > 0) {
-    // If gallery is available from context, group it
-    setGalleryByLocation(groupGalleryData(gallery));
-  }
-}, [gallery]);
+  // Fetch gallery data if not available from context
+  useEffect(() => {
+    // Only fetch if gallery is not available from context
+    if (!gallery || !Array.isArray(gallery) || gallery.length === 0) {
+      const fetchGallery = async () => {
+        try {
+          setLoadingGallery(true);
+          const response = await galleryService.getAll();
+          // Make sure we handle the response structure correctly
+          const galleryItems = response.data || response || [];
+          // Store gallery data in local state
+          setGalleryByLocation(groupGalleryData(galleryItems));
+        } catch (error) {
+          console.error('Error fetching gallery data:', error);
+        } finally {
+          setLoadingGallery(false);
+        }
+      };
+
+      fetchGallery();
+    } else if (gallery.length > 0) {
+      // If gallery is available from context, group it
+      setGalleryByLocation(groupGalleryData(gallery));
+    }
+  }, [gallery]);
 
   // Helper function to group gallery data by location
   const groupGalleryData = (galleryData) => {
     if (!Array.isArray(galleryData) || galleryData.length === 0) {
       return {};
     }
-    
+
     // Get unique locations
     const uniqueLocations = [...new Set(galleryData.map(item => item.location))];
-    
+
     // Create grouped object
     const grouped = {};
     uniqueLocations.forEach(location => {
@@ -115,14 +116,14 @@ useEffect(() => {
           ...item,
           image: formatImageUrl(item.image)
         }));
-        
+
         grouped[location] = {
           items: formattedItems,
           year: year
         };
       }
     });
-    
+
     return grouped;
   };
 
@@ -130,14 +131,14 @@ useEffect(() => {
 
   const handleClick = async (campLocation) => {
     window.scrollTo(0, 0);
-    
+
     try {
       // Get gallery images for this location from the API
       const response = await galleryService.getAll({ location: campLocation });
       const locationGallery = response.data || response || [];
-      
+
       // console.log('Raw gallery data:', locationGallery); 
-      
+
       // Process the gallery data to maintain the original category
       const processedGallery = locationGallery.map(item => {
         // Debug log for each item's category
@@ -146,18 +147,18 @@ useEffect(() => {
         //   originalCategory: item.category,
         //   title: item.title
         // });
-        
+
         // Ensure we're using the correct category field from the backend
         const category = item.category || item.type || 'regularclasses';
-        
+
         return {
           ...item,
           category: category
         };
       });
-      
+
       // console.log('Processed gallery data:', processedGallery); 
-      
+
       // Navigate to the gallery view with the processed data
       navigate(`/downloads/${campLocation.toLowerCase().replace(/\s+/g, '-')}`, {
         state: {
@@ -178,49 +179,49 @@ useEffect(() => {
   };
 
   // Handle file download
-// Handle file download
-const handleDownload = async (fileUrl, id, type) => {
-  try {
-    if (!fileUrl) {
-      console.error(`No file URL provided for ${type} download`);
-      return;
-    }
+  // Handle file download
+  const handleDownload = async (fileUrl, id, type) => {
+    try {
+      if (!fileUrl) {
+        console.error(`No file URL provided for ${type} download`);
+        return;
+      }
 
-    // If direct file URL is available, use window.open
-    if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
-      window.open(fileUrl, '_blank');
-      return;
-    }
+      // If direct file URL is available, use window.open
+      if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
+        window.open(fileUrl, '_blank');
+        return;
+      }
 
-    // Fallback to API download endpoint
-    let response;
-    if (type === 'brochure') {
-      response = await brochureService.download(id);
-    } else if (type === 'report') {
-      response = await reportService.download(id);
-    } else {
-      console.error('Invalid download type');
-      return;
-    }
+      // Fallback to API download endpoint
+      let response;
+      if (type === 'brochure') {
+        response = await brochureService.download(id);
+      } else if (type === 'report') {
+        response = await reportService.download(id);
+      } else {
+        console.error('Invalid download type');
+        return;
+      }
 
-    // Create a blob from the response data
-    const blob = new Blob([response.data], { type: response.headers['content-type'] });
-    const url = window.URL.createObjectURL(blob);
-    
-    // Create a temporary link and click it
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', `${type}_${id}.pdf`); // Default filename
-    document.body.appendChild(link);
-    link.click();
-    
-    // Clean up
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(link);
-  } catch (error) {
-    console.error(`Error downloading ${type}:`, error);
-  }
-};
+      // Create a blob from the response data
+      const blob = new Blob([response.data], { type: response.headers['content-type'] });
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link and click it
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${type}_${id}.pdf`); // Default filename
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error(`Error downloading ${type}:`, error);
+    }
+  };
 
   return (
     <>
@@ -303,10 +304,10 @@ const handleDownload = async (fileUrl, id, type) => {
                     onClick={() => handleClick(location)}
                   >
                     <span className='location-image-container'>
-                      <img 
-                        className='location-image' 
-                        src={galleryByLocation[location].items[0].imageUrl || formatImageUrl(galleryByLocation[location].items[0].image)} 
-                        alt={`Camp at ${location}`} 
+                      <img
+                        className='location-image'
+                        src={galleryByLocation[location].items[0].imageUrl || formatImageUrl(galleryByLocation[location].items[0].image)}
+                        alt={`Camp at ${location}`}
                       />
                     </span>
                     <span className="gallery-item-caption">
@@ -324,23 +325,7 @@ const handleDownload = async (fileUrl, id, type) => {
           )}
         </div>
       </div>
-      <div className='downloads-contribution-container'>
-        <h1>
-          Your Contribution Can transform Uttarakhand's future
-        </h1>
-        <Link
-          to="/get-involved"
-          className='downloads-contribution-container-button'
-          onClick={() => window.scrollTo(0, 0)}
-        >
-          <span>
-            Join our cause
-          </span>
-          <span className='downloads-contribution-arrow-icon'>
-            <img src={greaterthanicon} alt="arrow icon" />
-          </span>
-        </Link>
-      </div>
+      <ContributionBanner />
     </>
   );
 };

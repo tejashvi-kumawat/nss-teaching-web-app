@@ -1,3 +1,4 @@
+/* Base container styling */
 .previousYearPapers-and-results-papers-container {
     width: 100%;
     background-color: #F5FAF5;
@@ -6,10 +7,10 @@
 }
 
 .previousYearPapers-and-results-paper-section {
-    background-color: #F5F8F5;
+    background-color: #F5FAF5;
     transition: all 0.3s ease;
     width: 100%;
-    /* Small gap between sections */
+    margin-bottom: 0.5vh;
 }
 
 /* First section styling */
@@ -25,6 +26,7 @@
     margin-bottom: 0;
 }
 
+/* Section header styling to match AnnouncementItem */
 .previousYearPapers-and-results-section-header {
     min-height: 13vh;
     display: flex;
@@ -34,23 +36,23 @@
     cursor: pointer;
     margin: 0;
     background-color: #E9F2E9;
-}
-
-.previousYearPapers-and-results-section-header span {
-    color: #132611;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0;
+    border-radius: 8px;
 }
 
 .previousYearPapers-and-results-section-header:hover {
     background-color: #e0f5dd;
 }
 
+/* Updated font size to match requested main content size */
+.previousYearPapers-and-results-section-header span {
+    color: #132611;
+    font-size: 20px;
+    font-weight: 400;
+}
+
 .previousYearPapers-and-results-toggle-icon {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     transition: transform 0.3s ease;
 }
 
@@ -63,7 +65,8 @@
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.5s ease, opacity 0.5s ease-in-out;
-    background-color: #F5F8F5;
+    background-color: #F5FAF5;
+    border-radius: 0 0 8px 8px;
 }
 
 .previousYearPapers-and-results-section-content.show {
@@ -71,43 +74,38 @@
     opacity: 1;
 }
 
+/* Table styling */
 .previousYearPapers-and-results-papers-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #F5F8F5;
+    background-color: #F5FAF5;
 }
 
+/* Updated table text to match sub-content-1 size */
 .previousYearPapers-and-results-papers-table th,
 .previousYearPapers-and-results-papers-table td {
     padding: 12px 16px;
     text-align: center;
     font-size: 18px;
-    color: #333;
+    color: #526652;
     font-weight: 400;
-    border-bottom: 1px solid #E9F2E9;
-
+    border-bottom: 1px solid #ADCCAF;
 }
 
 .previousYearPapers-and-results-papers-table th {
-    background-color: #F5F8F5;
-    color: #333;
+    background-color: #F5FAF5;
+    color: #132611;
     position: relative;
     font-weight: 500;
-    border-bottom: 1px solid #E9F2E9;
+    border-bottom: 2px solid #ADCCAF;
     padding-bottom: 8px;
+    font-size: 20px;
 }
 
 .previousYearPapers-and-results-sortable-header {
     position: relative;
     cursor: pointer;
     padding-right: 16px;
-}
-
-.previousYearPapers-and-results-sortable-header::after {
-    position: absolute;
-    right: 0;
-    color: #999;
-    font-size: 12px;
 }
 
 .previousYearPapers-and-results-file-name {
@@ -132,15 +130,16 @@
     cursor: pointer;
 }
 
+/* Updated divider to match AnnouncementItem */
 .previousYearPapers-and-results-divider {
     height: 1px;
-    background-color: #EBEBEB;
+    background-color: #ADCCAF;
     width: 100%;
     display: block;
-    /* Ensure it's visible */
+    margin: 0.5vh 0;
 }
 
-/* Add wrapper styles */
+/* Wrapper styles */
 .previousYearPapers-and-results-wrapper {
     width: 100%;
 }
@@ -150,30 +149,67 @@
     height: 20px;
 }
 
-.previousYearPapers-and-results-papers-table span {
-    color: #132611;
+/* Remove border from last row in table */
+.previousYearPapers-and-results-papers-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
-
-/* Responsive styles for PreviousYearPapers component */
-
-@media (max-width: 1200px) {
+/* Responsive styles for tablet breakpoint (768px) */
+@media (max-width: 768px) {
     .previousYearPapers-and-results-section-header {
-        /* flex-direction: column; */
-        /* align-items: flex-start; */
-        padding: 10px;
+        min-height: 8vh;
+        padding: 15px 2%;
     }
 
     .previousYearPapers-and-results-section-header span {
         font-size: 18px;
+        /* Main content at 768px */
+    }
+
+    .previousYearPapers-and-results-papers-table th {
+        font-size: 18px;
+        /* Main content at 768px */
+    }
+
+    .previousYearPapers-and-results-papers-table td {
+        font-size: 16px;
+        /* Sub-content-1 at 768px */
+        padding: 10px;
+    }
+
+    .previousYearPapers-and-results-pdf-icon {
+        width: 24px;
+        height: 26px;
+    }
+
+    .previousYearPapers-and-results-download-icon {
+        width: 90px;
+        height: 40px;
     }
 }
 
-@media (max-width: 768px) {
-
-    .previousYearPapers-and-results-papers-table th,
-    .previousYearPapers-and-results-papers-table td {
+/* Responsive styles for mobile breakpoint (480px) */
+@media (max-width: 480px) {
+    .previousYearPapers-and-results-section-header span {
         font-size: 14px;
+        /* Main content at 480px */
+    }
+
+    .previousYearPapers-and-results-papers-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .previousYearPapers-and-results-papers-table th {
+        font-size: 14px;
+        /* Main content at 480px */
+        white-space: nowrap;
+    }
+
+    .previousYearPapers-and-results-papers-table td {
+        font-size: 12px;
+        /* Sub-content-1 at 480px */
+        white-space: nowrap;
         padding: 8px;
     }
 
@@ -183,29 +219,12 @@
     }
 
     .previousYearPapers-and-results-download-icon {
-        width: 80px;
-        height: 40px;
+        width: 70px;
+        height: 35px;
     }
 
-    .previousYearPapers-and-results-section-header {
-        min-height: 8vh;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .previousYearPapers-and-results-section-header span {
-        font-size: 16px;
-        padding-left: 10px;
-    }
-
-    .previousYearPapers-and-results-papers-table {
-        display: block;
-        overflow-x: auto;
-    }
-
-    .previousYearPapers-and-results-papers-table th,
-    .previousYearPapers-and-results-papers-table td {
-        white-space: nowrap;
+    .previousYearPapers-and-results-toggle-icon {
+        width: 20px;
+        height: 20px;
     }
 }

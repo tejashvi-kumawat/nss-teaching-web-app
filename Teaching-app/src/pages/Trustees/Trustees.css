@@ -1,172 +1,109 @@
+/* Base Styles */
 .TrusteesBody {
-    background-color: #f5f9f3;
-    font-family: "Montserrat", "Helvetica Neue", sans-serif;
-    margin: 0 auto;
+    background-color: #F5FAF5;
+    margin: 0 auto 5% auto;
+    width: 85vw;
     max-width: 1440px;
-    /* padding: 40px; */
-    color: #2F4F2F;
+    color: #132611;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.TrusteesBannerSection {
-    text-align: center;
-    margin: 0 auto;
-    max-width: 1440px;
-    position: relative;
-}
-
-
-.TrusteesBannerImageBox {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.TrusteesBannerImage {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 20px;
-    z-index: 1;
-}
-
-.Trustees_background_cover {
-    width: 100%;
-    background-color: green;
-    position: absolute;
-    left: 0px;
-    z-index: 2;
-    opacity: 0.4;
-    bottom: 0%;
-    border-radius: 24px;
-}
-
-.TrusteesBannerOverlayText {
-    position: absolute;
-    bottom: 10%;
-    left: 5%;
-    color: white;
-    text-align: left;
-    width: 90%;
-    z-index: 3;
-}
-
-.TrusteesBannerOverlayText h2 {
-    font-size: 2.2rem;
-    font-weight: 600;
-    opacity: 0.9;
-    color: #ADCCAF;
-}
-
-.TrusteesBannerOverlayText h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #F5FAF5;
-}
-
-.TrusteesBannerDescription {
-    margin-top: 25px;
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    max-width: 550px;
-    text-align: left;
-    margin: 2rem 0rem 2rem 0rem;
-
-}
-
+/* Trustees Container */
 .TrusteesContainer {
+    width: 100%;
+}
+
+.TrusteesContainer-even {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1440px;
-    margin: auto;
-    padding: 20px;
 }
 
+.TrusteesContainer-odd {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
 .TrusteesTextBox {
+    padding: 2.5rem 0 0 0;
     width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
+    gap: 12px;
 }
 
-.TrusteesNumberHeading-odd,
 .TrusteesNumberHeading {
     opacity: 0.15;
-    color: rgb(25, 85, 80);
+    color: #2E7D32;
     font-size: 4rem;
     font-weight: bolder;
     position: absolute;
-    top: -40px;
-    left: -10px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    top: 0px;
+    left: 0px;
 }
 
 .TrusteesTextHeading {
-    font-family: "Montserrat", "Helvetica Neue", sans-serif;
-    font-weight: 600;
-    color: #174f4b;
-    font-size: 1.8rem;
-    margin-bottom: 10px;
+    font-weight: 700;
+    color: #132611;
+    font-size: 32px;
     z-index: 2;
-    padding-left: 20px;
+    margin-left: 2.5rem;
 }
 
-.Trustees-Points-TextPara {
-    color: #2F4F2F !important;
-    font-size: 18px;
-    line-height: 1.6;
-    font-family: Arial, sans-serif;
-}
 
+/* Points List */
 .Trustees-Object-Points {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    /* gap: 12px; */
 }
 
-.Trustees-Object-Points li {
-
+.Trustees-Object-Points li,
+.Trustees-Points-TextPara {
     color: #526652;
     position: relative;
-    padding-left: 60px;
-    margin-bottom: 25px;
-    font-weight: 300;
-    line-height: 1.4;
+    padding-left: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    font-size: 24px;
 }
 
 .Trustees-Object-Points li::before {
     content: "";
     position: absolute;
-    margin-left: 30px;
     left: 0;
-    top: 6px;
+    top: 0.5rem;
     width: 12px;
     height: 12px;
     background-color: #2E7D32;
-    /* Green bullet */
     border-radius: 50%;
+    margin-left: 30px;
 }
 
-/* Creates the connecting line between bullets */
 .Trustees-Object-Points li:not(:last-child)::after {
     content: "";
-    margin-left: 30px;
     position: absolute;
     left: 6px;
-    /* Center the line with the bullet */
     top: 16px;
-    /* Start below the bullet */
     width: 0.6px;
     opacity: 50%;
     height: calc(100% + 18px);
-    /* Extend to the next bullet */
     background-color: #2E7D32;
-    /* Green connector */
+    margin-left: 30px;
 }
 
 .TrusteesTrustImageBox {
-    width: 30%;
-    height: 300px;
+    width: 80%;
+    height: 100%;
+    max-width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,7 +111,8 @@
 
 .TrusteesTrustImage {
     border-radius: 10px;
-    width: 300px;
+    width: 100%;
+    max-width: 473px;
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: top;
@@ -183,141 +121,29 @@
 }
 
 .TrusteesTrustImage:hover {
-    border: 4px solid #A5C7A1;
-    box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.2);
+    border: 4px solid #ADCCAF;
+    box-shadow: 0px 4px 10px #e0f5dd;
     border-radius: 12px;
 }
 
-@media screen and (max-width: 700px) {
-    .TrusteesBannerOverlayText h2 {
-        font-size: 1.5rem;
-    }
-
-    .TrusteesBannerOverlayText h1 {
-        font-size: 1.8rem;
-    }
-
-    .TrusteesTrustImage {
-        width: 200px;
-    }
-
-    .Trustees-Object-Points li {
-        font-size: 0.9rem;
-    }
-
-    .TrusteesTextHeading {
-        font-size: 1.3rem;
-    }
-
-    .TrusteesNumberHeading-odd,
-    .TrusteesNumberHeading {
-        font-size: 3rem;
-        top: -29px;
-        left: -7px;
-    }
-
-    .TrusteesNumberHeading-odd {
-        top: -33px;
-    }
-
-    .TrusteesContainer {
-        flex-direction: column;
-        margin-bottom: 2rem;
-    }
-
-    .TrusteesContainer-odd {
-        flex-direction: column-reverse;
-    }
-}
-
-@media screen and (max-width:450px) {
-    .TrusteesBannerOverlayText h2 {
-        font-size: 1.1rem;
-    }
-
-    .TrusteesBannerOverlayText h1 {
-        font-size: 1.3rem;
-    }
-
-    .TrusteesBannerDescription {
-        font-size: 0.8rem;
-    }
-
-    .TrusteesTextBox {
-        width: 100%;
-    }
-
-    .TrusteesTrustImage {
-        width: 70vw;
-    }
-
-    .Trustees-Object-Points li {
-        font-size: 0.9rem;
-    }
-
-    .TrusteesTextHeading {
-        font-size: 1.3rem;
-    }
-
-    .TrusteesNumberHeading-odd,
-    .TrusteesNumberHeading {
-        font-size: 3rem;
-        top: -29px;
-        left: -7px;
-    }
-
-    .TrusteesNumberHeading-odd {
-        top: -32px;
-    }
-}
-
-@media (max-width: 1650px) {
-    .TrusteesBody {
-        width: 85%;
-    }
-}
-
-@media (max-width: 768px) {
-    .TrusteesContainer {
-        padding: 0px;
-    }
-
-    .TrusteesTextBox {
-        width: 100%;
-    }
-
-    .TrusteesBody {
-        width: 90%;
-    }
-
-}
-
-@media (max-width: 480px) {
-    .TrusteesContainer-even {
-        flex-direction: column;
-    }
-
-    .TrusteesContainer-odd {
-        flex-direction: column-reverse;
-    }
-}
-
-/* Home components */
+/* Home Component Styles */
 .TrusteesHomeBody {
-    font-weight: 700;
-    font-family: "Open Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .TrusteesHomeHeading {
     color: #132611;
-    font-size: 32px;
-    margin-top: 30px;
+    font-size: 38px;
+    /* Main heading */
+    font-weight: 600;
 }
 
 .TrusteesHomeDescription {
     color: #526652;
-    font-size: 20px;
-    margin: 20px 0;
+    font-size: 32px;
+    /* Sub-heading-1 */
     font-weight: 400;
 }
 
@@ -331,7 +157,6 @@
 
 .TrusteesHomeFlex {
     width: 280px;
-    background-color: #F5FAF5;
     margin-bottom: 2%;
 }
 
@@ -346,7 +171,8 @@
 
 .TrusteesHomeName {
     color: #526652;
-    font-size: 18px;
+    font-size: 24px;
+    /* Main content */
     position: relative;
 }
 
@@ -360,21 +186,24 @@
 
 .TrusteesHomeImageDescription {
     color: #526652;
-    font-size: 16px;
+    font-size: 20px;
+    /* Sub-content-1 */
     font-weight: 400;
 }
 
-@media screen and (min-width: 700px) {
+/* Responsive Design - All Breakpoints */
+
+@media screen and (min-width: 768px) {
     .TrusteesHomeFlex:hover .TrusteesHomeImage {
-        background-color: #2E7D3210;
+        background-color: #E9F2E9;
         border: 0;
-        box-shadow: 2px 2px 10px 5px #2E7D3220;
+        box-shadow: 2px 2px 10px 5px #e0f5dd;
         transition-duration: 300ms;
         transition-timing-function: ease;
     }
 
     .TrusteesHomeFlex:hover .TrusteesHomeName {
-        color: #2E7D32;
+        color: #1b5e20;
         transition-duration: 300ms;
         transition-timing-function: ease;
     }
@@ -386,21 +215,72 @@
     }
 
     .TrusteesHomeFlex:hover .TrusteesHomeDescription {
-        color: #2E7D32;
+        color: #1b5e20;
         transition-duration: 300ms;
         transition-timing-function: ease;
     }
 }
 
-@media screen and (min-width: 450px) and (max-width: 700px) {
-    .TrusteesHomeHeading {
+/* Medium screens (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .TrusteesBody {
+        width: 90vw;
+    }
+
+    .TrusteesTextBox {
+        width: 100%;
+    }
+
+    .TrusteesNumberHeading {
+        font-size: 3.5rem;
+        top: 0px;
+        left: 0px;
+    }
+
+    .TrusteesContainer {
+        flex-direction: column;
+        padding: 2rem 0;
+    }
+
+    /* .TrusteesContainer-odd {
+        flex-direction: column-reverse;
+    } */
+
+    /* Typography adjustments */
+    .TrusteesBannerOverlayText h1 {
+        font-size: 28px;
+    }
+
+    .TrusteesBannerOverlayText h2 {
+        font-size: 28px;
+    }
+
+    .TrusteesTextHeading {
+        font-size: 24px;
+    }
+
+    .Trustees-Points-TextPara {
         font-size: 18px;
     }
 
+    .TrusteesBannerDescription {
+        font-size: 18px;
+    }
+
+    .TrusteesHomeHeading {
+        font-size: 28px;
+    }
+
     .TrusteesHomeDescription {
-        font-size: 14px;
-        margin: 0;
-        margin-bottom: 10px;
+        font-size: 24px;
+    }
+
+    .TrusteesHomeName {
+        font-size: 18px;
+    }
+
+    .TrusteesHomeImageDescription {
+        font-size: 16px;
     }
 
     .TrusteesHomeFlexbox {
@@ -409,24 +289,52 @@
     }
 
     .TrusteesHomeFlex {
-        width: 200px
+        width: 200px;
     }
 
     .TrusteesHomePointer {
-        right: none;
+        right: unset;
         left: 175px;
     }
 }
 
-@media screen and (max-width: 450px) {
+/* Small screens (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .TrusteesBannerDescription {
+        font-size: 14px;
+    }
+
+    /* Typography adjustments */
+    .TrusteesBannerOverlayText h1 {
+        font-size: 18px;
+    }
+
+    .TrusteesBannerOverlayText h2 {
+        font-size: 18px;
+    }
+
+    .Trustees-Points-TextPara {
+        font-size: 14px;
+    }
+
+    .TrusteesTextHeading {
+        font-size: 16px;
+    }
+
     .TrusteesHomeHeading {
         font-size: 18px;
     }
 
     .TrusteesHomeDescription {
+        font-size: 16px;
+    }
+
+    .TrusteesHomeName {
         font-size: 14px;
-        margin: 0;
-        margin-bottom: 10px;
+    }
+
+    .TrusteesHomeImageDescription {
+        font-size: 12px;
     }
 
     .TrusteesHomeFlexbox {
@@ -436,13 +344,5 @@
 
     .TrusteesHomeFlex {
         width: 150px;
-    }
-
-    .TrusteesHomeName {
-        font-size: 12px;
-    }
-
-    .TrusteesHomeImageDescription {
-        font-size: 12px;
     }
 }

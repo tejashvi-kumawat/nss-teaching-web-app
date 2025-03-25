@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./GetInvolved.css";
-import "../ForStudents/ForStudents.css";
+import "../ForStudents/ForStudents.css"; // Already imported, ensures tab styles are available
 import DonateForm from "../../components/GetInvolved/DonateForm";
-import PartnerUs from "../../components/GetInvolved/PartnerwithUs"
+import PartnerUs from "../../components/GetInvolved/PartnerwithUs";
 
 // Define components outside of the main component
 const VolunteerForm = ({
@@ -55,31 +55,19 @@ const VolunteerForm = ({
         <div className="get-involved-form-group">
           <label htmlFor="role">Role</label>
           <div className="custom-dropdown" ref={dropdownRef}>
-            <div
-              className="dropdown-header"
-              onClick={toggleDropdown}
-            >
+            <div className="dropdown-header" onClick={toggleDropdown}>
               {selectedRole || "Choose role"}
               <span className="dropdown-arrow">&#9662;</span>
             </div>
             {isDropdownOpen && (
               <div className="dropdown-content">
-                <div
-                  className="dropdown-item"
-                  onClick={() => selectRole("Mentoring")}
-                >
+                <div className="dropdown-item" onClick={() => selectRole("Mentoring")}>
                   Mentoring
                 </div>
-                <div
-                  className="dropdown-item"
-                  onClick={() => selectRole("Teaching")}
-                >
+                <div className="dropdown-item" onClick={() => selectRole("Teaching")}>
                   Teaching
                 </div>
-                <div
-                  className="dropdown-item"
-                  onClick={() => selectRole("Administrative support")}
-                >
+                <div className="dropdown-item" onClick={() => selectRole("Administrative support")}>
                   Administrative support
                 </div>
               </div>
@@ -159,53 +147,45 @@ function GetInvolved() {
   const [email, setEmail] = useState("");
 
   return (
-    <div className="get-involved-main-container">
-      {/* Breadcrumb Navigation */}
+    <div className="for-students-container"> {/* Updated class */}
       <div className="breadcrumb">
         <Link to="/" className="breadcrumb-link">Home</Link>
         <span className="breadcrumb-separator">&gt;</span>
         <span className="breadcrumb-current">Get Involved</span>
       </div>
 
-      {/* Main Content */}
-      <div className="get-involved-content-container">
-        <div className="get-involved-title-container">
-          <h1 className="get-involved-page-title">Get Involved</h1>
-          <p className="get-involved-description">
+      <div className="for-students-student-resources"> {/* Updated class */}
+        <div className="for-students-title-container"> {/* Updated class */}
+          <h1 className="for-students-page-title">Get Involved</h1> {/* Updated class */}
+          <p className="for-students-description"> {/* Updated class */}
             Your impact, your choice: Choose how you want to contribute.
           </p>
         </div>
 
-        {/* Tabs Container*/}
         <div className="for-students-tabs-container">
-          {/* Tabs */}
           <div className="for-students-resource-tabs">
             <div
-              className={`for-students-tab ${activeTab === "Volunteer" ? "active" : ""
-                }`}
+              className={`for-students-tab ${activeTab === "Volunteer" ? "active" : ""}`}
               onClick={() => setActiveTab("Volunteer")}
             >
               Volunteer
             </div>
             <div
-              className={`for-students-tab ${activeTab === "Donate" ? "active" : ""
-                }`}
+              className={`for-students-tab ${activeTab === "Donate" ? "active" : ""}`}
               onClick={() => setActiveTab("Donate")}
             >
               Donate
             </div>
             <div
-              className={`for-students-tab ${activeTab === "Partner with us" ? "active" : ""
-                }`}
+              className={`for-students-tab ${activeTab === "Partner with us" ? "active" : ""}`}
               onClick={() => setActiveTab("Partner with us")}
             >
               Partner with us
             </div>
           </div>
 
-          {/* Tab Content */}
           {activeTab === 'Volunteer' && (
-            <div className="for-students-tab-content announcementItem-announcements-container">
+            <div className="for-students-tab-content">
               <VolunteerForm
                 selectedRole={selectedRole}
                 setSelectedRole={setSelectedRole}

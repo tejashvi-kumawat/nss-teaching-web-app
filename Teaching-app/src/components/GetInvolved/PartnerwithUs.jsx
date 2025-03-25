@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-// import { useState } from "react-router-dom"; - This import seems incorrect, useState comes from React
+import { useNavigate } from 'react-router-dom';
 import "./PartnerwithUs.css";
+import arrowicon from '../../assets/bx-right-arrow-alt.svg'
 
-/**
- * PartnerWithUs Component
- * Displays partnership options that expand to show descriptions when clicked
- */
 const PartnerUs = () => {
-  // State to track which description is currently visible
-  const [visibleDesc, setVisibleDesc] = useState(null);
-
   // Partnership options data - could be moved to a separate file in a larger application
   const partnershipOptions = [
     {
@@ -39,63 +33,35 @@ const PartnerUs = () => {
     },
   ];
 
-  /**
-   * Toggle description visibility when a partnership option is clicked
-   * @param {number} id - The ID of the clicked partnership option
-   */
-  const handlePartnershipClick = (id) => {
-    setVisibleDesc((prevId) => (prevId === id ? null : id)); // Toggle visibility
+  // right now on click, it is navigating to announcementdetails page. 
+  // if needed to change in future, create a new component and add its route to app.jsx
+
+  const navigate = useNavigate();
+
+  const handleClick = (option) => {
+    navigate(`/partnership-option/${option.id}`, {
+      state: {
+        option,
+        comingFrom: '/get-involved',
+      }
+    });
+    window.scrollTo(0, 0);
   };
 
-  // Commented out routing code for future implementation
-  // const handlePartnershipClick = (option) => {
-  //   navigate(`/partnership/${option.id}`, {
-  //     state: { partnershipOption: option },
-  //   });
-  // };
-
   return (
-    <div className="partnerWithUs-container">
-      {partnershipOptions.map((option) => (
-        <React.Fragment key={option.id}>
-          {/* Partnership option item - clickable to expand/collapse */}
-          <div
-            className="partnerWithUs-item"
-            onClick={() => handlePartnershipClick(option.id)}
-            aria-expanded={visibleDesc === option.id}
-            role="button"
-          >
-            <div className="partnerWithUs-content">
-              {option.title}
-              {/* Arrow icon */}
-              <svg
-                className="partnerWithUs-arrow"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  d="M9 6l6 6-6 6"
-                  stroke="#2E7D32"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+    <div className="for-students-tab-content announcementItem-announcements-container">
+      {partnershipOptions.length > 0 ? (
+        partnershipOptions.map((option, index) => (
+          <div key={option.id} className="announcementItem-announcements-container">
+            {index > 0 && <div className="announcementItem-announcement-divider"></div>}
+            <div className="announcementItem-announcement-item" onClick={() => handleClick(option)}>
+              <div className="announcementItem-announcement-header">
+                <div className="announcementItem-announcement-item-title">{option.title}</div>
+                <span className="announcementItem-arrow-icon"><img className='announcementItem-announcement-arrow-icon' src={arrowicon} alt="arrow icon" /></span>
+              </div>
             </div>
           </div>
-          
-          {/* Expandable description section - shown only when the option is selected */}
-          {visibleDesc === option.id && (
-            <div className="hidden-desc-partner-with-us">
-              {option.desc}
-            </div>
-          )}
-        </React.Fragment>
-      ))}
+        ))) : 'No options available currently'}
     </div>
   );
 };

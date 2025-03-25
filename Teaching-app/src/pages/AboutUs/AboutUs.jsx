@@ -1,17 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useImagePreloader, extractImageSources, LoadingIndicator } from '../../utils/ImagePreloader';
+
 import "./AboutUs.css";
+import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx';
+import Banner from "../../components/Banner/Banner.jsx";
+
 import MessageContainer from "../../components/MessageContainer/MessageContainer";
 import founderImage from "../../assets/founder.png";
 import nidhi_pandey from "../../assets/nidhi_pandey.svg";
 import AboutUs_Ourvision from "../../assets/AboutUs_OurVision.png";
 import AboutUs_Mission from "../../assets/AboutUs_OurMission.png";
-import { Link } from "react-router-dom";
-import { BannerSection_About } from '../Teaching/TeachingData';
-import ContributionBanner from '../../components/ContributionBanner/ContributionBanner.jsx';
-import { useImagePreloader, extractImageSources, LoadingIndicator } from '../../utils/ImagePreloader';
+
 
 const AboutUs = () => {
-  // Define message data (assuming this was intended to be populated)
   const messageData = [
     {
       name: "J.P. Dabral",
@@ -48,14 +50,8 @@ const AboutUs = () => {
     AboutUs_Mission
   ];
 
-  // Get image sources from BannerSection_About React elements
-  const bannerImages = extractImageSources(BannerSection_About);
-
-  // Combine all image sources
-  const allImageSources = [...directImages, ...bannerImages];
-
   // Use the image preloader hook
-  const { isLoading, loadingProgress } = useImagePreloader(allImageSources);
+  const { isLoading, loadingProgress } = useImagePreloader(directImages);
 
   // Show loading indicator while images are loading
   if (isLoading) {
@@ -64,7 +60,7 @@ const AboutUs = () => {
 
   return (
     <>
-      <div className="about-us-container">
+      <div className="TrusteesBody">
         {/* Breadcrumb Navigation */}
         <div className="breadcrumb">
           <Link to="/" className="breadcrumb-link">Home</Link>
@@ -72,23 +68,16 @@ const AboutUs = () => {
           <span className="breadcrumb-current">About Us</span>
         </div>
 
-        {/* Hero section with background image and overlay */}
-        <div className="TeachingBannerSection">
-          <div className="TeachingBannerImageBox">
-            <img className='TeachingBannerImage' src={BannerSection_About.image} alt={BannerSection_About.altImage} />
-            <span className='TeachingBannerOverlayText'>About Us</span>
-          </div>
-          <p className="TeachingBannerDescription">{BannerSection_About.description}</p>
-        </div>
+        {/* Banner */}
+        <Banner bannerFor='about-us' />
 
         {/* About Us Section */}
         <div className="about-us-container">
-
           {/* Vision Section */}
-          <div className="about-us-vision-section">
-            <h1>Our Vision</h1>
-            <div className="vision-content">
-              <ul className="about-us-our-vision">
+          <h1 className="TeachingHeadings">Our Vision</h1>
+          <div className="TrusteesContainer TrusteesContainer-even">
+            <div className="TrusteesTextBox">
+              <ul className="Trustees-Object-Points">
                 <li>
                   Develop a sustainable educational model for rural Uttarakhand
                 </li>
@@ -98,6 +87,8 @@ const AboutUs = () => {
                 </li>
                 <li>Prepare students for success in life</li>
               </ul>
+            </div>
+            <div className="TrusteesTrustImageBox">
               <img
                 src={AboutUs_Ourvision}
                 alt="Students and staff"
@@ -115,9 +106,9 @@ const AboutUs = () => {
               padding: "40px 0",
             }}
           >
-            <h1>Our Mission</h1>
-            <div className="mission-content">
-              <div className="mission-points">
+            <h1 className="TeachingHeadings">Our Mission</h1>
+            <div className="TrusteesContainer TrusteesContainer-even">
+              <div className="TrusteesTextBox">
                 <div className="mission-point">
                   <div className="checkbox">✓</div>
                   <p>
@@ -141,11 +132,13 @@ const AboutUs = () => {
                   </p>
                 </div>
               </div>
-              <img
-                src={AboutUs_Mission}
-                alt="Teacher with student"
-                className="our-mission-image"
-              />
+              <div className="TrusteesTrustImageBox">
+                <img
+                  src={AboutUs_Mission}
+                  alt="Teacher with student"
+                  className="our-mission-image"
+                />
+              </div>
             </div>
           </div>
         </div>

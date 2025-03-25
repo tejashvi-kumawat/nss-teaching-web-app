@@ -9,7 +9,9 @@ import BackButton from '../BackButton/BackButton.jsx';
 const HomeVolunteerExperience = () => {
     const renderCard = (volunteerObject) => (
         <div className="home-volunteer-box TeachingVolunteerBox">
-            <img className='home-TeachingVolunteerImage TeachingVolunteerImage' src={volunteerObject.image} alt={volunteerObject.altImage} />
+            <span>
+                <img className='home-TeachingVolunteerImage TeachingVolunteerImage' src={volunteerObject.image} alt={volunteerObject.altImage} />
+            </span>
             <div className="home-TeachingVolunteerHeading TeachingVolunteerHeading">
                 {volunteerObject.name}
             </div>

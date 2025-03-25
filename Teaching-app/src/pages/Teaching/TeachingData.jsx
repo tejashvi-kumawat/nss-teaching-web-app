@@ -9,8 +9,6 @@ import WeeklyAndSurpriseTests from "../../assets/WeeklyAndSurpriseTests.jpeg";
 import MentorshipPrograms from "../../assets/MentorshipProgram.png";
 import TeachingApproach1 from "../../assets/TeachingApproach1.jpeg";
 import TeachingApproach2 from "../../assets/TeachingApproach2.jpeg";
-import TeachingBanner from "../../assets/TeachingBanner.png";
-import AboutUs_background from "../../assets/AboutUs_background.png";
 import Volunteer1 from "../../assets/Volunteer1.jpeg";
 import Volunteer2 from "../../assets/Volunteer2.jpeg";
 import Volunteer3 from "../../assets/Volunteer3.jpeg";
@@ -28,23 +26,33 @@ import Testimonial4 from "../../assets/Testimonial4.png";
 import Testimonial5 from "../../assets/Testimonial5.png";
 
 // Banner section data - contains only raw data, no JSX
-export const BannerSection_Teaching = {
-    image: TeachingBanner,
-    imageAlt: "students studying",
-    description: "Our teaching focuses on transformative educational programs, including coaching camps, tests, and mentorship. With innovative methods, we inspire students.",
-    overlayText: "Teaching"
-};
 
-export const BannerSection_About = {
-    image: AboutUs_background,
-    imageAlt: "students studying",
-    description: "We strive to bridge the education gap in rural Uttarakhand empowering students for success. J.P. Dabral has dedicated over three decades to this mission, transforming countless lives.",
-    overlayText: "About Us"
-};
+//Teaching Reports Data
+export const TeachingReportsData = [
+    {
+        title: 'Report_title1',
+        placeName: 'Salkot',
+        year: "2024",
+        lastUpdated: "2025-03-14T14:30:00", // ISO date string
+    },
+    {
+        title: 'Report_title2',
+        placeName: 'Narayan Bhagar',
+        year: "2023",
+        lastUpdated: "2024-03-15T14:30:00", // ISO date string
+    },
+    {
+        title: 'Report_title3',
+        placeName: 'Place name',
+        year: "20XX",
+        lastUpdated: "2024-02-15T14:30:00", // ISO date string
+    },
+];
 
 // Teaching programs data
-export const TeachingPrograms = [
+export const TeachingProgramsData = [
     {
+        id: 1,
         number: "01",
         name: "Intensive coaching camps",
         images: [
@@ -76,6 +84,7 @@ export const TeachingPrograms = [
         ]
     },
     {
+        id: 2,
         number: "02",
         name: "Weekly and Surprise tests",
         images: [
@@ -100,6 +109,7 @@ export const TeachingPrograms = [
         ]
     },
     {
+        id: 3,
         number: "03",
         name: "Mentorship programs",
         images: [
@@ -119,7 +129,7 @@ export const TeachingPrograms = [
 ];
 
 // Teaching approach data
-export const TeachingApproach = {
+export const TeachingApproachData = {
     heading: "Teaching Approach",
     points: [
         {
@@ -152,7 +162,7 @@ export const TeachingApproach = {
 };
 
 // Testimonials data
-export const TeachingTestimonials = [
+export const TeachingTestimonialsData = [
     {
         image: Testimonial1,
         imageAlt: "Sneha Kandari Testimonial",

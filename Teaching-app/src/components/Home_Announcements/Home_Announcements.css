@@ -9,7 +9,7 @@
 .home-announcements-section h2 {
     color: #132611;
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .view-all-link .back-button {
@@ -24,8 +24,14 @@
     transform: rotate(180deg);
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
     .home-announcements-section h2 {
         font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home-announcements-section h2 {
+        font-size: 16px;
     }
 }
