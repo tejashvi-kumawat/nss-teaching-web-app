@@ -26,6 +26,7 @@ const Home_About = () => {
                         to="/about-us"
                         className='contribution-banner-container-button home-about-learn-more'
                         onClick={() => window.scrollTo(0, 0)}
+                        aria-label="Learn More about the himalayan vidya daan trust"
                     >
                         <span>Learn More</span>
                         <span className='contribution-banner-arrow-icon'>
