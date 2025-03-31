@@ -4,18 +4,21 @@ import CarouselTray from '../CarouselTray/CarouselTray';
 import { TeachingVolunteerList } from '../../pages/Teaching/TeachingData';
 import '../Home_Announcements/Home_Announcements.css';
 import './Home_VolunteerExperience.css';
+import '../TeachingPageComponents/TeachingVolunteerExperience/TeachingVolunteerExperience.css';
 import BackButton from '../BackButton/BackButton.jsx';
 
 const HomeVolunteerExperience = () => {
     const renderCard = (volunteerObject) => (
-        <div className="home-volunteer-box TeachingVolunteerBox">
-            <span>
-                <img className='home-TeachingVolunteerImage TeachingVolunteerImage' src={volunteerObject.image} alt={volunteerObject.altImage} />
-            </span>
-            <div className="home-TeachingVolunteerHeading TeachingVolunteerHeading">
+        <div className="home-volunteer-box">
+            <img
+                className='home-TeachingVolunteerImage'
+                src={volunteerObject.image}
+                alt={volunteerObject.altImage || volunteerObject.name}
+            />
+            <div className="home-TeachingVolunteerHeading">
                 {volunteerObject.name}
             </div>
-            <div className="home-TeachingVolunteerText TeachingVolunteerText">
+            <div className="home-TeachingVolunteerText">
                 {volunteerObject.description}
             </div>
         </div>
@@ -34,7 +37,7 @@ const HomeVolunteerExperience = () => {
             <CarouselTray
                 items={TeachingVolunteerList}
                 renderCard={renderCard}
-                cardsPerViewConfig={{ desktop: 2, mobile: 1 }}
+                cardsPerViewConfig={{ desktop: 2, mobile: 2 }}
             />
         </div>
     );

@@ -5,28 +5,6 @@
     /* padding: 0 20px; */
 }
 
-/* Breadcrumb styles - reusing from Downloads.css */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    margin: 20px 0;
-    font-size: 14px;
-    color: #526652;
-}
-
-.breadcrumb-link {
-    text-decoration: none;
-    color: #526652;
-}
-
-.breadcrumb-separator {
-    margin: 0 8px;
-}
-
-.breadcrumb-current {
-    color: #526652;
-}
-
 /* Header section */
 .DownloadsInsideAnyCampGallery-header {
     display: flex;

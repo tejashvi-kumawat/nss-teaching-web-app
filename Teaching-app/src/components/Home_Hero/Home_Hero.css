@@ -131,6 +131,10 @@
         font-size: 28px;
     }
 
+    .home-hero-description {
+        font-size: 18px;
+    }
+
     .home-hero-section-content {
         max-width: 100%;
         order: 1;
@@ -152,7 +156,11 @@
     }
 
     .home-hero-title h2 {
-        font-size: 18px;
+        font-size: 20px;
+    }
+
+    .home-hero-description {
+        font-size: 14px;
     }
 
     .home-hero-section-content {

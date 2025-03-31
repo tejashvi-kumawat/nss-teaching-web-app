@@ -74,13 +74,8 @@
 
 @media screen and (max-width: 1100px) {
     .TeachingVolunteerImage {
-        top: -4rem;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .TeachingVolunteerImage {
         top: -3rem;
+        width: 30%;
     }
 }
 

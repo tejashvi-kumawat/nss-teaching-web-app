@@ -179,7 +179,7 @@ export const TeachingTestimonialsData = [
         image: Testimonial3,
         imageAlt: "Khushi Bisht Testimonial",
         name: "Khushi Bisht",
-        description: "My name is Khushi Bisht, and I'm now a Class 12 student at GIC, Garhkot, Chamoli. I attended the program in Narayan Bagar and Saikot, and it has been a turning point in my life. I used to be a mediocre student, scoring between 40-50%, but now I rank first in my class and consistently score 90%. In the teaching program we got very good counselling and came to know of various opportunities that we can avail. This year I will attempt for JEE also. Numerous students who have participated in our program have achieved outstanding success, securing admissions to prestigious institutions such as the National Defence Academy (NDA), Govind Ballabh Pant University, NIT Srinagar, B.Sc. Nursing and B. Pharma programs, among others."
+        description: "My name is Khushi Bisht, and I'm now a Class 12 student at GIC, Garhkot, Chamoli. I attended the program in Narayan Bagar and Saikot, and it has been a turning point in my life. I used to be a mediocre student, scoring between 40-50%, but now I rank first in my class and consistently score 90%. In the teaching program we got very good counselling and came to know of various opportunities that we can avail. This year I will attempt for JEE also."
     },
     {
         image: Testimonial4,

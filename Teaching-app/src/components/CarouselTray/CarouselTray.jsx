@@ -8,9 +8,9 @@ const CarouselTray = ({ items, renderCard, cardsPerViewConfig = { desktop: 2, mo
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPrevHovered, setIsPrevHovered] = useState(false);
     const [isNextHovered, setIsNextHovered] = useState(false);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 980);
 
-    const getCardsPerView = () => window.innerWidth <= 768 ? cardsPerViewConfig.mobile : cardsPerViewConfig.desktop;
+    const getCardsPerView = () => window.innerWidth <= 980 ? cardsPerViewConfig.mobile : cardsPerViewConfig.desktop;
     const [cardsPerView, setCardsPerView] = useState(getCardsPerView());
 
     const peakWidth = 20;
@@ -18,7 +18,7 @@ const CarouselTray = ({ items, renderCard, cardsPerViewConfig = { desktop: 2, mo
     useEffect(() => {
         const handleResize = () => {
             setCardsPerView(getCardsPerView());
-            setIsMobile(window.innerWidth <= 768);
+            setIsMobile(window.innerWidth <= 980);
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);

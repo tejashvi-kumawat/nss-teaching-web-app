@@ -135,15 +135,14 @@
 
 .TrusteesHomeHeading {
     color: #132611;
-    font-size: 38px;
+    font-size: 32px;
     /* Main heading */
     font-weight: 600;
 }
 
 .TrusteesHomeDescription {
     color: #526652;
-    font-size: 32px;
-    /* Sub-heading-1 */
+    font-size: 24px;
     font-weight: 400;
 }
 
@@ -152,11 +151,11 @@
     flex-wrap: wrap;
     align-content: space-between;
     justify-content: center;
-    column-gap: 10%;
+    column-gap: 2%;
 }
 
 .TrusteesHomeFlex {
-    width: 280px;
+    width: 459px;
     margin-bottom: 2%;
 }
 
@@ -268,11 +267,11 @@
     }
 
     .TrusteesHomeHeading {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .TrusteesHomeDescription {
-        font-size: 24px;
+        font-size: 18px;
     }
 
     .TrusteesHomeName {
@@ -284,12 +283,12 @@
     }
 
     .TrusteesHomeFlexbox {
-        column-gap: 10px;
         justify-content: center;
     }
 
     .TrusteesHomeFlex {
-        width: 200px;
+        width: 90%;
+        max-width: 376px;
     }
 
     .TrusteesHomePointer {
@@ -322,11 +321,11 @@
     }
 
     .TrusteesHomeHeading {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .TrusteesHomeDescription {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .TrusteesHomeName {
@@ -340,9 +339,5 @@
     .TrusteesHomeFlexbox {
         flex-direction: column;
         align-content: center;
-    }
-
-    .TrusteesHomeFlex {
-        width: 150px;
     }
 }
