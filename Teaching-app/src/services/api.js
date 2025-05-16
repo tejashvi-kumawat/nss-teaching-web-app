@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Ensure API_URL doesn't have a trailing slash
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
-
+// const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+const API_URL = 'http://localhost:8000'
 // Function to get CSRF token from cookies
 function getCsrfToken() {
     const name = 'csrftoken';
@@ -29,7 +29,7 @@ async function getCsrfTokenFromServer() {
                 'Accept': 'application/json'
             }
         });
-        
+
         // Get the token from cookies after the request
         return getCsrfToken();
     } catch (error) {
@@ -55,7 +55,7 @@ axiosInstance.interceptors.request.use(
         if (token) {
             config.headers.Authorization = `Token ${token}`;
         }
-        
+
         // Add CSRF token for all non-GET requests
         if (config.method !== 'get') {
             const csrfToken = await getCsrfTokenFromServer();
@@ -63,7 +63,7 @@ axiosInstance.interceptors.request.use(
                 config.headers['X-CSRFToken'] = csrfToken;
             }
         }
-        
+
         return config;
     },
     (error) => {
@@ -90,7 +90,7 @@ const api = {
             try {
                 // Get CSRF token
                 const csrfToken = await getCsrfTokenFromServer();
-                
+
                 // Make login request
                 const response = await axios.post(`${API_URL}/api/login/`, {
                     username,
@@ -103,13 +103,13 @@ const api = {
                         'X-CSRFToken': csrfToken
                     }
                 });
-                
+
                 console.log('Login API response:', response);
-                
+
                 // Store tokens
                 if (response.data && response.data.token) {
                     localStorage.setItem('token', response.data.token);
-                    
+
                     // Also store username if available
                     if (response.data.username) {
                         localStorage.setItem('username', response.data.username);
@@ -117,7 +117,7 @@ const api = {
                 } else {
                     throw new Error('No token received from server');
                 }
-                
+
                 return response.data;
             } catch (error) {
                 console.error('Login API error:', {
@@ -134,7 +134,7 @@ const api = {
             try {
                 // Get CSRF token
                 const csrfToken = await getCsrfTokenFromServer();
-                
+
                 const response = await axios.post(`${API_URL}/api/register/`, userData, {
                     withCredentials: true,
                     headers: {
@@ -166,7 +166,7 @@ const api = {
                 if (!token) {
                     throw new Error('No authentication token found');
                 }
-                
+
                 const response = await axiosInstance.get('/api/profile/', {
                     headers: {
                         'Authorization': `Token ${token}`
@@ -186,7 +186,7 @@ const api = {
             try {
                 // Get CSRF token
                 const csrfToken = await getCsrfTokenFromServer();
-                
+
                 // Make the request with proper headers
                 const response = await axios.post(`${API_URL}/contact/`, formData, {
                     withCredentials: true,
@@ -196,11 +196,11 @@ const api = {
                         'X-CSRFToken': csrfToken
                     }
                 });
-                
+
                 if (!response.data) {
                     throw new Error('No response data received');
                 }
-                
+
                 return response.data;
             } catch (error) {
                 console.error('Contact form submission error:', {
@@ -209,7 +209,7 @@ const api = {
                     status: error.response?.status,
                     headers: error.response?.headers
                 });
-                
+
                 // Provide more specific error messages
                 if (error.response?.status === 403) {
                     throw new Error('CSRF token validation failed. Please try again.');
@@ -269,22 +269,74 @@ const api = {
             try {
                 console.log('Fetching gallery items with params:', params);
                 const response = await axiosInstance.get('/gallery/', { params });
-                console.log('Gallery response:', response);
-                
+
+                // Add more detailed logging
+                console.log('Gallery raw response:', response);
+
+                if (!response.data || !Array.isArray(response.data)) {
+                    console.error('Invalid gallery response format:', response.data);
+                    return [];
+                }
+
                 // Process the response to ensure image_url is used
                 const galleryWithCorrectUrls = response.data.map(item => ({
                     ...item,
-                    // Use image_url if available, otherwise construct the URL
-                    imageUrl: item.image_url || 
-                             (item.image ? `${API_URL}${item.image.startsWith('/') ? '' : '/'}${item.image}` : '')
+                    imageUrl: item.image_url ||
+                        (item.image ? `${API_URL}${item.image.startsWith('/') ? '' : '/'}${item.image}` : ''),
+                    campName: item.camp_name || '',
+                    location: item.location || '',
+                    year: item.year || new Date(item.date).getFullYear()
                 }));
-                
+
                 return galleryWithCorrectUrls;
             } catch (error) {
+                // More detailed error logging
                 console.error('Failed to fetch gallery items:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status
+                });
                 return [];
             }
         },
+
+        // Add method to get all camps with gallery items
+        getCamps: async () => {
+            try {
+                const response = await axiosInstance.get('/gallery/camps/');
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch camps with gallery:', error);
+                return [];
+            }
+        },
+
+        // Get gallery items by camp
+        getByCamp: async (campId) => {
+            try {
+                const response = await axiosInstance.get(`/gallery/`, {
+                    params: { camp_id: campId }
+                });
+
+                // Process the response to ensure image_url is used
+                const galleryWithCorrectUrls = response.data.map(item => ({
+                    ...item,
+                    imageUrl: item.image_url ||
+                        (item.image ? `${API_URL}${item.image.startsWith('/') ? '' : '/'}${item.image}` : ''),
+                    campName: item.camp_name || '',
+                    location: item.location || '',
+                    year: item.year || new Date(item.date).getFullYear()
+                }));
+
+                return galleryWithCorrectUrls;
+            } catch (error) {
+                console.error(`Failed to fetch gallery items for camp ${campId}:`, error);
+                return [];
+            }
+        },
+
+        // Keep existing methods
         getById: async (id) => {
             try {
                 const response = await axiosInstance.get(`/gallery/${id}/`);
@@ -294,6 +346,7 @@ const api = {
                 return {};
             }
         },
+
         download: async (id) => {
             try {
                 const response = await axiosInstance.get(`/gallery/${id}/download/`, {
@@ -304,9 +357,9 @@ const api = {
                 console.error('Failed to download gallery item:', error);
                 throw error;
             }
-        }
+        },
     },
-    
+
     // Brochures
     brochures: {
         getAll: async () => {
@@ -314,16 +367,16 @@ const api = {
                 console.log('Fetching brochures from:', `${API_URL}/brochures/`);
                 const response = await axiosInstance.get('/brochures/');
                 console.log('Brochures response:', response);
-                
+
                 // Process the response to ensure file_url is used
                 const brochuresWithCorrectUrls = response.data.map(brochure => ({
                     ...brochure,
                     year: brochure.year || new Date(brochure.created_at).getFullYear(),
                     // Use file_url if available, otherwise construct the URL (with null checks)
-                    fileUrl: brochure.file_url || 
-                             (brochure.file ? `${API_URL}${brochure.file.startsWith('/') ? '' : '/'}${brochure.file}` : '')
+                    fileUrl: brochure.file_url ||
+                        (brochure.file ? `${API_URL}${brochure.file.startsWith('/') ? '' : '/'}${brochure.file}` : '')
                 }));
-                
+
                 return brochuresWithCorrectUrls;
             } catch (error) {
                 console.error('Failed to fetch brochures:', error);
@@ -343,7 +396,7 @@ const api = {
             }
         }
     },
-    
+
     // Reports
     reports: {
         getAll: async (params = {}) => {
@@ -351,16 +404,16 @@ const api = {
                 console.log('Fetching reports from:', `${API_URL}/reports/`, params);
                 const response = await axiosInstance.get('/reports/');
                 console.log('Reports response:', response);
-                
+
                 // Process the response to ensure file_url is used
                 const reportsWithCorrectUrls = response.data.map(report => ({
                     ...report,
                     year: report.year || new Date(report.created_at).getFullYear(),
                     // Use file_url if available, otherwise construct the URL (with null checks)
-                    fileUrl: report.file_url || 
-                             (report.file ? `${API_URL}${report.file.startsWith('/') ? '' : '/'}${report.file}` : '')
+                    fileUrl: report.file_url ||
+                        (report.file ? `${API_URL}${report.file.startsWith('/') ? '' : '/'}${report.file}` : '')
                 }));
-                
+
                 return reportsWithCorrectUrls;
             } catch (error) {
                 console.error('Failed to fetch reports:', error);
@@ -392,11 +445,11 @@ const api = {
                 throw error;
             }
         },
-        
+
         getFeatured: async () => {
             try {
-                const response = await axiosInstance.get('/events/', { 
-                    params: { featured: true } 
+                const response = await axiosInstance.get('/events/', {
+                    params: { featured: true }
                 });
                 return response.data;
             } catch (error) {
@@ -404,7 +457,7 @@ const api = {
                 throw error;
             }
         },
-        
+
         getById: async (id) => {
             try {
                 const response = await axiosInstance.get(`/events/${id}/`);
@@ -412,6 +465,37 @@ const api = {
             } catch (error) {
                 console.error(`Failed to fetch event ${id}:`, error);
                 throw error;
+            }
+        }
+    },
+    camps: {
+        getAll: async (params = {}) => {
+            try {
+                const response = await axiosInstance.get('/camps/', { params });
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch camps:', error);
+                return [];
+            }
+        },
+
+        getById: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/camps/${id}/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to fetch camp ${id}:`, error);
+                return null;
+            }
+        },
+
+        getGallery: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/camps/${id}/gallery/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to fetch gallery for camp ${id}:`, error);
+                return [];
             }
         }
     },
