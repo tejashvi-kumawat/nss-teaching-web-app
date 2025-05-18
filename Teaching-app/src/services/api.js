@@ -3,6 +3,7 @@ import axios from 'axios';
 // Ensure API_URL doesn't have a trailing slash
 // const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
 const API_URL = 'http://localhost:8000'
+
 // Function to get CSRF token from cookies
 function getCsrfToken() {
     const name = 'csrftoken';
@@ -44,43 +45,43 @@ const axiosInstance = axios.create({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     },
-    withCredentials: true // This is important for cookies to be sent
+    // withCredentials: true // This is important for cookies to be sent
 });
 
-// Add a request interceptor
-axiosInstance.interceptors.request.use(
-    async (config) => {
-        // Add Authorization header if token exists
-        const token = localStorage.getItem('token');
-        if (token) {
-            config.headers.Authorization = `Token ${token}`;
-        }
+// // Add a request interceptor
+// axiosInstance.interceptors.request.use(
+//     async (config) => {
+//         // Add Authorization header if token exists
+//         const token = localStorage.getItem('token');
+//         if (token) {
+//             config.headers.Authorization = `Token ${token}`;
+//         }
 
-        // Add CSRF token for all non-GET requests
-        if (config.method !== 'get') {
-            const csrfToken = await getCsrfTokenFromServer();
-            if (csrfToken) {
-                config.headers['X-CSRFToken'] = csrfToken;
-            }
-        }
+//         // Add CSRF token for all non-GET requests
+//         if (config.method !== 'get') {
+//             const csrfToken = await getCsrfTokenFromServer();
+//             if (csrfToken) {
+//                 config.headers['X-CSRFToken'] = csrfToken;
+//             }
+//         }
 
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
-    }
-);
+//         return config;
+//     },
+//     (error) => {
+//         return Promise.reject(error);
+//     }
+// );
 
-// Add a response interceptor
-axiosInstance.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        if (error.response?.status === 401) {
-            localStorage.removeItem('token');
-        }
-        return Promise.reject(error);
-    }
-);
+// // Add a response interceptor
+// axiosInstance.interceptors.response.use(
+//     (response) => response,
+//     (error) => {
+//         if (error.response?.status === 401) {
+//             localStorage.removeItem('token');
+//         }
+//         return Promise.reject(error);
+//     }
+// );
 
 // Export the axios instance with additional methods
 const api = {
@@ -180,12 +181,10 @@ const api = {
         }
     },
 
-    // Contact form submission
     contact: {
         submitForm: async (formData) => {
             try {
                 // Get CSRF token
-                const csrfToken = await getCsrfTokenFromServer();
 
                 // Make the request with proper headers
                 const response = await axios.post(`${API_URL}/contact/`, formData, {
@@ -193,7 +192,6 @@ const api = {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        'X-CSRFToken': csrfToken
                     }
                 });
 
@@ -301,6 +299,7 @@ const api = {
             }
         },
 
+
         // Add method to get all camps with gallery items
         getCamps: async () => {
             try {
@@ -315,23 +314,52 @@ const api = {
         // Get gallery items by camp
         getByCamp: async (campId) => {
             try {
+                console.log(`Fetching gallery for camp ID: ${campId}`);
                 const response = await axiosInstance.get(`/gallery/`, {
                     params: { camp_id: campId }
                 });
 
-                // Process the response to ensure image_url is used
-                const galleryWithCorrectUrls = response.data.map(item => ({
-                    ...item,
-                    imageUrl: item.image_url ||
-                        (item.image ? `${API_URL}${item.image.startsWith('/') ? '' : '/'}${item.image}` : ''),
-                    campName: item.camp_name || '',
-                    location: item.location || '',
-                    year: item.year || new Date(item.date).getFullYear()
-                }));
+                console.log('Raw gallery response:', response);
+
+                if (!response.data || !Array.isArray(response.data)) {
+                    console.error('Invalid gallery response format:', response.data);
+                    return [];
+                }
+
+                // Process the response with better error handling
+                const galleryWithCorrectUrls = response.data.map(item => {
+                    // Log each item to debug
+                    console.log('Processing gallery item:', item);
+
+                    let imageUrl = '';
+
+                    // Try to construct image URL with fallbacks
+                    if (item.image_url) {
+                        imageUrl = item.image_url;
+                    } else if (item.image) {
+                        // Make sure image path is properly formatted
+                        const imagePath = item.image.startsWith('/') ? item.image : `/${item.image}`;
+                        imageUrl = `${API_URL}${imagePath}`;
+                    }
+
+                    return {
+                        ...item,
+                        imageUrl,
+                        campName: item.camp_name || '',
+                        location: item.location || '',
+                        year: item.year || (item.date ? new Date(item.date).getFullYear() : new Date().getFullYear())
+                    };
+                });
 
                 return galleryWithCorrectUrls;
             } catch (error) {
                 console.error(`Failed to fetch gallery items for camp ${campId}:`, error);
+                console.error('Error details:', {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status,
+                    url: error.config?.url
+                });
                 return [];
             }
         },
@@ -355,6 +383,42 @@ const api = {
                 return response;
             } catch (error) {
                 console.error('Failed to download gallery item:', error);
+                throw error;
+            }
+        },
+        upload: async (galleryData) => {
+            try {
+                // Create FormData object
+                const formData = new FormData();
+
+                // Append all data to FormData
+                formData.append('title', galleryData.title);
+                formData.append('description', galleryData.description || '');
+                formData.append('date', galleryData.date);
+                formData.append('type', galleryData.type || 'regularclasses');
+                formData.append('camp', galleryData.campId);
+
+                // Append the image file last
+                if (galleryData.image) {
+                    formData.append('image', galleryData.image);
+                }
+
+                // Make the request with the correct headers for multipart/form-data
+                const response = await axios.post(`${API_URL}/gallery/`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    // Include auth token if needed
+                    ...(localStorage.getItem('token') ? {
+                        headers: {
+                            'Authorization': `Token ${localStorage.getItem('token')}`
+                        }
+                    } : {})
+                });
+
+                return response.data;
+            } catch (error) {
+                console.error('Failed to upload gallery image:', error);
                 throw error;
             }
         },
@@ -468,10 +532,87 @@ const api = {
             }
         }
     },
+
+    //Slot coordinators
+    slotCoordinators: {
+        // Get personal details
+        getPersonalDetails: async () => {
+            try {
+                const response = await axiosInstance.get('/api/slot-coordinators/details/');
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch personal details:', error);
+                throw error;
+            }
+        },
+
+        // Request OTP
+        requestOTP: async (phoneNumber) => {
+            try {
+                const response = await axiosInstance.post('/api/slot-coordinators/request-otp/', {
+                    phone_number: phoneNumber
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Failed to request OTP:', error);
+                throw error;
+            }
+        },
+
+        // Verify OTP
+        verifyOTP: async (otpCode) => {
+            try {
+                const response = await axiosInstance.post('/api/slot-coordinators/verify-otp/', {
+                    otp: otpCode
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Failed to verify OTP:', error);
+                throw error;
+            }
+        },
+
+        // Get available slots
+        getAvailableSlots: async () => {
+            try {
+                const response = await axiosInstance.get('/api/slot-coordinators/slots/');
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch available slots:', error);
+                throw error;
+            }
+        },
+
+        // Get departments
+        getDepartments: async () => {
+            try {
+                const response = await axiosInstance.get('/api/slot-coordinators/departments/');
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch departments:', error);
+                throw error;
+            }
+        },
+
+        // Submit preferences
+        submitPreferences: async (preferences) => {
+            try {
+                const response = await axiosInstance.post('/api/slot-coordinators/preferences/', preferences);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to submit preferences:', error);
+                throw error;
+            }
+        }
+    },
+
+    // Camps service
     camps: {
         getAll: async (params = {}) => {
             try {
-                const response = await axiosInstance.get('/camps/', { params });
+                console.log('fetching camps')
+                console.log("Calling:", axiosInstance.defaults.baseURL + '/api/camps/');
+                const response = await axiosInstance.get('api/camps/', { params });
                 return response.data;
             } catch (error) {
                 console.error('Failed to fetch camps:', error);
@@ -500,6 +641,237 @@ const api = {
         }
     },
 
+    // Updates service
+    updates: {
+        getByCamp: async (campId) => {
+            try {
+                const response = await axiosInstance.get(`/api/updates/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to fetch updates for camp ${campId}:`, error);
+                throw error;
+            }
+        },
+
+        // In api.js
+        create: async (updateData) => {
+            try {
+                console.log('Sending update data:', updateData);
+                const response = await axiosInstance.post('/api/add_update/', updateData);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to create update:', error);
+                throw error;
+            }
+        },
+
+
+
+        delete: async (updateId) => {
+            try {
+                const response = await axiosInstance.delete(`/api/updates/${updateId}/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to delete update ${updateId}:`, error);
+                throw error;
+            }
+        }
+    },
+    // Students service
+    students: {
+        getAll: async (params = {}) => {
+            try {
+                const response = await axiosInstance.get('/api/students/', { params });
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch students:', error);
+                throw error;
+            }
+        },
+
+        getByCamp: async (campId, params = {}) => {
+            try {
+                const response = await axiosInstance.get(`/api/camps/${campId}/students/`, { params });
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to fetch students for camp ${campId}:`, error);
+                return [];
+            }
+        },
+
+        getById: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/api/students/${id}/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to fetch student ${id}:`, error);
+                throw error;
+            }
+        },
+
+        create: async (studentData) => {
+            try {
+                const response = await axiosInstance.post('/api/new-student-register/', studentData);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to register student:', error);
+                throw error;
+            }
+        },
+
+        update: async (id, studentData) => {
+            try {
+                const response = await axiosInstance.put(`/api/students/${id}/`, studentData);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to update student ${id}:`, error);
+                throw error;
+            }
+        },
+
+        delete: async (id) => {
+            try {
+                const response = await axiosInstance.delete(`/api/students/${id}/`);
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to delete student ${id}:`, error);
+                throw error;
+            }
+        }
+    },
+
+    campDetail: {
+        getAll: async (campId) => {
+            try {
+                const response = await axiosInstance.get(`/api/camps/${campId}/`);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to fetch students:', error);
+                throw error;
+            }
+        },
+    },
+
+
+
+    // Service for test results
+    result: {
+        // Get results with pagination, sorting, and filtering
+        getResults: async (campId, params = {}) => {
+            try {
+                const response = await api.get('/api/test-results/', {
+                    params: {
+                        camp_id: campId,
+                        ...params
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Error fetching test results:', error);
+                throw error;
+            }
+        },
+        getAllResults: async (params = {}) => {
+            try {
+                const response = await api.get('/api/test-results/', {
+                    params: {
+                        ...params
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Error fetching test results:', error);
+                throw error;
+            }
+        },
+
+        // Upload a new result
+        uploadResult: async (formData) => {
+            try {
+                const response = await api.post('/api/upload-test-result/', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Error uploading test result:', error);
+                throw error;
+            }
+        },
+
+        // Download a result
+        downloadResult: async (resultId) => {
+            try {
+                const response = await axios.get(`/api/test-results/${resultId}/download/`, {
+                    responseType: 'blob'
+                });
+                return response;
+            } catch (error) {
+                console.error('Error downloading test result:', error);
+                throw error;
+            }
+        }
+    },
+    paper: {
+        // Get papers with pagination, sorting, and filtering
+        getPapers: async (campId, params = {}) => {
+            try {
+                const response = await api.get('/api/test-papers/', {
+                    params: {
+                        camp_id: campId,
+                        ...params
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Error fetching test papers:', error);
+                throw error;
+            }
+        },
+        getAllPapers: async (params = {}) => {
+            try {
+                const response = await api.get('/api/test-papers/', {
+                    params: {
+                        ...params
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Error fetching test papers:', error);
+                throw error;
+            }
+        },
+
+        // Upload a new paper
+        uploadPaper: async (formData) => {
+            try {
+                const response = await api.post('/api/upload-test-paper/', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Error uploading test paper:', error);
+                throw error;
+            }
+        },
+
+        // Download a paper
+        downloadPaper: async (paperId) => {
+            try {
+                const response = await axios.get(`/api/test-papers/${paperId}/download/`, {
+                    responseType: 'blob'
+                });
+                return response;
+            } catch (error) {
+                console.error('Error downloading test paper:', error);
+                throw error;
+            }
+        }
+    },
+
     // Generic HTTP methods
     get: axiosInstance.get.bind(axiosInstance),
     post: axiosInstance.post.bind(axiosInstance),
@@ -515,6 +887,23 @@ export const brochureService = api.brochures;
 
 // Export the report service separately
 export const reportService = api.reports;
+
+// Export the report service separately
+export const campService = api.camps;
+
+// Export the report service separately
+export const updateService = api.updates;
+
+// Export the student service separately
+export const studentService = api.students;
+
+export const campDetailService = api.campDetail;
+
+export const resultService = api.result;
+
+export const paperService = api.paper;
+
+
 
 // Default export for backward compatibility
 export default api;
